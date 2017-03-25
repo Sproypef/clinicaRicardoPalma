@@ -1,0 +1,115 @@
+﻿@model UPC.TP2.WEB.Models.T_PLAN_DE_SALUD
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>T_PLAN_DE_SALUD</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_plan_salud)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.id_plan_salud)
+            @Html.ValidationMessageFor(model => model.id_plan_salud)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.nombre_plan)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.nombre_plan)
+            @Html.ValidationMessageFor(model => model.nombre_plan)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.descripcion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.descripcion)
+            @Html.ValidationMessageFor(model => model.descripcion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.fecha_inicio)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.fecha_inicio)
+            @Html.ValidationMessageFor(model => model.fecha_inicio)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.fecha_fin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.fecha_fin)
+            @Html.ValidationMessageFor(model => model.fecha_fin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.objetivo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.objetivo)
+            @Html.ValidationMessageFor(model => model.objetivo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_investigacion_comercial, "T_INVESTIGACION_COMERCIAL")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_investigacion_comercial", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_investigacion_comercial)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_estrategia_comercial, "T_ESTRATEGIA_COMERCIAL")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_estrategia_comercial", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_estrategia_comercial)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_base_financiera, "T_BASE_FINANCIERA")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_base_financiera", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_base_financiera)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_base_legal, "T_BASE_LEGAL")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_base_legal", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_base_legal)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_servicio)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.id_servicio)
+            @Html.ValidationMessageFor(model => model.id_servicio)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

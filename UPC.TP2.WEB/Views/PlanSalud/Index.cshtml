@@ -1,0 +1,93 @@
+﻿@model IEnumerable<UPC.TP2.WEB.Models.T_PLAN_DE_SALUD>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mantenimiento de Planes de Salud</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo Plan", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_plan_salud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_plan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_inicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_fin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.objetivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_INVESTIGACION_COMERCIAL.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_ESTRATEGIA_COMERCIAL.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_BASE_FINANCIERA.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_BASE_LEGAL.nombre_normativa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_servicio)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+           <i class="icon-calendar"></i>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_plan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_inicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_fin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.objetivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_INVESTIGACION_COMERCIAL.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_ESTRATEGIA_COMERCIAL.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_BASE_FINANCIERA.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_BASE_LEGAL.nombre_normativa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_servicio)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_plan_salud }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_plan_salud }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_plan_salud })
+        </td>
+    </tr>
+}
+
+</table>
