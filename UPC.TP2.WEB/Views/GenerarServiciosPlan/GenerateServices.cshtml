@@ -1,0 +1,161 @@
+﻿@model UPC.TP2.WEB.ViewModels.GenerateServiceModel
+
+@{
+    ViewBag.Title = "GenerateServices";
+}
+
+<script type="text/javascript">
+
+
+
+</script>
+
+<h2>Generar Servicios</h2>
+<br />
+<h3>@ViewBag.Message</h3>
+
+@{Html.BeginForm("GenerarAction", "GenerarServiciosPlan", FormMethod.Post, new { @class = "some_class", @id = "form_generar_accion" });}
+
+<input type="hidden" id="fecha_inicio" name="fecha_inicio" value="@ViewBag.FechaInicio" />
+<input type="hidden" id="fecha_fin" name="fecha_fin" value="@ViewBag.FechaFin" />
+<input type="hidden" id="accion" name="accion" value="X"/>
+
+<h3>Retirar servicio</h3>
+<table id="table_retirar" class="display nowrap dataTable dtr-inline collapsed">
+    <thead>
+        <tr>
+            <th>Seleccionar</th>
+            <th>Plan salud</th>
+            <th>Servicio salud</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int cantidad = 0; UPC.TP2.WEB.Models.T_PROGRAMACION_MEDICA prog_last = null; int index = 0; string pair_keys; string color_row = "";}
+        @foreach (var prog in Model.LIST_RETIRO_SERVICIO)
+        {
+
+            if (prog_last == null)
+            {
+                prog_last = prog;
+            }
+            else
+            {
+
+                if (prog.id_plan_salud != prog_last.id_plan_salud || prog.id_servicio_salud != prog_last.id_servicio_salud)
+                {
+                    index++;
+                    pair_keys = prog_last.T_PLAN_DE_SALUD.id_plan_salud + "_" + prog_last.T_SERVICIO_SALUD.id_servicio;
+                    color_row = (cantidad <= Int32.Parse(Model.T_CONFIGURACION_RETIRAR.valor_maximo) && cantidad >= Int32.Parse(Model.T_CONFIGURACION_RETIRAR.valor_minimo)) ? "orange" : "";
+                    <tr style="background-color: @color_row">
+                        <td><input type="checkbox" name="checkbox_retirar_@pair_keys" @((color_row != "")?"checked":"")/></td>
+                        <td>@prog_last.T_PLAN_DE_SALUD.nombre_plan</td>
+                        <td>@prog_last.T_SERVICIO_SALUD.nombre_servicio</td>
+                        <td>@cantidad</td>
+                    </tr>
+
+                    prog_last = prog;
+                    cantidad = 0;
+                }
+
+            }
+            cantidad++;
+        }
+        <!--b:last element-->
+        @{ index = index + 1; }
+        @{ pair_keys = prog_last.T_PLAN_DE_SALUD.id_plan_salud + "_" + prog_last.T_SERVICIO_SALUD.id_servicio; }
+        @{ color_row = (cantidad <= Int32.Parse(Model.T_CONFIGURACION_RETIRAR.valor_maximo) && cantidad >= Int32.Parse(Model.T_CONFIGURACION_RETIRAR.valor_minimo)) ? "orange" : ""; }
+        <tr>
+            <td><input type="checkbox" name="checkbox_retirar_@pair_keys" @((color_row != "")?"checked":"")/></td>
+            <td>@prog_last.T_PLAN_DE_SALUD.nombre_plan</td>
+            <td>@prog_last.T_SERVICIO_SALUD.nombre_servicio</td>
+            <td>@cantidad</td>
+        </tr>
+        <!--e:last element-->
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="4"><input id="submit_retirar" type="button" value="Retirar servicio"/></th>
+        </tr>
+    </tfoot>
+</table>
+<br />
+<br />
+<h3>Asignar servicio</h3>
+<table id="table_asignar" class="display nowrap dataTable dtr-inline collapsed">
+    <thead>
+        <tr>
+            <th>Seleciona</th>
+            <th>Servicio</th>
+            <th>Cantidad</th>
+            <th>Asignar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int cantidad_ = 0; UPC.TP2.WEB.Models.T_PROGRAMACION_MEDICA prog_last_ = null; int index_ = 0; string pair_keys_; string color_row_ = ""; }
+        @foreach (var prog in Model.LIST_ASIGNA_PLAN)
+        {
+            if (prog_last_ == null)
+            {
+                prog_last_ = prog;
+            }
+            else
+            {
+
+                if (prog.id_servicio_salud != prog_last_.id_servicio_salud)
+                {
+                    index_++;
+                    pair_keys_ = prog_last_.T_SERVICIO_SALUD.id_servicio + "";
+                    color_row_ = (cantidad_ <= Int32.Parse(Model.T_CONFIGURACION_ASIGNAR.valor_maximo) && cantidad_ >= Int32.Parse(Model.T_CONFIGURACION_ASIGNAR.valor_minimo)) ? "orange" : "";
+                    <tr>
+                        <td><input type="checkbox" name="checkbox_asignar_@pair_keys_" @((color_row_ != "")?"checked":"")/></td>
+                        <td>@prog_last_.T_SERVICIO_SALUD.nombre_servicio</td>
+                        <td>@cantidad_</td>
+                        <td>
+                            <select id="select_plan_salud_@index_"  name="select_plan_salud_@pair_keys_">
+                                @foreach (var p in Model.LIST_PLAN_DE_SALUD)
+                                {
+                                    <option value="@p.id_plan_salud">@p.nombre_plan</option>
+                                }
+                                
+                            </select>
+                        </td>
+                    </tr>
+
+                    prog_last_ = prog;
+                    cantidad_ = 0;
+                }
+
+            }
+            cantidad_++;
+        }
+
+        <!--b:last element-->
+        @{ index_ = index_ + 1; }
+        @{ pair_keys_ = prog_last_.T_SERVICIO_SALUD.id_servicio + ""; }
+        @{ color_row_ = (cantidad_ <= Int32.Parse(Model.T_CONFIGURACION_ASIGNAR.valor_maximo) && cantidad_ >= Int32.Parse(Model.T_CONFIGURACION_ASIGNAR.valor_minimo)) ? "orange" : ""; }
+        <tr>
+            <td><input type="checkbox" name="checkbox_asignar_@pair_keys_" @((color_row_ != "")?"checked":"")/></td>
+            <td>@prog_last_.T_SERVICIO_SALUD.nombre_servicio</td>
+            <td>@cantidad_</td>
+            <td>
+                <select id="select_plan_salud_@index_" name="select_plan_salud_@pair_keys_">
+                    @foreach (var p in Model.LIST_PLAN_DE_SALUD)
+                    {
+                        <option value="@p.id_plan_salud">@p.nombre_plan</option>
+                    }
+
+                </select>
+            </td>
+        </tr>
+        <!--e:last element-->
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="4"><input id="submit_asignar" type="button"  value="Asignar servicio"/></th>
+        </tr>
+    </tfoot>
+</table>
+
+@{Html.EndForm();}
+
