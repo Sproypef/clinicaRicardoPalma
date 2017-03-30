@@ -1,11 +1,14 @@
-﻿@model UPC.TP2.WEB.Models.T_PLAN_DE_SALUD
+﻿
+@model UPC.TP2.WEB.Models.T_PLAN_DE_SALUD
+
 
 @{
     ViewBag.Title = "Details";
 }
-
+ 
 <h2>Details</h2>
 
+<div id="ContaintPopup" class="table-responsive">
 <fieldset>
     <legend>T_PLAN_DE_SALUD</legend>
 
@@ -90,3 +93,23 @@
     @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+</div>
+
+<script type="text/javascript">
+    function showPopup() {
+        $("ContaintPopup").dialog({
+            height: 400,
+            width: 500,
+            modal: true,
+            buttons: {
+                "ok": function () {
+                    $(this).dialog("close");
+                    alert("seleccion ok")
+                },
+                "cancel": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    }
+</script>
