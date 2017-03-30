@@ -11,6 +11,7 @@ namespace UPC.TP2.WEB.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class T_PLAN_DE_SALUD
     {
@@ -22,11 +23,32 @@ namespace UPC.TP2.WEB.Models
         }
     
         public int id_plan_salud { get; set; }
+
+        [DataType(DataType.Text)]
+        [StringLength(30, ErrorMessage = "El campo {0} debe contener entre {2} y {1} caracteres ", MinimumLength = 5)]
+        [Display(Name = "Nombre Plan")]
         public string nombre_plan { get; set; }
+
+        [DataType(DataType.Text)]
+        [StringLength(30,ErrorMessage="El campo {0} debe contener entre {2} y {1} caracteres ",MinimumLength=5)]
+        [Display(Name = "Descripcion Plan")]
         public string descripcion { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode=true)]
+        [Display(Name="Fecha Inicio")]
         public Nullable<System.DateTime> fecha_inicio { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha Fin")]
         public Nullable<System.DateTime> fecha_fin { get; set; }
+
+        [DataType(DataType.Text)]
+        [StringLength(30, ErrorMessage = "El campo {0} debe contener entre {2} y {1} caracteres ", MinimumLength = 5)]
+        [Display(Name = "Objetivo Plan")]
         public string objetivo { get; set; }
+
         public Nullable<int> id_investigacion_comercial { get; set; }
         public Nullable<int> id_estrategia_comercial { get; set; }
         public Nullable<int> id_base_financiera { get; set; }
