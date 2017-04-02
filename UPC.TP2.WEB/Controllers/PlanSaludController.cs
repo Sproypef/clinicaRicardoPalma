@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using UPC.TP2.WEB.Models;
 using System.Web.Helpers;
+using UPC.TP2.WEB.ViewModels;
 
 namespace UPC.TP2.WEB.Controllers
 {
@@ -40,9 +41,9 @@ namespace UPC.TP2.WEB.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.id_base_financiera = new SelectList(db.T_BASE_FINANCIERA, "id_base_financiera", "descripcion");
-            ViewBag.id_base_legal = new SelectList(db.T_BASE_LEGAL, "id_base_legal", "nombre_normativa");
             ViewBag.id_estrategia_comercial = new SelectList(db.T_ESTRATEGIA_COMERCIAL, "id_estrategia_comercial", "nombre");
+            ViewBag.id_base_legal = new SelectList(db.T_BASE_LEGAL, "id_base_legal", "nombre_normativa");
+            ViewBag.id_base_financiera = new SelectList(db.T_BASE_FINANCIERA, "id_base_financiera", "descripcion");
             ViewBag.id_investigacion_comercial = new SelectList(db.T_INVESTIGACION_COMERCIAL, "id_investigacion_comercial", "nombre");
             return View();
         }
@@ -51,20 +52,18 @@ namespace UPC.TP2.WEB.Controllers
         // POST: /PlanSalud/Create
 
         [HttpPost]
-        public ActionResult Create(T_PLAN_DE_SALUD t_plan_de_salud)
+        public ActionResult Create(T_PLAN_DE_SALUD planSalud)
         {
+
             if (ModelState.IsValid)
             {
-                db.T_PLAN_DE_SALUD.Add(t_plan_de_salud);
+                db.T_PLAN_DE_SALUD.Add(planSalud);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_base_financiera = new SelectList(db.T_BASE_FINANCIERA, "id_base_financiera", "descripcion", t_plan_de_salud.id_base_financiera);
-            ViewBag.id_base_legal = new SelectList(db.T_BASE_LEGAL, "id_base_legal", "nombre_normativa", t_plan_de_salud.id_base_legal);
-            ViewBag.id_estrategia_comercial = new SelectList(db.T_ESTRATEGIA_COMERCIAL, "id_estrategia_comercial", "nombre", t_plan_de_salud.id_estrategia_comercial);
-            ViewBag.id_investigacion_comercial = new SelectList(db.T_INVESTIGACION_COMERCIAL, "id_investigacion_comercial", "nombre", t_plan_de_salud.id_investigacion_comercial);
-            return View(t_plan_de_salud);
+            ViewBag.id_investigacion_comercial = new SelectList(db.T_INVESTIGACION_COMERCIAL, "id_investigacion_comercial", "nombre", planSalud.id_investigacion_comercial);
+            return View(planSalud);
         }
 
         //
@@ -77,9 +76,7 @@ namespace UPC.TP2.WEB.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id_base_financiera = new SelectList(db.T_BASE_FINANCIERA, "id_base_financiera", "descripcion", t_plan_de_salud.id_base_financiera);
-            ViewBag.id_base_legal = new SelectList(db.T_BASE_LEGAL, "id_base_legal", "nombre_normativa", t_plan_de_salud.id_base_legal);
-            ViewBag.id_estrategia_comercial = new SelectList(db.T_ESTRATEGIA_COMERCIAL, "id_estrategia_comercial", "nombre", t_plan_de_salud.id_estrategia_comercial);
+            ViewBag.id_estrategia_comercial = new SelectList(db.T_ESTRATEGIA_COMERCIAL, "id_estrategia_comercial", "nombre");
             ViewBag.id_investigacion_comercial = new SelectList(db.T_INVESTIGACION_COMERCIAL, "id_investigacion_comercial", "nombre", t_plan_de_salud.id_investigacion_comercial);
             return View(t_plan_de_salud);
         }
@@ -96,9 +93,6 @@ namespace UPC.TP2.WEB.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_base_financiera = new SelectList(db.T_BASE_FINANCIERA, "id_base_financiera", "descripcion", t_plan_de_salud.id_base_financiera);
-            ViewBag.id_base_legal = new SelectList(db.T_BASE_LEGAL, "id_base_legal", "nombre_normativa", t_plan_de_salud.id_base_legal);
-            ViewBag.id_estrategia_comercial = new SelectList(db.T_ESTRATEGIA_COMERCIAL, "id_estrategia_comercial", "nombre", t_plan_de_salud.id_estrategia_comercial);
             ViewBag.id_investigacion_comercial = new SelectList(db.T_INVESTIGACION_COMERCIAL, "id_investigacion_comercial", "nombre", t_plan_de_salud.id_investigacion_comercial);
             return View(t_plan_de_salud);
         }
@@ -108,11 +102,15 @@ namespace UPC.TP2.WEB.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            T_PLAN_DE_SALUD t_plan_de_salud = db.T_PLAN_DE_SALUD.Find(id);
-            if (t_plan_de_salud == null)
-            {
-                return HttpNotFound();
-            }
+            T_PLAN_DE_SALUD t_plan_de_salud;
+
+                t_plan_de_salud = db.T_PLAN_DE_SALUD.Find(id);
+
+                if (t_plan_de_salud == null)
+                {
+                    return HttpNotFound();
+                }
+
             return View(t_plan_de_salud);
         }
 

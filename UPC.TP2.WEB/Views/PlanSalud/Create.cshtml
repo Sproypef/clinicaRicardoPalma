@@ -1,5 +1,4 @@
 ﻿@model UPC.TP2.WEB.Models.T_PLAN_DE_SALUD
-
 @{
     ViewBag.Title = "Create";
 }
@@ -12,9 +11,10 @@
 
     <fieldset>
         <legend>T_PLAN_DE_SALUD</legend>
-
-            @Html.LabelFor(model => model.id_plan_salud)
+        <div>
+            @Html.LabelFor(model => Model.id_plan_salud)
         </div>
+
         <div class="editor-field">
             @Html.EditorFor(model => model.id_plan_salud)
             @Html.ValidationMessageFor(model => model.id_plan_salud)
@@ -60,44 +60,31 @@
             @Html.ValidationMessageFor(model => model.objetivo)
         </div>
 
+        @{UPC.TP2.WEB.Models.T_ESTRATEGIA_COMERCIAL saludDetalle = null;}
         <div class="editor-label">
-            @Html.LabelFor(model => model.id_investigacion_comercial, "T_INVESTIGACION_COMERCIAL")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("id_investigacion_comercial", String.Empty)
-            @Html.ValidationMessageFor(model => model.id_investigacion_comercial)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.id_estrategia_comercial, "T_ESTRATEGIA_COMERCIAL")
+            @Html.LabelFor(model => saludDetalle.id_estrategia_comercial, "T_ESTRATEGIA_COMERCIAL")
         </div>
         <div class="editor-field">
             @Html.DropDownList("id_estrategia_comercial", String.Empty)
-            @Html.ValidationMessageFor(model => model.id_estrategia_comercial)
+            @Html.ValidationMessageFor(model => saludDetalle.nombre)
         </div>
 
+        @{UPC.TP2.WEB.Models.T_BASE_LEGAL saludLegal = null;}
         <div class="editor-label">
-            @Html.LabelFor(model => model.id_base_financiera, "T_BASE_FINANCIERA")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("id_base_financiera", String.Empty)
-            @Html.ValidationMessageFor(model => model.id_base_financiera)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.id_base_legal, "T_BASE_LEGAL")
+            @Html.LabelFor(model => saludLegal.id_base_legal, "T_BASE_LEGAL")
         </div>
         <div class="editor-field">
             @Html.DropDownList("id_base_legal", String.Empty)
-            @Html.ValidationMessageFor(model => model.id_base_legal)
+            @Html.ValidationMessageFor(model => saludLegal.nombre_normativa)
         </div>
 
+        @{UPC.TP2.WEB.Models.T_BASE_FINANCIERA saludFinanciero = null;}
         <div class="editor-label">
-            @Html.LabelFor(model => model.id_servicio)
+            @Html.LabelFor(model => saludFinanciero.id_base_financiera, "T_BASE_LEGAL")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.id_servicio)
-            @Html.ValidationMessageFor(model => model.id_servicio)
+            @Html.DropDownList("id_base_legal", String.Empty)
+            @Html.ValidationMessageFor(model => saludFinanciero.descripcion)
         </div>
 
         <p>
