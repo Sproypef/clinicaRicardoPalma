@@ -16,7 +16,6 @@ namespace UPC.TP2.WEB.Models
     {
         public T_INVESTIGACION_COMERCIAL()
         {
-            this.T_BITACORA_INCIDENCIA = new HashSet<T_BITACORA_INCIDENCIA>();
             this.T_CONFIGURACION = new HashSet<T_CONFIGURACION>();
             this.T_PLAN_DE_SALUD = new HashSet<T_PLAN_DE_SALUD>();
             this.T_PROYECTO_PLANSALUD = new HashSet<T_PROYECTO_PLANSALUD>();
@@ -30,7 +29,6 @@ namespace UPC.TP2.WEB.Models
         public string resultado_especialidad { get; set; }
         public string fecha_creacion { get; set; }
     
-        public virtual ICollection<T_BITACORA_INCIDENCIA> T_BITACORA_INCIDENCIA { get; set; }
         public virtual ICollection<T_CONFIGURACION> T_CONFIGURACION { get; set; }
         public virtual ICollection<T_PLAN_DE_SALUD> T_PLAN_DE_SALUD { get; set; }
         public virtual ICollection<T_PROYECTO_PLANSALUD> T_PROYECTO_PLANSALUD { get; set; }

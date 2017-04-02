@@ -12,24 +12,23 @@ namespace UPC.TP2.WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class T_PERSONA
+    public partial class T_ESPECIALIDAD_SERVICIO
     {
-        public T_PERSONA()
+        public T_ESPECIALIDAD_SERVICIO()
         {
-            this.T_EMPLEADO = new HashSet<T_EMPLEADO>();
-            this.T_EMPRESA = new HashSet<T_EMPRESA>();
-            this.T_PACIENTE = new HashSet<T_PACIENTE>();
-            this.T_PERSONA_PLANSALUD = new HashSet<T_PERSONA_PLANSALUD>();
+            this.T_PLAN_ESPECIALIDADxSERVICIO = new HashSet<T_PLAN_ESPECIALIDADxSERVICIO>();
             this.T_PROGRAMACION_MEDICA = new HashSet<T_PROGRAMACION_MEDICA>();
         }
     
-        public int codPersona { get; set; }
-        public string nompersona { get; set; }
+        public int id_especialidad_servicio { get; set; }
+        public Nullable<System.DateTime> fecha_ingreso { get; set; }
+        public string estado { get; set; }
+        public Nullable<int> id_servicio { get; set; }
+        public Nullable<int> id_especialidad { get; set; }
     
-        public virtual ICollection<T_EMPLEADO> T_EMPLEADO { get; set; }
-        public virtual ICollection<T_EMPRESA> T_EMPRESA { get; set; }
-        public virtual ICollection<T_PACIENTE> T_PACIENTE { get; set; }
-        public virtual ICollection<T_PERSONA_PLANSALUD> T_PERSONA_PLANSALUD { get; set; }
+        public virtual T_ESPECIALIDAD_MEDICA T_ESPECIALIDAD_MEDICA { get; set; }
+        public virtual ICollection<T_PLAN_ESPECIALIDADxSERVICIO> T_PLAN_ESPECIALIDADxSERVICIO { get; set; }
         public virtual ICollection<T_PROGRAMACION_MEDICA> T_PROGRAMACION_MEDICA { get; set; }
+        public virtual T_SERVICIO_SALUD T_SERVICIO_SALUD { get; set; }
     }
 }

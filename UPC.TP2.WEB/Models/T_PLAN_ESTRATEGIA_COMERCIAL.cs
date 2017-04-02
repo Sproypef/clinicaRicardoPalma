@@ -12,21 +12,15 @@ namespace UPC.TP2.WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class T_BASE_FINANCIERA
+    public partial class T_PLAN_ESTRATEGIA_COMERCIAL
     {
-        public T_BASE_FINANCIERA()
-        {
-            this.T_PLAN_BASE_FINANCIERA = new HashSet<T_PLAN_BASE_FINANCIERA>();
-        }
-    
-        public int id_base_financiera { get; set; }
-        public string descripcion { get; set; }
-        public string comentario { get; set; }
-        public Nullable<int> monto { get; set; }
-        public Nullable<int> presupuesto { get; set; }
-        public string promocion { get; set; }
+        public int id_plan_estrategia_comercial { get; set; }
+        public Nullable<int> id_estrategia_comercial { get; set; }
+        public Nullable<int> id_plan_salud { get; set; }
         public Nullable<System.DateTime> fecha_registro { get; set; }
+        public string estado { get; set; }
     
-        public virtual ICollection<T_PLAN_BASE_FINANCIERA> T_PLAN_BASE_FINANCIERA { get; set; }
+        public virtual T_ESTRATEGIA_COMERCIAL T_ESTRATEGIA_COMERCIAL { get; set; }
+        public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
     }
 }

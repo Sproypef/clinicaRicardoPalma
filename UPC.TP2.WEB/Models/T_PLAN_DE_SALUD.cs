@@ -11,56 +11,36 @@ namespace UPC.TP2.WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class T_PLAN_DE_SALUD
     {
         public T_PLAN_DE_SALUD()
         {
+            this.T_BITACORA_INCIDENCIA = new HashSet<T_BITACORA_INCIDENCIA>();
+            this.T_PLAN_BASE_FINANCIERA = new HashSet<T_PLAN_BASE_FINANCIERA>();
+            this.T_PLAN_BASE_LEGAL = new HashSet<T_PLAN_BASE_LEGAL>();
+            this.T_PLAN_ESTRATEGIA_COMERCIAL = new HashSet<T_PLAN_ESTRATEGIA_COMERCIAL>();
             this.T_PLAN_PACIENTE = new HashSet<T_PLAN_PACIENTE>();
-            this.T_PLAN_SERVICIO = new HashSet<T_PLAN_SERVICIO>();
-            this.T_PROGRAMACION_MEDICA = new HashSet<T_PROGRAMACION_MEDICA>();
+            this.T_PLAN_ESPECIALIDADxSERVICIO = new HashSet<T_PLAN_ESPECIALIDADxSERVICIO>();
+            this.T_PERSONA_PLANSALUD = new HashSet<T_PERSONA_PLANSALUD>();
         }
     
         public int id_plan_salud { get; set; }
-
-        [DataType(DataType.Text)]
-        [StringLength(30, ErrorMessage = "El campo {0} debe contener entre {2} y {1} caracteres ", MinimumLength = 5)]
-        [Display(Name = "Nombre Plan")]
         public string nombre_plan { get; set; }
-
-        [DataType(DataType.Text)]
-        [StringLength(30,ErrorMessage="El campo {0} debe contener entre {2} y {1} caracteres ",MinimumLength=5)]
-        [Display(Name = "Descripcion Plan")]
         public string descripcion { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode=true)]
-        [Display(Name="Fecha Inicio")]
         public Nullable<System.DateTime> fecha_inicio { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Fecha Fin")]
         public Nullable<System.DateTime> fecha_fin { get; set; }
-
-        [DataType(DataType.Text)]
-        [StringLength(30, ErrorMessage = "El campo {0} debe contener entre {2} y {1} caracteres ", MinimumLength = 5)]
-        [Display(Name = "Objetivo Plan")]
         public string objetivo { get; set; }
-
         public Nullable<int> id_investigacion_comercial { get; set; }
-        public Nullable<int> id_estrategia_comercial { get; set; }
-        public Nullable<int> id_base_financiera { get; set; }
-        public Nullable<int> id_base_legal { get; set; }
-        public Nullable<int> id_servicio { get; set; }
+        public string estado { get; set; }
     
-        public virtual T_BASE_FINANCIERA T_BASE_FINANCIERA { get; set; }
-        public virtual T_BASE_LEGAL T_BASE_LEGAL { get; set; }
-        public virtual T_ESTRATEGIA_COMERCIAL T_ESTRATEGIA_COMERCIAL { get; set; }
+        public virtual ICollection<T_BITACORA_INCIDENCIA> T_BITACORA_INCIDENCIA { get; set; }
         public virtual T_INVESTIGACION_COMERCIAL T_INVESTIGACION_COMERCIAL { get; set; }
+        public virtual ICollection<T_PLAN_BASE_FINANCIERA> T_PLAN_BASE_FINANCIERA { get; set; }
+        public virtual ICollection<T_PLAN_BASE_LEGAL> T_PLAN_BASE_LEGAL { get; set; }
+        public virtual ICollection<T_PLAN_ESTRATEGIA_COMERCIAL> T_PLAN_ESTRATEGIA_COMERCIAL { get; set; }
         public virtual ICollection<T_PLAN_PACIENTE> T_PLAN_PACIENTE { get; set; }
-        public virtual ICollection<T_PLAN_SERVICIO> T_PLAN_SERVICIO { get; set; }
-        public virtual ICollection<T_PROGRAMACION_MEDICA> T_PROGRAMACION_MEDICA { get; set; }
+        public virtual ICollection<T_PLAN_ESPECIALIDADxSERVICIO> T_PLAN_ESPECIALIDADxSERVICIO { get; set; }
+        public virtual ICollection<T_PERSONA_PLANSALUD> T_PERSONA_PLANSALUD { get; set; }
     }
 }

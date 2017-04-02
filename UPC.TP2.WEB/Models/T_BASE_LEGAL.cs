@@ -16,7 +16,7 @@ namespace UPC.TP2.WEB.Models
     {
         public T_BASE_LEGAL()
         {
-            this.T_PLAN_DE_SALUD = new HashSet<T_PLAN_DE_SALUD>();
+            this.T_PLAN_BASE_LEGAL = new HashSet<T_PLAN_BASE_LEGAL>();
         }
     
         public int id_base_legal { get; set; }
@@ -25,6 +25,6 @@ namespace UPC.TP2.WEB.Models
         public string autorizacion { get; set; }
         public Nullable<System.DateTime> fecha_registro { get; set; }
     
-        public virtual ICollection<T_PLAN_DE_SALUD> T_PLAN_DE_SALUD { get; set; }
+        public virtual ICollection<T_PLAN_BASE_LEGAL> T_PLAN_BASE_LEGAL { get; set; }
     }
 }

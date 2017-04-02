@@ -12,24 +12,21 @@ namespace UPC.TP2.WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class T_PERSONA
+    public partial class T_PERSONA_PLANSALUD
     {
-        public T_PERSONA()
+        public T_PERSONA_PLANSALUD()
         {
-            this.T_EMPLEADO = new HashSet<T_EMPLEADO>();
-            this.T_EMPRESA = new HashSet<T_EMPRESA>();
-            this.T_PACIENTE = new HashSet<T_PACIENTE>();
-            this.T_PERSONA_PLANSALUD = new HashSet<T_PERSONA_PLANSALUD>();
             this.T_PROGRAMACION_MEDICA = new HashSet<T_PROGRAMACION_MEDICA>();
         }
     
+        public int id_persona_plansalud { get; set; }
+        public System.DateTime fecha_inicio { get; set; }
+        public System.DateTime fecha_fin { get; set; }
         public int codPersona { get; set; }
-        public string nompersona { get; set; }
+        public int id_plan_salud { get; set; }
     
-        public virtual ICollection<T_EMPLEADO> T_EMPLEADO { get; set; }
-        public virtual ICollection<T_EMPRESA> T_EMPRESA { get; set; }
-        public virtual ICollection<T_PACIENTE> T_PACIENTE { get; set; }
-        public virtual ICollection<T_PERSONA_PLANSALUD> T_PERSONA_PLANSALUD { get; set; }
+        public virtual T_PERSONA T_PERSONA { get; set; }
+        public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
         public virtual ICollection<T_PROGRAMACION_MEDICA> T_PROGRAMACION_MEDICA { get; set; }
     }
 }

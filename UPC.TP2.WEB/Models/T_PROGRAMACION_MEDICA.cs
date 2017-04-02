@@ -24,14 +24,15 @@ namespace UPC.TP2.WEB.Models
         public string estado { get; set; }
         public string descripcion { get; set; }
         public int id_empleado { get; set; }
-        public int id_paciente { get; set; }
+        public Nullable<int> id_especialidad_servicio { get; set; }
         public Nullable<int> codInmueble { get; set; }
-        public Nullable<int> id_plan_salud { get; set; }
-        public int id_servicio_salud { get; set; }
+        public int codPersona { get; set; }
+        public Nullable<int> id_persona_plansalud { get; set; }
     
         public virtual T_EMPLEADO T_EMPLEADO { get; set; }
+        public virtual T_ESPECIALIDAD_SERVICIO T_ESPECIALIDAD_SERVICIO { get; set; }
         public virtual T_INMUEBLE T_INMUEBLE { get; set; }
-        public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
-        public virtual T_SERVICIO_SALUD T_SERVICIO_SALUD { get; set; }
+        public virtual T_PERSONA T_PERSONA { get; set; }
+        public virtual T_PERSONA_PLANSALUD T_PERSONA_PLANSALUD { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace UPC.TP2.WEB.Models
     {
         public T_ESTRATEGIA_COMERCIAL()
         {
-            this.T_PLAN_DE_SALUD = new HashSet<T_PLAN_DE_SALUD>();
+            this.T_PLAN_ESTRATEGIA_COMERCIAL = new HashSet<T_PLAN_ESTRATEGIA_COMERCIAL>();
         }
     
         public int id_estrategia_comercial { get; set; }
@@ -26,6 +26,6 @@ namespace UPC.TP2.WEB.Models
         public Nullable<System.DateTime> fecha_registro { get; set; }
         public Nullable<int> presupuesto { get; set; }
     
-        public virtual ICollection<T_PLAN_DE_SALUD> T_PLAN_DE_SALUD { get; set; }
+        public virtual ICollection<T_PLAN_ESTRATEGIA_COMERCIAL> T_PLAN_ESTRATEGIA_COMERCIAL { get; set; }
     }
 }

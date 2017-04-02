@@ -18,6 +18,7 @@ namespace UPC.TP2.WEB.Models
         {
             this.T_EMPLEADO = new HashSet<T_EMPLEADO>();
             this.T_EQUIPO_MEDICO = new HashSet<T_EQUIPO_MEDICO>();
+            this.T_ESPECIALIDAD_SERVICIO = new HashSet<T_ESPECIALIDAD_SERVICIO>();
         }
     
         public int idEspecialidad { get; set; }
@@ -25,5 +26,6 @@ namespace UPC.TP2.WEB.Models
     
         public virtual ICollection<T_EMPLEADO> T_EMPLEADO { get; set; }
         public virtual ICollection<T_EQUIPO_MEDICO> T_EQUIPO_MEDICO { get; set; }
+        public virtual ICollection<T_ESPECIALIDAD_SERVICIO> T_ESPECIALIDAD_SERVICIO { get; set; }
     }
 }

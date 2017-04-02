@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/27/2017 21:58:00
+-- Date Created: 04/01/2017 00:52:39
 -- Generated from EDMX file: E:\PROJECTS_VS\VS2017\ProyectoClinicaRP\UPC.TP2.WEB\Models\ClinicaContext.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK__T_PLAN_DE__id_ba__5AEE82B9]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_PLAN_DE_SALUD] DROP CONSTRAINT [FK__T_PLAN_DE__id_ba__5AEE82B9];
+IF OBJECT_ID(N'[dbo].[FK_T_BASE_FINANCIERA]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_BASE_FINANCIERA] DROP CONSTRAINT [FK_T_BASE_FINANCIERA];
 GO
-IF OBJECT_ID(N'[dbo].[FK__T_PLAN_DE__id_ba__5BE2A6F2]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_PLAN_DE_SALUD] DROP CONSTRAINT [FK__T_PLAN_DE__id_ba__5BE2A6F2];
+IF OBJECT_ID(N'[dbo].[FK_T_PLAN_BASE_LEGAL]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_BASE_LEGAL] DROP CONSTRAINT [FK_T_PLAN_BASE_LEGAL];
 GO
 IF OBJECT_ID(N'[dbo].[FK__T_MUEBLE__codBie__571DF1D5]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_MUEBLE] DROP CONSTRAINT [FK__T_MUEBLE__codBie__571DF1D5];
@@ -29,11 +29,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_T_INMUEBLE_T_BIEN]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_INMUEBLE] DROP CONSTRAINT [FK_T_INMUEBLE_T_BIEN];
 GO
-IF OBJECT_ID(N'[dbo].[FK__T_BITACOR__id_in__47DBAE45]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_BITACORA_INCIDENCIA] DROP CONSTRAINT [FK__T_BITACOR__id_in__47DBAE45];
-GO
 IF OBJECT_ID(N'[dbo].[FK__T_BITACOR__idemp__4D94879B]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_BITACORA_INCIDENCIA] DROP CONSTRAINT [FK__T_BITACOR__idemp__4D94879B];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_BITACORA_INCIDENCIA] DROP CONSTRAINT [FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_SEGUIMIENTO] DROP CONSTRAINT [FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA];
 GO
 IF OBJECT_ID(N'[dbo].[FK__T_COMPROB__id_pa__49C3F6B7]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_COMPROBANTE] DROP CONSTRAINT [FK__T_COMPROB__id_pa__49C3F6B7];
@@ -83,14 +86,26 @@ GO
 IF OBJECT_ID(N'[dbo].[FK__T_SOLICIT__idEqu__693CA210]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_SOLICITUD_MANTENIMIENTO] DROP CONSTRAINT [FK__T_SOLICIT__idEqu__693CA210];
 GO
-IF OBJECT_ID(N'[dbo].[FK__T_PLAN_DE__id_es__5CD6CB2B]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_PLAN_DE_SALUD] DROP CONSTRAINT [FK__T_PLAN_DE__id_es__5CD6CB2B];
+IF OBJECT_ID(N'[dbo].[FK_T_ESPECIALIDAD_x_SERVICIO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_ESPECIALIDAD_SERVICIO] DROP CONSTRAINT [FK_T_ESPECIALIDAD_x_SERVICIO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_PLAN_ESPECIALIDADSERVICIO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_ESPECIALIDADxSERVICIO] DROP CONSTRAINT [FK_T_PLAN_ESPECIALIDADSERVICIO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA] DROP CONSTRAINT [FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_SERVICIO_ESPECIALIDAD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_ESPECIALIDAD_SERVICIO] DROP CONSTRAINT [FK_T_SERVICIO_ESPECIALIDAD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_PLAN_ESTRATEGIA_COMERCIAL]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL] DROP CONSTRAINT [FK_T_PLAN_ESTRATEGIA_COMERCIAL];
 GO
 IF OBJECT_ID(N'[dbo].[FK__T_PROGRAM__codIn__6754599E]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA] DROP CONSTRAINT [FK__T_PROGRAM__codIn__6754599E];
 GO
-IF OBJECT_ID(N'[dbo].[FK__T_PLAN_DE__id_in__5DCAEF64]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_PLAN_DE_SALUD] DROP CONSTRAINT [FK__T_PLAN_DE__id_in__5DCAEF64];
+IF OBJECT_ID(N'[dbo].[FK__T_PLAN_DE_SALUD1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_DE_SALUD] DROP CONSTRAINT [FK__T_PLAN_DE_SALUD1];
 GO
 IF OBJECT_ID(N'[dbo].[FK__T_PROYECT__id_in__656C112C]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_PROYECTO_PLANSALUD] DROP CONSTRAINT [FK__T_PROYECT__id_in__656C112C];
@@ -113,17 +128,23 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_T_PLAN_PACIENTE_T_PACIENTE]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_PLAN_PACIENTE] DROP CONSTRAINT [FK_T_PLAN_PACIENTE_T_PACIENTE];
 GO
+IF OBJECT_ID(N'[dbo].[FK_T_PLAN_DE_SALUD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_BASE_FINANCIERA] DROP CONSTRAINT [FK_T_PLAN_DE_SALUD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_PLAN]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_BASE_LEGAL] DROP CONSTRAINT [FK_T_PLAN];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_PLAN_COMERCIAL]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL] DROP CONSTRAINT [FK_T_PLAN_COMERCIAL];
+GO
 IF OBJECT_ID(N'[dbo].[FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_PLAN_PACIENTE] DROP CONSTRAINT [FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD];
 GO
-IF OBJECT_ID(N'[dbo].[FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_PLAN_SERVICIO] DROP CONSTRAINT [FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD];
+IF OBJECT_ID(N'[dbo].[FK_T_PLANSALUD_ESPECIALIDADSERVICIO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PLAN_ESPECIALIDADxSERVICIO] DROP CONSTRAINT [FK_T_PLANSALUD_ESPECIALIDADSERVICIO];
 GO
 IF OBJECT_ID(N'[dbo].[FK__T_PLAN_MA__idTec__5EBF139D]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_PLAN_MANTENIMIENTO] DROP CONSTRAINT [FK__T_PLAN_MA__idTec__5EBF139D];
-GO
-IF OBJECT_ID(N'[dbo].[FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_PLAN_SERVICIO] DROP CONSTRAINT [FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD];
 GO
 IF OBJECT_ID(N'[dbo].[FK__T_RESERVA__id_se__5EBF139D]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_RESERVA_SERVICIO_SALUD] DROP CONSTRAINT [FK__T_RESERVA__id_se__5EBF139D];
@@ -131,11 +152,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK__T_SOLICIT__idTec__6A30C649]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_SOLICITUD_MANTENIMIENTO] DROP CONSTRAINT [FK__T_SOLICIT__idTec__6A30C649];
 GO
-IF OBJECT_ID(N'[dbo].[FK_T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA] DROP CONSTRAINT [FK_T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA];
+IF OBJECT_ID(N'[dbo].[FK_T_PERSONAT_PERSONA_PLANSALUD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PERSONA_PLANSALUD] DROP CONSTRAINT [FK_T_PERSONAT_PERSONA_PLANSALUD];
 GO
-IF OBJECT_ID(N'[dbo].[FK_T_SERVICIO_SALUDT_PROGRAMACION_MEDICA]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA] DROP CONSTRAINT [FK_T_SERVICIO_SALUDT_PROGRAMACION_MEDICA];
+IF OBJECT_ID(N'[dbo].[FK_T_PERSONA_PLANSALUDT_PLAN_DE_SALUD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PERSONA_PLANSALUD] DROP CONSTRAINT [FK_T_PERSONA_PLANSALUDT_PLAN_DE_SALUD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_PROGRAMACION_MEDICAT_PERSONA]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA] DROP CONSTRAINT [FK_T_PROGRAMACION_MEDICAT_PERSONA];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA] DROP CONSTRAINT [FK_T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD];
 GO
 
 -- --------------------------------------------------
@@ -175,6 +202,9 @@ GO
 IF OBJECT_ID(N'[dbo].[T_ESPECIALIDAD_MEDICA]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_ESPECIALIDAD_MEDICA];
 GO
+IF OBJECT_ID(N'[dbo].[T_ESPECIALIDAD_SERVICIO]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_ESPECIALIDAD_SERVICIO];
+GO
 IF OBJECT_ID(N'[dbo].[T_ESTRATEGIA_COMERCIAL]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_ESTRATEGIA_COMERCIAL];
 GO
@@ -199,17 +229,26 @@ GO
 IF OBJECT_ID(N'[dbo].[T_PERSONA]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_PERSONA];
 GO
+IF OBJECT_ID(N'[dbo].[T_PLAN_BASE_FINANCIERA]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_PLAN_BASE_FINANCIERA];
+GO
+IF OBJECT_ID(N'[dbo].[T_PLAN_BASE_LEGAL]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_PLAN_BASE_LEGAL];
+GO
 IF OBJECT_ID(N'[dbo].[T_PLAN_DE_SALUD]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_PLAN_DE_SALUD];
+GO
+IF OBJECT_ID(N'[dbo].[T_PLAN_ESPECIALIDADxSERVICIO]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_PLAN_ESPECIALIDADxSERVICIO];
+GO
+IF OBJECT_ID(N'[dbo].[T_PLAN_ESTRATEGIA_COMERCIAL]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL];
 GO
 IF OBJECT_ID(N'[dbo].[T_PLAN_MANTENIMIENTO]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_PLAN_MANTENIMIENTO];
 GO
 IF OBJECT_ID(N'[dbo].[T_PLAN_PACIENTE]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_PLAN_PACIENTE];
-GO
-IF OBJECT_ID(N'[dbo].[T_PLAN_SERVICIO]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[T_PLAN_SERVICIO];
 GO
 IF OBJECT_ID(N'[dbo].[T_PROGRAMACION_MEDICA]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_PROGRAMACION_MEDICA];
@@ -219,6 +258,9 @@ IF OBJECT_ID(N'[dbo].[T_PROYECTO_PLANSALUD]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[T_RESERVA_SERVICIO_SALUD]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_RESERVA_SERVICIO_SALUD];
+GO
+IF OBJECT_ID(N'[dbo].[T_SEGUIMIENTO]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_SEGUIMIENTO];
 GO
 IF OBJECT_ID(N'[dbo].[T_SERVICIO_SALUD]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_SERVICIO_SALUD];
@@ -231,6 +273,9 @@ IF OBJECT_ID(N'[dbo].[T_TECNICO_MANTENIMIENTO]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[T_TIPO_PERSONA]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_TIPO_PERSONA];
+GO
+IF OBJECT_ID(N'[dbo].[T_PERSONA_PLANSALUD]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_PERSONA_PLANSALUD];
 GO
 
 -- --------------------------------------------------
@@ -273,8 +318,8 @@ CREATE TABLE [dbo].[T_BITACORA_INCIDENCIA] (
     [tipo_incidencia] varchar(10)  NULL,
     [fecha_registro] datetime  NULL,
     [descripcion] nvarchar(max)  NOT NULL,
-    [idempleado] int  NULL,
-    [id_investigacion_comercial] int  NULL
+    [id_plan_salud] int  NULL,
+    [idempleado] int  NULL
 );
 GO
 
@@ -359,6 +404,16 @@ GO
 CREATE TABLE [dbo].[T_ESPECIALIDAD_MEDICA] (
     [idEspecialidad] int  NOT NULL,
     [nomEspecialidad] varchar(100)  NULL
+);
+GO
+
+-- Creating table 'T_ESPECIALIDAD_SERVICIO'
+CREATE TABLE [dbo].[T_ESPECIALIDAD_SERVICIO] (
+    [id_especialidad_servicio] int IDENTITY(1,1) NOT NULL,
+    [fecha_ingreso] datetime  NULL,
+    [estado] char(1)  NULL,
+    [id_servicio] int  NULL,
+    [id_especialidad] int  NULL
 );
 GO
 
@@ -448,6 +503,26 @@ CREATE TABLE [dbo].[T_PERSONA] (
 );
 GO
 
+-- Creating table 'T_PLAN_BASE_FINANCIERA'
+CREATE TABLE [dbo].[T_PLAN_BASE_FINANCIERA] (
+    [id_plan_base_financiera] int IDENTITY(1,1) NOT NULL,
+    [id_base_financiera] int  NULL,
+    [id_plan_salud] int  NULL,
+    [fecha_registro] datetime  NULL,
+    [estado] char(1)  NULL
+);
+GO
+
+-- Creating table 'T_PLAN_BASE_LEGAL'
+CREATE TABLE [dbo].[T_PLAN_BASE_LEGAL] (
+    [id_plan_base_financiera] int IDENTITY(1,1) NOT NULL,
+    [id_base_legal] int  NULL,
+    [id_plan_salud] int  NULL,
+    [fecha_registro] datetime  NULL,
+    [estado] char(1)  NULL
+);
+GO
+
 -- Creating table 'T_PLAN_DE_SALUD'
 CREATE TABLE [dbo].[T_PLAN_DE_SALUD] (
     [id_plan_salud] int IDENTITY(1,1) NOT NULL,
@@ -457,10 +532,28 @@ CREATE TABLE [dbo].[T_PLAN_DE_SALUD] (
     [fecha_fin] datetime  NULL,
     [objetivo] varchar(20)  NULL,
     [id_investigacion_comercial] int  NULL,
+    [estado] char(1)  NULL
+);
+GO
+
+-- Creating table 'T_PLAN_ESPECIALIDADxSERVICIO'
+CREATE TABLE [dbo].[T_PLAN_ESPECIALIDADxSERVICIO] (
+    [id_plan_especialidad] int IDENTITY(1,1) NOT NULL,
+    [id_especialidad_servicio] int  NULL,
+    [id_plan_salud] int  NULL,
+    [fecha_inicio] datetime  NULL,
+    [fecha_fin] datetime  NULL,
+    [estado] char(1)  NULL
+);
+GO
+
+-- Creating table 'T_PLAN_ESTRATEGIA_COMERCIAL'
+CREATE TABLE [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL] (
+    [id_plan_estrategia_comercial] int IDENTITY(1,1) NOT NULL,
     [id_estrategia_comercial] int  NULL,
-    [id_base_financiera] int  NULL,
-    [id_base_legal] int  NULL,
-    [id_servicio] int  NULL
+    [id_plan_salud] int  NULL,
+    [fecha_registro] datetime  NULL,
+    [estado] char(1)  NULL
 );
 GO
 
@@ -484,18 +577,6 @@ CREATE TABLE [dbo].[T_PLAN_PACIENTE] (
 );
 GO
 
--- Creating table 'T_PLAN_SERVICIO'
-CREATE TABLE [dbo].[T_PLAN_SERVICIO] (
-    [id_plan_servicio] int IDENTITY(1,1) NOT NULL,
-    [id_servicio] int  NULL,
-    [id_plan_salud] int  NULL,
-    [fecha_registro] datetime  NULL,
-    [fecha_retiro] datetime  NULL,
-    [idempleado] int  NULL,
-    [estado] char(1)  NULL
-);
-GO
-
 -- Creating table 'T_PROGRAMACION_MEDICA'
 CREATE TABLE [dbo].[T_PROGRAMACION_MEDICA] (
     [id_programacion] int IDENTITY(1,1) NOT NULL,
@@ -508,10 +589,10 @@ CREATE TABLE [dbo].[T_PROGRAMACION_MEDICA] (
     [estado] varchar(10)  NULL,
     [descripcion] nvarchar(max)  NOT NULL,
     [id_empleado] int  NOT NULL,
-    [id_paciente] int  NOT NULL,
+    [id_especialidad_servicio] int  NULL,
     [codInmueble] int  NULL,
-    [id_plan_salud] int  NULL,
-    [id_servicio_salud] int  NOT NULL
+    [codPersona] int  NOT NULL,
+    [id_persona_plansalud] int  NULL
 );
 GO
 
@@ -535,6 +616,16 @@ CREATE TABLE [dbo].[T_RESERVA_SERVICIO_SALUD] (
     [estado] char(1)  NULL,
     [id_paciente] int  NULL,
     [id_servicio] int  NULL
+);
+GO
+
+-- Creating table 'T_SEGUIMIENTO'
+CREATE TABLE [dbo].[T_SEGUIMIENTO] (
+    [id_seguimiento] int IDENTITY(1,1) NOT NULL,
+    [id_bitacora] int  NULL,
+    [id_plan_salud] int  NULL,
+    [seguimiento] varchar(500)  NULL,
+    [fecha_registro] datetime  NULL
 );
 GO
 
@@ -576,6 +667,16 @@ CREATE TABLE [dbo].[T_TIPO_PERSONA] (
     [id_tipo_persona] int IDENTITY(1,1) NOT NULL,
     [nombre_servicio] nvarchar(max)  NOT NULL,
     [tipo_servicio] varchar(10)  NULL
+);
+GO
+
+-- Creating table 'T_PERSONA_PLANSALUD'
+CREATE TABLE [dbo].[T_PERSONA_PLANSALUD] (
+    [id_persona_plansalud] int IDENTITY(1,1) NOT NULL,
+    [fecha_inicio] datetime  NOT NULL,
+    [fecha_fin] datetime  NOT NULL,
+    [codPersona] int  NOT NULL,
+    [id_plan_salud] int  NOT NULL
 );
 GO
 
@@ -649,6 +750,12 @@ ADD CONSTRAINT [PK_T_ESPECIALIDAD_MEDICA]
     PRIMARY KEY CLUSTERED ([idEspecialidad] ASC);
 GO
 
+-- Creating primary key on [id_especialidad_servicio] in table 'T_ESPECIALIDAD_SERVICIO'
+ALTER TABLE [dbo].[T_ESPECIALIDAD_SERVICIO]
+ADD CONSTRAINT [PK_T_ESPECIALIDAD_SERVICIO]
+    PRIMARY KEY CLUSTERED ([id_especialidad_servicio] ASC);
+GO
+
 -- Creating primary key on [id_estrategia_comercial] in table 'T_ESTRATEGIA_COMERCIAL'
 ALTER TABLE [dbo].[T_ESTRATEGIA_COMERCIAL]
 ADD CONSTRAINT [PK_T_ESTRATEGIA_COMERCIAL]
@@ -697,10 +804,34 @@ ADD CONSTRAINT [PK_T_PERSONA]
     PRIMARY KEY CLUSTERED ([codPersona] ASC);
 GO
 
+-- Creating primary key on [id_plan_base_financiera] in table 'T_PLAN_BASE_FINANCIERA'
+ALTER TABLE [dbo].[T_PLAN_BASE_FINANCIERA]
+ADD CONSTRAINT [PK_T_PLAN_BASE_FINANCIERA]
+    PRIMARY KEY CLUSTERED ([id_plan_base_financiera] ASC);
+GO
+
+-- Creating primary key on [id_plan_base_financiera] in table 'T_PLAN_BASE_LEGAL'
+ALTER TABLE [dbo].[T_PLAN_BASE_LEGAL]
+ADD CONSTRAINT [PK_T_PLAN_BASE_LEGAL]
+    PRIMARY KEY CLUSTERED ([id_plan_base_financiera] ASC);
+GO
+
 -- Creating primary key on [id_plan_salud] in table 'T_PLAN_DE_SALUD'
 ALTER TABLE [dbo].[T_PLAN_DE_SALUD]
 ADD CONSTRAINT [PK_T_PLAN_DE_SALUD]
     PRIMARY KEY CLUSTERED ([id_plan_salud] ASC);
+GO
+
+-- Creating primary key on [id_plan_especialidad] in table 'T_PLAN_ESPECIALIDADxSERVICIO'
+ALTER TABLE [dbo].[T_PLAN_ESPECIALIDADxSERVICIO]
+ADD CONSTRAINT [PK_T_PLAN_ESPECIALIDADxSERVICIO]
+    PRIMARY KEY CLUSTERED ([id_plan_especialidad] ASC);
+GO
+
+-- Creating primary key on [id_plan_estrategia_comercial] in table 'T_PLAN_ESTRATEGIA_COMERCIAL'
+ALTER TABLE [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL]
+ADD CONSTRAINT [PK_T_PLAN_ESTRATEGIA_COMERCIAL]
+    PRIMARY KEY CLUSTERED ([id_plan_estrategia_comercial] ASC);
 GO
 
 -- Creating primary key on [codPlan] in table 'T_PLAN_MANTENIMIENTO'
@@ -713,12 +844,6 @@ GO
 ALTER TABLE [dbo].[T_PLAN_PACIENTE]
 ADD CONSTRAINT [PK_T_PLAN_PACIENTE]
     PRIMARY KEY CLUSTERED ([id_plan_paciente] ASC);
-GO
-
--- Creating primary key on [id_plan_servicio] in table 'T_PLAN_SERVICIO'
-ALTER TABLE [dbo].[T_PLAN_SERVICIO]
-ADD CONSTRAINT [PK_T_PLAN_SERVICIO]
-    PRIMARY KEY CLUSTERED ([id_plan_servicio] ASC);
 GO
 
 -- Creating primary key on [id_programacion] in table 'T_PROGRAMACION_MEDICA'
@@ -737,6 +862,12 @@ GO
 ALTER TABLE [dbo].[T_RESERVA_SERVICIO_SALUD]
 ADD CONSTRAINT [PK_T_RESERVA_SERVICIO_SALUD]
     PRIMARY KEY CLUSTERED ([id_reserva] ASC);
+GO
+
+-- Creating primary key on [id_seguimiento] in table 'T_SEGUIMIENTO'
+ALTER TABLE [dbo].[T_SEGUIMIENTO]
+ADD CONSTRAINT [PK_T_SEGUIMIENTO]
+    PRIMARY KEY CLUSTERED ([id_seguimiento] ASC);
 GO
 
 -- Creating primary key on [id_servicio] in table 'T_SERVICIO_SALUD'
@@ -763,37 +894,43 @@ ADD CONSTRAINT [PK_T_TIPO_PERSONA]
     PRIMARY KEY CLUSTERED ([id_tipo_persona] ASC);
 GO
 
+-- Creating primary key on [id_persona_plansalud] in table 'T_PERSONA_PLANSALUD'
+ALTER TABLE [dbo].[T_PERSONA_PLANSALUD]
+ADD CONSTRAINT [PK_T_PERSONA_PLANSALUD]
+    PRIMARY KEY CLUSTERED ([id_persona_plansalud] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [id_base_financiera] in table 'T_PLAN_DE_SALUD'
-ALTER TABLE [dbo].[T_PLAN_DE_SALUD]
-ADD CONSTRAINT [FK__T_PLAN_DE__id_ba__5AEE82B9]
+-- Creating foreign key on [id_base_financiera] in table 'T_PLAN_BASE_FINANCIERA'
+ALTER TABLE [dbo].[T_PLAN_BASE_FINANCIERA]
+ADD CONSTRAINT [FK_T_BASE_FINANCIERA]
     FOREIGN KEY ([id_base_financiera])
     REFERENCES [dbo].[T_BASE_FINANCIERA]
         ([id_base_financiera])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK__T_PLAN_DE__id_ba__5AEE82B9'
-CREATE INDEX [IX_FK__T_PLAN_DE__id_ba__5AEE82B9]
-ON [dbo].[T_PLAN_DE_SALUD]
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_BASE_FINANCIERA'
+CREATE INDEX [IX_FK_T_BASE_FINANCIERA]
+ON [dbo].[T_PLAN_BASE_FINANCIERA]
     ([id_base_financiera]);
 GO
 
--- Creating foreign key on [id_base_legal] in table 'T_PLAN_DE_SALUD'
-ALTER TABLE [dbo].[T_PLAN_DE_SALUD]
-ADD CONSTRAINT [FK__T_PLAN_DE__id_ba__5BE2A6F2]
+-- Creating foreign key on [id_base_legal] in table 'T_PLAN_BASE_LEGAL'
+ALTER TABLE [dbo].[T_PLAN_BASE_LEGAL]
+ADD CONSTRAINT [FK_T_PLAN_BASE_LEGAL]
     FOREIGN KEY ([id_base_legal])
     REFERENCES [dbo].[T_BASE_LEGAL]
         ([id_base_legal])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK__T_PLAN_DE__id_ba__5BE2A6F2'
-CREATE INDEX [IX_FK__T_PLAN_DE__id_ba__5BE2A6F2]
-ON [dbo].[T_PLAN_DE_SALUD]
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN_BASE_LEGAL'
+CREATE INDEX [IX_FK_T_PLAN_BASE_LEGAL]
+ON [dbo].[T_PLAN_BASE_LEGAL]
     ([id_base_legal]);
 GO
 
@@ -827,21 +964,6 @@ ON [dbo].[T_INMUEBLE]
     ([codBien]);
 GO
 
--- Creating foreign key on [id_investigacion_comercial] in table 'T_BITACORA_INCIDENCIA'
-ALTER TABLE [dbo].[T_BITACORA_INCIDENCIA]
-ADD CONSTRAINT [FK__T_BITACOR__id_in__47DBAE45]
-    FOREIGN KEY ([id_investigacion_comercial])
-    REFERENCES [dbo].[T_INVESTIGACION_COMERCIAL]
-        ([id_investigacion_comercial])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK__T_BITACOR__id_in__47DBAE45'
-CREATE INDEX [IX_FK__T_BITACOR__id_in__47DBAE45]
-ON [dbo].[T_BITACORA_INCIDENCIA]
-    ([id_investigacion_comercial]);
-GO
-
 -- Creating foreign key on [idempleado] in table 'T_BITACORA_INCIDENCIA'
 ALTER TABLE [dbo].[T_BITACORA_INCIDENCIA]
 ADD CONSTRAINT [FK__T_BITACOR__idemp__4D94879B]
@@ -855,6 +977,36 @@ GO
 CREATE INDEX [IX_FK__T_BITACOR__idemp__4D94879B]
 ON [dbo].[T_BITACORA_INCIDENCIA]
     ([idempleado]);
+GO
+
+-- Creating foreign key on [id_plan_salud] in table 'T_BITACORA_INCIDENCIA'
+ALTER TABLE [dbo].[T_BITACORA_INCIDENCIA]
+ADD CONSTRAINT [FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD]
+    FOREIGN KEY ([id_plan_salud])
+    REFERENCES [dbo].[T_PLAN_DE_SALUD]
+        ([id_plan_salud])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD'
+CREATE INDEX [IX_FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD]
+ON [dbo].[T_BITACORA_INCIDENCIA]
+    ([id_plan_salud]);
+GO
+
+-- Creating foreign key on [id_bitacora] in table 'T_SEGUIMIENTO'
+ALTER TABLE [dbo].[T_SEGUIMIENTO]
+ADD CONSTRAINT [FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA]
+    FOREIGN KEY ([id_bitacora])
+    REFERENCES [dbo].[T_BITACORA_INCIDENCIA]
+        ([id_bitacora])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA'
+CREATE INDEX [IX_FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA]
+ON [dbo].[T_SEGUIMIENTO]
+    ([id_bitacora]);
 GO
 
 -- Creating foreign key on [id_paciente] in table 'T_COMPROBANTE'
@@ -1097,18 +1249,78 @@ ON [dbo].[T_SOLICITUD_MANTENIMIENTO]
     ([idEquipoMedico]);
 GO
 
--- Creating foreign key on [id_estrategia_comercial] in table 'T_PLAN_DE_SALUD'
-ALTER TABLE [dbo].[T_PLAN_DE_SALUD]
-ADD CONSTRAINT [FK__T_PLAN_DE__id_es__5CD6CB2B]
+-- Creating foreign key on [id_especialidad] in table 'T_ESPECIALIDAD_SERVICIO'
+ALTER TABLE [dbo].[T_ESPECIALIDAD_SERVICIO]
+ADD CONSTRAINT [FK_T_ESPECIALIDAD_x_SERVICIO]
+    FOREIGN KEY ([id_especialidad])
+    REFERENCES [dbo].[T_ESPECIALIDAD_MEDICA]
+        ([idEspecialidad])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_ESPECIALIDAD_x_SERVICIO'
+CREATE INDEX [IX_FK_T_ESPECIALIDAD_x_SERVICIO]
+ON [dbo].[T_ESPECIALIDAD_SERVICIO]
+    ([id_especialidad]);
+GO
+
+-- Creating foreign key on [id_especialidad_servicio] in table 'T_PLAN_ESPECIALIDADxSERVICIO'
+ALTER TABLE [dbo].[T_PLAN_ESPECIALIDADxSERVICIO]
+ADD CONSTRAINT [FK_T_PLAN_ESPECIALIDADSERVICIO]
+    FOREIGN KEY ([id_especialidad_servicio])
+    REFERENCES [dbo].[T_ESPECIALIDAD_SERVICIO]
+        ([id_especialidad_servicio])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN_ESPECIALIDADSERVICIO'
+CREATE INDEX [IX_FK_T_PLAN_ESPECIALIDADSERVICIO]
+ON [dbo].[T_PLAN_ESPECIALIDADxSERVICIO]
+    ([id_especialidad_servicio]);
+GO
+
+-- Creating foreign key on [id_especialidad_servicio] in table 'T_PROGRAMACION_MEDICA'
+ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA]
+ADD CONSTRAINT [FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO]
+    FOREIGN KEY ([id_especialidad_servicio])
+    REFERENCES [dbo].[T_ESPECIALIDAD_SERVICIO]
+        ([id_especialidad_servicio])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO'
+CREATE INDEX [IX_FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO]
+ON [dbo].[T_PROGRAMACION_MEDICA]
+    ([id_especialidad_servicio]);
+GO
+
+-- Creating foreign key on [id_servicio] in table 'T_ESPECIALIDAD_SERVICIO'
+ALTER TABLE [dbo].[T_ESPECIALIDAD_SERVICIO]
+ADD CONSTRAINT [FK_T_SERVICIO_ESPECIALIDAD]
+    FOREIGN KEY ([id_servicio])
+    REFERENCES [dbo].[T_SERVICIO_SALUD]
+        ([id_servicio])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_SERVICIO_ESPECIALIDAD'
+CREATE INDEX [IX_FK_T_SERVICIO_ESPECIALIDAD]
+ON [dbo].[T_ESPECIALIDAD_SERVICIO]
+    ([id_servicio]);
+GO
+
+-- Creating foreign key on [id_estrategia_comercial] in table 'T_PLAN_ESTRATEGIA_COMERCIAL'
+ALTER TABLE [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL]
+ADD CONSTRAINT [FK_T_PLAN_ESTRATEGIA_COMERCIAL]
     FOREIGN KEY ([id_estrategia_comercial])
     REFERENCES [dbo].[T_ESTRATEGIA_COMERCIAL]
         ([id_estrategia_comercial])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK__T_PLAN_DE__id_es__5CD6CB2B'
-CREATE INDEX [IX_FK__T_PLAN_DE__id_es__5CD6CB2B]
-ON [dbo].[T_PLAN_DE_SALUD]
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN_ESTRATEGIA_COMERCIAL'
+CREATE INDEX [IX_FK_T_PLAN_ESTRATEGIA_COMERCIAL]
+ON [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL]
     ([id_estrategia_comercial]);
 GO
 
@@ -1129,15 +1341,15 @@ GO
 
 -- Creating foreign key on [id_investigacion_comercial] in table 'T_PLAN_DE_SALUD'
 ALTER TABLE [dbo].[T_PLAN_DE_SALUD]
-ADD CONSTRAINT [FK__T_PLAN_DE__id_in__5DCAEF64]
+ADD CONSTRAINT [FK__T_PLAN_DE_SALUD1]
     FOREIGN KEY ([id_investigacion_comercial])
     REFERENCES [dbo].[T_INVESTIGACION_COMERCIAL]
         ([id_investigacion_comercial])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK__T_PLAN_DE__id_in__5DCAEF64'
-CREATE INDEX [IX_FK__T_PLAN_DE__id_in__5DCAEF64]
+-- Creating non-clustered index for FOREIGN KEY 'FK__T_PLAN_DE_SALUD1'
+CREATE INDEX [IX_FK__T_PLAN_DE_SALUD1]
 ON [dbo].[T_PLAN_DE_SALUD]
     ([id_investigacion_comercial]);
 GO
@@ -1247,6 +1459,51 @@ ON [dbo].[T_PLAN_PACIENTE]
     ([id_paciente]);
 GO
 
+-- Creating foreign key on [id_plan_salud] in table 'T_PLAN_BASE_FINANCIERA'
+ALTER TABLE [dbo].[T_PLAN_BASE_FINANCIERA]
+ADD CONSTRAINT [FK_T_PLAN_DE_SALUD]
+    FOREIGN KEY ([id_plan_salud])
+    REFERENCES [dbo].[T_PLAN_DE_SALUD]
+        ([id_plan_salud])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN_DE_SALUD'
+CREATE INDEX [IX_FK_T_PLAN_DE_SALUD]
+ON [dbo].[T_PLAN_BASE_FINANCIERA]
+    ([id_plan_salud]);
+GO
+
+-- Creating foreign key on [id_plan_salud] in table 'T_PLAN_BASE_LEGAL'
+ALTER TABLE [dbo].[T_PLAN_BASE_LEGAL]
+ADD CONSTRAINT [FK_T_PLAN]
+    FOREIGN KEY ([id_plan_salud])
+    REFERENCES [dbo].[T_PLAN_DE_SALUD]
+        ([id_plan_salud])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN'
+CREATE INDEX [IX_FK_T_PLAN]
+ON [dbo].[T_PLAN_BASE_LEGAL]
+    ([id_plan_salud]);
+GO
+
+-- Creating foreign key on [id_plan_salud] in table 'T_PLAN_ESTRATEGIA_COMERCIAL'
+ALTER TABLE [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL]
+ADD CONSTRAINT [FK_T_PLAN_COMERCIAL]
+    FOREIGN KEY ([id_plan_salud])
+    REFERENCES [dbo].[T_PLAN_DE_SALUD]
+        ([id_plan_salud])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN_COMERCIAL'
+CREATE INDEX [IX_FK_T_PLAN_COMERCIAL]
+ON [dbo].[T_PLAN_ESTRATEGIA_COMERCIAL]
+    ([id_plan_salud]);
+GO
+
 -- Creating foreign key on [id_plan_salud] in table 'T_PLAN_PACIENTE'
 ALTER TABLE [dbo].[T_PLAN_PACIENTE]
 ADD CONSTRAINT [FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD]
@@ -1262,18 +1519,18 @@ ON [dbo].[T_PLAN_PACIENTE]
     ([id_plan_salud]);
 GO
 
--- Creating foreign key on [id_plan_salud] in table 'T_PLAN_SERVICIO'
-ALTER TABLE [dbo].[T_PLAN_SERVICIO]
-ADD CONSTRAINT [FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD]
+-- Creating foreign key on [id_plan_salud] in table 'T_PLAN_ESPECIALIDADxSERVICIO'
+ALTER TABLE [dbo].[T_PLAN_ESPECIALIDADxSERVICIO]
+ADD CONSTRAINT [FK_T_PLANSALUD_ESPECIALIDADSERVICIO]
     FOREIGN KEY ([id_plan_salud])
     REFERENCES [dbo].[T_PLAN_DE_SALUD]
         ([id_plan_salud])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD'
-CREATE INDEX [IX_FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD]
-ON [dbo].[T_PLAN_SERVICIO]
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PLANSALUD_ESPECIALIDADSERVICIO'
+CREATE INDEX [IX_FK_T_PLANSALUD_ESPECIALIDADSERVICIO]
+ON [dbo].[T_PLAN_ESPECIALIDADxSERVICIO]
     ([id_plan_salud]);
 GO
 
@@ -1290,21 +1547,6 @@ GO
 CREATE INDEX [IX_FK__T_PLAN_MA__idTec__5EBF139D]
 ON [dbo].[T_PLAN_MANTENIMIENTO]
     ([idTecnicoMant]);
-GO
-
--- Creating foreign key on [id_servicio] in table 'T_PLAN_SERVICIO'
-ALTER TABLE [dbo].[T_PLAN_SERVICIO]
-ADD CONSTRAINT [FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD]
-    FOREIGN KEY ([id_servicio])
-    REFERENCES [dbo].[T_SERVICIO_SALUD]
-        ([id_servicio])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD'
-CREATE INDEX [IX_FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD]
-ON [dbo].[T_PLAN_SERVICIO]
-    ([id_servicio]);
 GO
 
 -- Creating foreign key on [id_servicio] in table 'T_RESERVA_SERVICIO_SALUD'
@@ -1337,34 +1579,64 @@ ON [dbo].[T_SOLICITUD_MANTENIMIENTO]
     ([idTecnicoMant]);
 GO
 
--- Creating foreign key on [id_plan_salud] in table 'T_PROGRAMACION_MEDICA'
-ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA]
-ADD CONSTRAINT [FK_T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA]
+-- Creating foreign key on [codPersona] in table 'T_PERSONA_PLANSALUD'
+ALTER TABLE [dbo].[T_PERSONA_PLANSALUD]
+ADD CONSTRAINT [FK_T_PERSONAT_PERSONA_PLANSALUD]
+    FOREIGN KEY ([codPersona])
+    REFERENCES [dbo].[T_PERSONA]
+        ([codPersona])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PERSONAT_PERSONA_PLANSALUD'
+CREATE INDEX [IX_FK_T_PERSONAT_PERSONA_PLANSALUD]
+ON [dbo].[T_PERSONA_PLANSALUD]
+    ([codPersona]);
+GO
+
+-- Creating foreign key on [id_plan_salud] in table 'T_PERSONA_PLANSALUD'
+ALTER TABLE [dbo].[T_PERSONA_PLANSALUD]
+ADD CONSTRAINT [FK_T_PERSONA_PLANSALUDT_PLAN_DE_SALUD]
     FOREIGN KEY ([id_plan_salud])
     REFERENCES [dbo].[T_PLAN_DE_SALUD]
         ([id_plan_salud])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA'
-CREATE INDEX [IX_FK_T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA]
-ON [dbo].[T_PROGRAMACION_MEDICA]
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PERSONA_PLANSALUDT_PLAN_DE_SALUD'
+CREATE INDEX [IX_FK_T_PERSONA_PLANSALUDT_PLAN_DE_SALUD]
+ON [dbo].[T_PERSONA_PLANSALUD]
     ([id_plan_salud]);
 GO
 
--- Creating foreign key on [id_servicio_salud] in table 'T_PROGRAMACION_MEDICA'
+-- Creating foreign key on [codPersona] in table 'T_PROGRAMACION_MEDICA'
 ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA]
-ADD CONSTRAINT [FK_T_SERVICIO_SALUDT_PROGRAMACION_MEDICA]
-    FOREIGN KEY ([id_servicio_salud])
-    REFERENCES [dbo].[T_SERVICIO_SALUD]
-        ([id_servicio])
+ADD CONSTRAINT [FK_T_PROGRAMACION_MEDICAT_PERSONA]
+    FOREIGN KEY ([codPersona])
+    REFERENCES [dbo].[T_PERSONA]
+        ([codPersona])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_T_SERVICIO_SALUDT_PROGRAMACION_MEDICA'
-CREATE INDEX [IX_FK_T_SERVICIO_SALUDT_PROGRAMACION_MEDICA]
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PROGRAMACION_MEDICAT_PERSONA'
+CREATE INDEX [IX_FK_T_PROGRAMACION_MEDICAT_PERSONA]
 ON [dbo].[T_PROGRAMACION_MEDICA]
-    ([id_servicio_salud]);
+    ([codPersona]);
+GO
+
+-- Creating foreign key on [id_persona_plansalud] in table 'T_PROGRAMACION_MEDICA'
+ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA]
+ADD CONSTRAINT [FK_T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD]
+    FOREIGN KEY ([id_persona_plansalud])
+    REFERENCES [dbo].[T_PERSONA_PLANSALUD]
+        ([id_persona_plansalud])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD'
+CREATE INDEX [IX_FK_T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD]
+ON [dbo].[T_PROGRAMACION_MEDICA]
+    ([id_persona_plansalud]);
 GO
 
 -- --------------------------------------------------

@@ -12,22 +12,16 @@ namespace UPC.TP2.WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class T_BITACORA_INCIDENCIA
+    public partial class T_PLAN_ESPECIALIDADxSERVICIO
     {
-        public T_BITACORA_INCIDENCIA()
-        {
-            this.T_SEGUIMIENTO = new HashSet<T_SEGUIMIENTO>();
-        }
-    
-        public int id_bitacora { get; set; }
-        public string tipo_incidencia { get; set; }
-        public Nullable<System.DateTime> fecha_registro { get; set; }
-        public string descripcion { get; set; }
+        public int id_plan_especialidad { get; set; }
+        public Nullable<int> id_especialidad_servicio { get; set; }
         public Nullable<int> id_plan_salud { get; set; }
-        public Nullable<int> idempleado { get; set; }
+        public Nullable<System.DateTime> fecha_inicio { get; set; }
+        public Nullable<System.DateTime> fecha_fin { get; set; }
+        public string estado { get; set; }
     
-        public virtual T_EMPLEADO T_EMPLEADO { get; set; }
+        public virtual T_ESPECIALIDAD_SERVICIO T_ESPECIALIDAD_SERVICIO { get; set; }
         public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
-        public virtual ICollection<T_SEGUIMIENTO> T_SEGUIMIENTO { get; set; }
     }
 }

@@ -16,17 +16,15 @@ namespace UPC.TP2.WEB.Models
     {
         public T_SERVICIO_SALUD()
         {
-            this.T_PLAN_SERVICIO = new HashSet<T_PLAN_SERVICIO>();
+            this.T_ESPECIALIDAD_SERVICIO = new HashSet<T_ESPECIALIDAD_SERVICIO>();
             this.T_RESERVA_SERVICIO_SALUD = new HashSet<T_RESERVA_SERVICIO_SALUD>();
-            this.T_PROGRAMACION_MEDICA = new HashSet<T_PROGRAMACION_MEDICA>();
         }
     
         public int id_servicio { get; set; }
         public string nombre_servicio { get; set; }
         public string tipo_servicio { get; set; }
     
-        public virtual ICollection<T_PLAN_SERVICIO> T_PLAN_SERVICIO { get; set; }
+        public virtual ICollection<T_ESPECIALIDAD_SERVICIO> T_ESPECIALIDAD_SERVICIO { get; set; }
         public virtual ICollection<T_RESERVA_SERVICIO_SALUD> T_RESERVA_SERVICIO_SALUD { get; set; }
-        public virtual ICollection<T_PROGRAMACION_MEDICA> T_PROGRAMACION_MEDICA { get; set; }
     }
 }

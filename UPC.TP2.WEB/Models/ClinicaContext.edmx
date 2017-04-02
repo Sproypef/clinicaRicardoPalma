@@ -17,6 +17,7 @@
     <EntitySet Name="T_EQUIPO_MEDICO" EntityType="BDCLINICAModel.Store.T_EQUIPO_MEDICO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_EQUIPO_USO" EntityType="BDCLINICAModel.Store.T_EQUIPO_USO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_ESPECIALIDAD_MEDICA" EntityType="BDCLINICAModel.Store.T_ESPECIALIDAD_MEDICA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_ESPECIALIDAD_SERVICIO" EntityType="BDCLINICAModel.Store.T_ESPECIALIDAD_SERVICIO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_ESTRATEGIA_COMERCIAL" EntityType="BDCLINICAModel.Store.T_ESTRATEGIA_COMERCIAL" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_INMUEBLE" EntityType="BDCLINICAModel.Store.T_INMUEBLE" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_INVESTIGACION_COMERCIAL" EntityType="BDCLINICAModel.Store.T_INVESTIGACION_COMERCIAL" store:Type="Tables" Schema="dbo" />
@@ -25,24 +26,29 @@
     <EntitySet Name="T_MUEBLE" EntityType="BDCLINICAModel.Store.T_MUEBLE" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PACIENTE" EntityType="BDCLINICAModel.Store.T_PACIENTE" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PERSONA" EntityType="BDCLINICAModel.Store.T_PERSONA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_PLAN_BASE_FINANCIERA" EntityType="BDCLINICAModel.Store.T_PLAN_BASE_FINANCIERA" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_PLAN_BASE_LEGAL" EntityType="BDCLINICAModel.Store.T_PLAN_BASE_LEGAL" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PLAN_DE_SALUD" EntityType="BDCLINICAModel.Store.T_PLAN_DE_SALUD" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_PLAN_ESPECIALIDADxSERVICIO" EntityType="BDCLINICAModel.Store.T_PLAN_ESPECIALIDADxSERVICIO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_PLAN_ESTRATEGIA_COMERCIAL" EntityType="BDCLINICAModel.Store.T_PLAN_ESTRATEGIA_COMERCIAL" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PLAN_MANTENIMIENTO" EntityType="BDCLINICAModel.Store.T_PLAN_MANTENIMIENTO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PLAN_PACIENTE" EntityType="BDCLINICAModel.Store.T_PLAN_PACIENTE" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="T_PLAN_SERVICIO" EntityType="BDCLINICAModel.Store.T_PLAN_SERVICIO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PROGRAMACION_MEDICA" EntityType="BDCLINICAModel.Store.T_PROGRAMACION_MEDICA" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PROYECTO_PLANSALUD" EntityType="BDCLINICAModel.Store.T_PROYECTO_PLANSALUD" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_RESERVA_SERVICIO_SALUD" EntityType="BDCLINICAModel.Store.T_RESERVA_SERVICIO_SALUD" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_SEGUIMIENTO" EntityType="BDCLINICAModel.Store.T_SEGUIMIENTO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_SERVICIO_SALUD" EntityType="BDCLINICAModel.Store.T_SERVICIO_SALUD" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_SOLICITUD_MANTENIMIENTO" EntityType="BDCLINICAModel.Store.T_SOLICITUD_MANTENIMIENTO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_TECNICO_MANTENIMIENTO" EntityType="BDCLINICAModel.Store.T_TECNICO_MANTENIMIENTO" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_TIPO_PERSONA" EntityType="BDCLINICAModel.Store.T_TIPO_PERSONA" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK__T_PLAN_DE__id_ba__5AEE82B9" Association="BDCLINICAModel.Store.FK__T_PLAN_DE__id_ba__5AEE82B9">
+    <EntitySet Name="T_PERSONA_PLANSALUD" EntityType="BDCLINICAModel.Store.T_PERSONA_PLANSALUD" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_T_BASE_FINANCIERA" Association="BDCLINICAModel.Store.FK_T_BASE_FINANCIERA">
       <End Role="T_BASE_FINANCIERA" EntitySet="T_BASE_FINANCIERA" />
-      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+      <End Role="T_PLAN_BASE_FINANCIERA" EntitySet="T_PLAN_BASE_FINANCIERA" />
     </AssociationSet>
-    <AssociationSet Name="FK__T_PLAN_DE__id_ba__5BE2A6F2" Association="BDCLINICAModel.Store.FK__T_PLAN_DE__id_ba__5BE2A6F2">
+    <AssociationSet Name="FK_T_PLAN_BASE_LEGAL" Association="BDCLINICAModel.Store.FK_T_PLAN_BASE_LEGAL">
       <End Role="T_BASE_LEGAL" EntitySet="T_BASE_LEGAL" />
-      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+      <End Role="T_PLAN_BASE_LEGAL" EntitySet="T_PLAN_BASE_LEGAL" />
     </AssociationSet>
     <AssociationSet Name="FK__T_MUEBLE__codBie__571DF1D5" Association="BDCLINICAModel.Store.FK__T_MUEBLE__codBie__571DF1D5">
       <End Role="T_BIEN" EntitySet="T_BIEN" />
@@ -52,13 +58,17 @@
       <End Role="T_BIEN" EntitySet="T_BIEN" />
       <End Role="T_INMUEBLE" EntitySet="T_INMUEBLE" />
     </AssociationSet>
-    <AssociationSet Name="FK__T_BITACOR__id_in__47DBAE45" Association="BDCLINICAModel.Store.FK__T_BITACOR__id_in__47DBAE45">
-      <End Role="T_INVESTIGACION_COMERCIAL" EntitySet="T_INVESTIGACION_COMERCIAL" />
-      <End Role="T_BITACORA_INCIDENCIA" EntitySet="T_BITACORA_INCIDENCIA" />
-    </AssociationSet>
     <AssociationSet Name="FK__T_BITACOR__idemp__4D94879B" Association="BDCLINICAModel.Store.FK__T_BITACOR__idemp__4D94879B">
       <End Role="T_EMPLEADO" EntitySet="T_EMPLEADO" />
       <End Role="T_BITACORA_INCIDENCIA" EntitySet="T_BITACORA_INCIDENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD" Association="BDCLINICAModel.Store.FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD">
+      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+      <End Role="T_BITACORA_INCIDENCIA" EntitySet="T_BITACORA_INCIDENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA" Association="BDCLINICAModel.Store.FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA">
+      <End Role="T_BITACORA_INCIDENCIA" EntitySet="T_BITACORA_INCIDENCIA" />
+      <End Role="T_SEGUIMIENTO" EntitySet="T_SEGUIMIENTO" />
     </AssociationSet>
     <AssociationSet Name="FK__T_COMPROB__id_pa__49C3F6B7" Association="BDCLINICAModel.Store.FK__T_COMPROB__id_pa__49C3F6B7">
       <End Role="T_PACIENTE" EntitySet="T_PACIENTE" />
@@ -124,15 +134,31 @@
       <End Role="T_EQUIPO_MEDICO" EntitySet="T_EQUIPO_MEDICO" />
       <End Role="T_SOLICITUD_MANTENIMIENTO" EntitySet="T_SOLICITUD_MANTENIMIENTO" />
     </AssociationSet>
-    <AssociationSet Name="FK__T_PLAN_DE__id_es__5CD6CB2B" Association="BDCLINICAModel.Store.FK__T_PLAN_DE__id_es__5CD6CB2B">
+    <AssociationSet Name="FK_T_ESPECIALIDAD_x_SERVICIO" Association="BDCLINICAModel.Store.FK_T_ESPECIALIDAD_x_SERVICIO">
+      <End Role="T_ESPECIALIDAD_MEDICA" EntitySet="T_ESPECIALIDAD_MEDICA" />
+      <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_PLAN_ESPECIALIDADSERVICIO" Association="BDCLINICAModel.Store.FK_T_PLAN_ESPECIALIDADSERVICIO">
+      <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
+      <End Role="T_PLAN_ESPECIALIDADxSERVICIO" EntitySet="T_PLAN_ESPECIALIDADxSERVICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO" Association="BDCLINICAModel.Store.FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO">
+      <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
+      <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_SERVICIO_ESPECIALIDAD" Association="BDCLINICAModel.Store.FK_T_SERVICIO_ESPECIALIDAD">
+      <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
+      <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_PLAN_ESTRATEGIA_COMERCIAL" Association="BDCLINICAModel.Store.FK_T_PLAN_ESTRATEGIA_COMERCIAL">
       <End Role="T_ESTRATEGIA_COMERCIAL" EntitySet="T_ESTRATEGIA_COMERCIAL" />
-      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+      <End Role="T_PLAN_ESTRATEGIA_COMERCIAL" EntitySet="T_PLAN_ESTRATEGIA_COMERCIAL" />
     </AssociationSet>
     <AssociationSet Name="FK__T_PROGRAM__codIn__6754599E" Association="BDCLINICAModel.Store.FK__T_PROGRAM__codIn__6754599E">
       <End Role="T_INMUEBLE" EntitySet="T_INMUEBLE" />
       <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
     </AssociationSet>
-    <AssociationSet Name="FK__T_PLAN_DE__id_in__5DCAEF64" Association="BDCLINICAModel.Store.FK__T_PLAN_DE__id_in__5DCAEF64">
+    <AssociationSet Name="FK__T_PLAN_DE_SALUD1" Association="BDCLINICAModel.Store.FK__T_PLAN_DE_SALUD1">
       <End Role="T_INVESTIGACION_COMERCIAL" EntitySet="T_INVESTIGACION_COMERCIAL" />
       <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
     </AssociationSet>
@@ -164,21 +190,29 @@
       <End Role="T_PACIENTE" EntitySet="T_PACIENTE" />
       <End Role="T_PLAN_PACIENTE" EntitySet="T_PLAN_PACIENTE" />
     </AssociationSet>
+    <AssociationSet Name="FK_T_PLAN_DE_SALUD" Association="BDCLINICAModel.Store.FK_T_PLAN_DE_SALUD">
+      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+      <End Role="T_PLAN_BASE_FINANCIERA" EntitySet="T_PLAN_BASE_FINANCIERA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_PLAN" Association="BDCLINICAModel.Store.FK_T_PLAN">
+      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+      <End Role="T_PLAN_BASE_LEGAL" EntitySet="T_PLAN_BASE_LEGAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_PLAN_COMERCIAL" Association="BDCLINICAModel.Store.FK_T_PLAN_COMERCIAL">
+      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+      <End Role="T_PLAN_ESTRATEGIA_COMERCIAL" EntitySet="T_PLAN_ESTRATEGIA_COMERCIAL" />
+    </AssociationSet>
     <AssociationSet Name="FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD" Association="BDCLINICAModel.Store.FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD">
       <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
       <End Role="T_PLAN_PACIENTE" EntitySet="T_PLAN_PACIENTE" />
     </AssociationSet>
-    <AssociationSet Name="FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD" Association="BDCLINICAModel.Store.FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD">
+    <AssociationSet Name="FK_T_PLANSALUD_ESPECIALIDADSERVICIO" Association="BDCLINICAModel.Store.FK_T_PLANSALUD_ESPECIALIDADSERVICIO">
       <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
-      <End Role="T_PLAN_SERVICIO" EntitySet="T_PLAN_SERVICIO" />
+      <End Role="T_PLAN_ESPECIALIDADxSERVICIO" EntitySet="T_PLAN_ESPECIALIDADxSERVICIO" />
     </AssociationSet>
     <AssociationSet Name="FK__T_PLAN_MA__idTec__5EBF139D" Association="BDCLINICAModel.Store.FK__T_PLAN_MA__idTec__5EBF139D">
       <End Role="T_TECNICO_MANTENIMIENTO" EntitySet="T_TECNICO_MANTENIMIENTO" />
       <End Role="T_PLAN_MANTENIMIENTO" EntitySet="T_PLAN_MANTENIMIENTO" />
-    </AssociationSet>
-    <AssociationSet Name="FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD" Association="BDCLINICAModel.Store.FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD">
-      <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
-      <End Role="T_PLAN_SERVICIO" EntitySet="T_PLAN_SERVICIO" />
     </AssociationSet>
     <AssociationSet Name="FK__T_RESERVA__id_se__5EBF139D" Association="BDCLINICAModel.Store.FK__T_RESERVA__id_se__5EBF139D">
       <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
@@ -188,13 +222,21 @@
       <End Role="T_TECNICO_MANTENIMIENTO" EntitySet="T_TECNICO_MANTENIMIENTO" />
       <End Role="T_SOLICITUD_MANTENIMIENTO" EntitySet="T_SOLICITUD_MANTENIMIENTO" />
     </AssociationSet>
-    <AssociationSet Name="T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA" Association="BDCLINICAModel.Store.T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA">
-      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
-      <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
+    <AssociationSet Name="T_PERSONAT_PERSONA_PLANSALUD" Association="BDCLINICAModel.Store.T_PERSONAT_PERSONA_PLANSALUD">
+      <End Role="T_PERSONA_PLANSALUD" EntitySet="T_PERSONA_PLANSALUD" />
+      <End Role="T_PERSONA" EntitySet="T_PERSONA" />
     </AssociationSet>
-    <AssociationSet Name="T_SERVICIO_SALUDT_PROGRAMACION_MEDICA" Association="BDCLINICAModel.Store.T_SERVICIO_SALUDT_PROGRAMACION_MEDICA">
-      <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
+    <AssociationSet Name="T_PERSONA_PLANSALUDT_PLAN_DE_SALUD" Association="BDCLINICAModel.Store.T_PERSONA_PLANSALUDT_PLAN_DE_SALUD">
+      <End Role="T_PERSONA_PLANSALUD" EntitySet="T_PERSONA_PLANSALUD" />
+      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+    </AssociationSet>
+    <AssociationSet Name="T_PROGRAMACION_MEDICAT_PERSONA" Association="BDCLINICAModel.Store.T_PROGRAMACION_MEDICAT_PERSONA">
       <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
+      <End Role="T_PERSONA" EntitySet="T_PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD" Association="BDCLINICAModel.Store.T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD">
+      <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
+      <End Role="T_PERSONA_PLANSALUD" EntitySet="T_PERSONA_PLANSALUD" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="T_BASE_FINANCIERA">
@@ -235,8 +277,8 @@
     <Property Name="tipo_incidencia" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="fecha_registro" Type="datetime" Nullable="true" />
     <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id_plan_salud" Type="int" Nullable="true" />
     <Property Name="idempleado" Type="int" Nullable="true" />
-    <Property Name="id_investigacion_comercial" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="T_COMPROBANTE">
     <Key>
@@ -321,6 +363,16 @@
     </Key>
     <Property Name="idEspecialidad" Type="int" Nullable="false" />
     <Property Name="nomEspecialidad" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="T_ESPECIALIDAD_SERVICIO">
+    <Key>
+      <PropertyRef Name="id_especialidad_servicio" />
+    </Key>
+    <Property Name="id_especialidad_servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_ingreso" Type="datetime" Nullable="true" />
+    <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
+    <Property Name="id_servicio" Type="int" Nullable="true" />
+    <Property Name="id_especialidad" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="T_ESTRATEGIA_COMERCIAL">
     <Key>
@@ -408,6 +460,26 @@
     <Property Name="codPersona" Type="int" Nullable="false" />
     <Property Name="nompersona" Type="varchar" Nullable="true" MaxLength="100" />
   </EntityType>
+  <EntityType Name="T_PLAN_BASE_FINANCIERA">
+    <Key>
+      <PropertyRef Name="id_plan_base_financiera" />
+    </Key>
+    <Property Name="id_plan_base_financiera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_base_financiera" Type="int" Nullable="true" />
+    <Property Name="id_plan_salud" Type="int" Nullable="true" />
+    <Property Name="fecha_registro" Type="datetime" Nullable="true" />
+    <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_PLAN_BASE_LEGAL">
+    <Key>
+      <PropertyRef Name="id_plan_base_financiera" />
+    </Key>
+    <Property Name="id_plan_base_financiera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_base_legal" Type="int" Nullable="true" />
+    <Property Name="id_plan_salud" Type="int" Nullable="true" />
+    <Property Name="fecha_registro" Type="datetime" Nullable="true" />
+    <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
+  </EntityType>
   <EntityType Name="T_PLAN_DE_SALUD">
     <Key>
       <PropertyRef Name="id_plan_salud" />
@@ -419,10 +491,28 @@
     <Property Name="fecha_fin" Type="datetime" Nullable="true" />
     <Property Name="objetivo" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="id_investigacion_comercial" Type="int" Nullable="true" />
+    <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_PLAN_ESPECIALIDADxSERVICIO">
+    <Key>
+      <PropertyRef Name="id_plan_especialidad" />
+    </Key>
+    <Property Name="id_plan_especialidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_especialidad_servicio" Type="int" Nullable="true" />
+    <Property Name="id_plan_salud" Type="int" Nullable="true" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="true" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="true" />
+    <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="T_PLAN_ESTRATEGIA_COMERCIAL">
+    <Key>
+      <PropertyRef Name="id_plan_estrategia_comercial" />
+    </Key>
+    <Property Name="id_plan_estrategia_comercial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_estrategia_comercial" Type="int" Nullable="true" />
-    <Property Name="id_base_financiera" Type="int" Nullable="true" />
-    <Property Name="id_base_legal" Type="int" Nullable="true" />
-    <Property Name="id_servicio" Type="int" Nullable="true" />
+    <Property Name="id_plan_salud" Type="int" Nullable="true" />
+    <Property Name="fecha_registro" Type="datetime" Nullable="true" />
+    <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
   </EntityType>
   <EntityType Name="T_PLAN_MANTENIMIENTO">
     <Key>
@@ -444,18 +534,6 @@
     <Property Name="fecha_fin" Type="datetime" Nullable="true" />
     <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
   </EntityType>
-  <EntityType Name="T_PLAN_SERVICIO">
-    <Key>
-      <PropertyRef Name="id_plan_servicio" />
-    </Key>
-    <Property Name="id_plan_servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="id_servicio" Type="int" Nullable="true" />
-    <Property Name="id_plan_salud" Type="int" Nullable="true" />
-    <Property Name="fecha_registro" Type="datetime" Nullable="true" />
-    <Property Name="fecha_retiro" Type="datetime" Nullable="true" />
-    <Property Name="idempleado" Type="int" Nullable="true" />
-    <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
-  </EntityType>
   <EntityType Name="T_PROGRAMACION_MEDICA">
     <Key>
       <PropertyRef Name="id_programacion" />
@@ -470,10 +548,10 @@
     <Property Name="estado" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
     <Property Name="id_empleado" Type="int" Nullable="false" />
-    <Property Name="id_paciente" Type="int" Nullable="false" />
+    <Property Name="id_especialidad_servicio" Type="int" Nullable="true" />
     <Property Name="codInmueble" Type="int" Nullable="true" />
-    <Property Name="id_plan_salud" Type="int" Nullable="true" />
-    <Property Name="id_servicio_salud" Type="int" Nullable="false" />
+    <Property Name="codPersona" Type="int" Nullable="false" />
+    <Property Name="id_persona_plansalud" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="T_PROYECTO_PLANSALUD">
     <Key>
@@ -497,6 +575,16 @@
     <Property Name="estado" Type="char" Nullable="true" MaxLength="1" />
     <Property Name="id_paciente" Type="int" Nullable="true" />
     <Property Name="id_servicio" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="T_SEGUIMIENTO">
+    <Key>
+      <PropertyRef Name="id_seguimiento" />
+    </Key>
+    <Property Name="id_seguimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_bitacora" Type="int" Nullable="true" />
+    <Property Name="id_plan_salud" Type="int" Nullable="true" />
+    <Property Name="seguimiento" Type="varchar" Nullable="true" MaxLength="500" />
+    <Property Name="fecha_registro" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="T_SERVICIO_SALUD">
     <Key>
@@ -539,26 +627,36 @@
     <Property Name="nombre_servicio" Type="nvarchar(max)" Nullable="false" />
     <Property Name="tipo_servicio" Type="varchar" Nullable="true" MaxLength="10" />
   </EntityType>
-  <Association Name="FK__T_PLAN_DE__id_ba__5AEE82B9">
+  <EntityType Name="T_PERSONA_PLANSALUD">
+    <Key>
+      <PropertyRef Name="id_persona_plansalud" />
+    </Key>
+    <Property Name="id_persona_plansalud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="false" />
+    <Property Name="codPersona" Type="int" Nullable="false" />
+    <Property Name="id_plan_salud" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_T_BASE_FINANCIERA">
     <End Role="T_BASE_FINANCIERA" Type="BDCLINICAModel.Store.T_BASE_FINANCIERA" Multiplicity="0..1" />
-    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="*" />
+    <End Role="T_PLAN_BASE_FINANCIERA" Type="BDCLINICAModel.Store.T_PLAN_BASE_FINANCIERA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="T_BASE_FINANCIERA">
         <PropertyRef Name="id_base_financiera" />
       </Principal>
-      <Dependent Role="T_PLAN_DE_SALUD">
+      <Dependent Role="T_PLAN_BASE_FINANCIERA">
         <PropertyRef Name="id_base_financiera" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__T_PLAN_DE__id_ba__5BE2A6F2">
+  <Association Name="FK_T_PLAN_BASE_LEGAL">
     <End Role="T_BASE_LEGAL" Type="BDCLINICAModel.Store.T_BASE_LEGAL" Multiplicity="0..1" />
-    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="*" />
+    <End Role="T_PLAN_BASE_LEGAL" Type="BDCLINICAModel.Store.T_PLAN_BASE_LEGAL" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="T_BASE_LEGAL">
         <PropertyRef Name="id_base_legal" />
       </Principal>
-      <Dependent Role="T_PLAN_DE_SALUD">
+      <Dependent Role="T_PLAN_BASE_LEGAL">
         <PropertyRef Name="id_base_legal" />
       </Dependent>
     </ReferentialConstraint>
@@ -587,18 +685,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__T_BITACOR__id_in__47DBAE45">
-    <End Role="T_INVESTIGACION_COMERCIAL" Type="BDCLINICAModel.Store.T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
-    <End Role="T_BITACORA_INCIDENCIA" Type="BDCLINICAModel.Store.T_BITACORA_INCIDENCIA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="T_INVESTIGACION_COMERCIAL">
-        <PropertyRef Name="id_investigacion_comercial" />
-      </Principal>
-      <Dependent Role="T_BITACORA_INCIDENCIA">
-        <PropertyRef Name="id_investigacion_comercial" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__T_BITACOR__idemp__4D94879B">
     <End Role="T_EMPLEADO" Type="BDCLINICAModel.Store.T_EMPLEADO" Multiplicity="0..1" />
     <End Role="T_BITACORA_INCIDENCIA" Type="BDCLINICAModel.Store.T_BITACORA_INCIDENCIA" Multiplicity="*" />
@@ -608,6 +694,30 @@
       </Principal>
       <Dependent Role="T_BITACORA_INCIDENCIA">
         <PropertyRef Name="idempleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD">
+    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="0..1" />
+    <End Role="T_BITACORA_INCIDENCIA" Type="BDCLINICAModel.Store.T_BITACORA_INCIDENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_PLAN_DE_SALUD">
+        <PropertyRef Name="id_plan_salud" />
+      </Principal>
+      <Dependent Role="T_BITACORA_INCIDENCIA">
+        <PropertyRef Name="id_plan_salud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA">
+    <End Role="T_BITACORA_INCIDENCIA" Type="BDCLINICAModel.Store.T_BITACORA_INCIDENCIA" Multiplicity="0..1" />
+    <End Role="T_SEGUIMIENTO" Type="BDCLINICAModel.Store.T_SEGUIMIENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_BITACORA_INCIDENCIA">
+        <PropertyRef Name="id_bitacora" />
+      </Principal>
+      <Dependent Role="T_SEGUIMIENTO">
+        <PropertyRef Name="id_bitacora" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -803,14 +913,62 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__T_PLAN_DE__id_es__5CD6CB2B">
+  <Association Name="FK_T_ESPECIALIDAD_x_SERVICIO">
+    <End Role="T_ESPECIALIDAD_MEDICA" Type="BDCLINICAModel.Store.T_ESPECIALIDAD_MEDICA" Multiplicity="0..1" />
+    <End Role="T_ESPECIALIDAD_SERVICIO" Type="BDCLINICAModel.Store.T_ESPECIALIDAD_SERVICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_ESPECIALIDAD_MEDICA">
+        <PropertyRef Name="idEspecialidad" />
+      </Principal>
+      <Dependent Role="T_ESPECIALIDAD_SERVICIO">
+        <PropertyRef Name="id_especialidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_PLAN_ESPECIALIDADSERVICIO">
+    <End Role="T_ESPECIALIDAD_SERVICIO" Type="BDCLINICAModel.Store.T_ESPECIALIDAD_SERVICIO" Multiplicity="0..1" />
+    <End Role="T_PLAN_ESPECIALIDADxSERVICIO" Type="BDCLINICAModel.Store.T_PLAN_ESPECIALIDADxSERVICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_ESPECIALIDAD_SERVICIO">
+        <PropertyRef Name="id_especialidad_servicio" />
+      </Principal>
+      <Dependent Role="T_PLAN_ESPECIALIDADxSERVICIO">
+        <PropertyRef Name="id_especialidad_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO">
+    <End Role="T_ESPECIALIDAD_SERVICIO" Type="BDCLINICAModel.Store.T_ESPECIALIDAD_SERVICIO" Multiplicity="0..1" />
+    <End Role="T_PROGRAMACION_MEDICA" Type="BDCLINICAModel.Store.T_PROGRAMACION_MEDICA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_ESPECIALIDAD_SERVICIO">
+        <PropertyRef Name="id_especialidad_servicio" />
+      </Principal>
+      <Dependent Role="T_PROGRAMACION_MEDICA">
+        <PropertyRef Name="id_especialidad_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_SERVICIO_ESPECIALIDAD">
+    <End Role="T_SERVICIO_SALUD" Type="BDCLINICAModel.Store.T_SERVICIO_SALUD" Multiplicity="0..1" />
+    <End Role="T_ESPECIALIDAD_SERVICIO" Type="BDCLINICAModel.Store.T_ESPECIALIDAD_SERVICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_SERVICIO_SALUD">
+        <PropertyRef Name="id_servicio" />
+      </Principal>
+      <Dependent Role="T_ESPECIALIDAD_SERVICIO">
+        <PropertyRef Name="id_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_PLAN_ESTRATEGIA_COMERCIAL">
     <End Role="T_ESTRATEGIA_COMERCIAL" Type="BDCLINICAModel.Store.T_ESTRATEGIA_COMERCIAL" Multiplicity="0..1" />
-    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="*" />
+    <End Role="T_PLAN_ESTRATEGIA_COMERCIAL" Type="BDCLINICAModel.Store.T_PLAN_ESTRATEGIA_COMERCIAL" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="T_ESTRATEGIA_COMERCIAL">
         <PropertyRef Name="id_estrategia_comercial" />
       </Principal>
-      <Dependent Role="T_PLAN_DE_SALUD">
+      <Dependent Role="T_PLAN_ESTRATEGIA_COMERCIAL">
         <PropertyRef Name="id_estrategia_comercial" />
       </Dependent>
     </ReferentialConstraint>
@@ -827,7 +985,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__T_PLAN_DE__id_in__5DCAEF64">
+  <Association Name="FK__T_PLAN_DE_SALUD1">
     <End Role="T_INVESTIGACION_COMERCIAL" Type="BDCLINICAModel.Store.T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
     <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="*" />
     <ReferentialConstraint>
@@ -923,6 +1081,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_T_PLAN_DE_SALUD">
+    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="0..1" />
+    <End Role="T_PLAN_BASE_FINANCIERA" Type="BDCLINICAModel.Store.T_PLAN_BASE_FINANCIERA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_PLAN_DE_SALUD">
+        <PropertyRef Name="id_plan_salud" />
+      </Principal>
+      <Dependent Role="T_PLAN_BASE_FINANCIERA">
+        <PropertyRef Name="id_plan_salud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_PLAN">
+    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="0..1" />
+    <End Role="T_PLAN_BASE_LEGAL" Type="BDCLINICAModel.Store.T_PLAN_BASE_LEGAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_PLAN_DE_SALUD">
+        <PropertyRef Name="id_plan_salud" />
+      </Principal>
+      <Dependent Role="T_PLAN_BASE_LEGAL">
+        <PropertyRef Name="id_plan_salud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T_PLAN_COMERCIAL">
+    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="0..1" />
+    <End Role="T_PLAN_ESTRATEGIA_COMERCIAL" Type="BDCLINICAModel.Store.T_PLAN_ESTRATEGIA_COMERCIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_PLAN_DE_SALUD">
+        <PropertyRef Name="id_plan_salud" />
+      </Principal>
+      <Dependent Role="T_PLAN_ESTRATEGIA_COMERCIAL">
+        <PropertyRef Name="id_plan_salud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD">
     <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="0..1" />
     <End Role="T_PLAN_PACIENTE" Type="BDCLINICAModel.Store.T_PLAN_PACIENTE" Multiplicity="*" />
@@ -935,14 +1129,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD">
+  <Association Name="FK_T_PLANSALUD_ESPECIALIDADSERVICIO">
     <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="0..1" />
-    <End Role="T_PLAN_SERVICIO" Type="BDCLINICAModel.Store.T_PLAN_SERVICIO" Multiplicity="*" />
+    <End Role="T_PLAN_ESPECIALIDADxSERVICIO" Type="BDCLINICAModel.Store.T_PLAN_ESPECIALIDADxSERVICIO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="T_PLAN_DE_SALUD">
         <PropertyRef Name="id_plan_salud" />
       </Principal>
-      <Dependent Role="T_PLAN_SERVICIO">
+      <Dependent Role="T_PLAN_ESPECIALIDADxSERVICIO">
         <PropertyRef Name="id_plan_salud" />
       </Dependent>
     </ReferentialConstraint>
@@ -956,18 +1150,6 @@
       </Principal>
       <Dependent Role="T_PLAN_MANTENIMIENTO">
         <PropertyRef Name="idTecnicoMant" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD">
-    <End Role="T_SERVICIO_SALUD" Type="BDCLINICAModel.Store.T_SERVICIO_SALUD" Multiplicity="0..1" />
-    <End Role="T_PLAN_SERVICIO" Type="BDCLINICAModel.Store.T_PLAN_SERVICIO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="T_SERVICIO_SALUD">
-        <PropertyRef Name="id_servicio" />
-      </Principal>
-      <Dependent Role="T_PLAN_SERVICIO">
-        <PropertyRef Name="id_servicio" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -995,35 +1177,89 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA">
-    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="0..1" />
-    <End Role="T_PROGRAMACION_MEDICA" Type="BDCLINICAModel.Store.T_PROGRAMACION_MEDICA" Multiplicity="*" />
+  <Association Name="T_PERSONAT_PERSONA_PLANSALUD">
+    <End Role="T_PERSONA_PLANSALUD" Type="BDCLINICAModel.Store.T_PERSONA_PLANSALUD" Multiplicity="*" />
+    <End Role="T_PERSONA" Type="BDCLINICAModel.Store.T_PERSONA" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="T_PERSONA">
+        <PropertyRef Name="codPersona" />
+      </Principal>
+      <Dependent Role="T_PERSONA_PLANSALUD">
+        <PropertyRef Name="codPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_PERSONA_PLANSALUDT_PLAN_DE_SALUD">
+    <End Role="T_PERSONA_PLANSALUD" Type="BDCLINICAModel.Store.T_PERSONA_PLANSALUD" Multiplicity="*" />
+    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="T_PLAN_DE_SALUD">
         <PropertyRef Name="id_plan_salud" />
       </Principal>
-      <Dependent Role="T_PROGRAMACION_MEDICA">
+      <Dependent Role="T_PERSONA_PLANSALUD">
         <PropertyRef Name="id_plan_salud" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="T_SERVICIO_SALUDT_PROGRAMACION_MEDICA">
-    <End Role="T_SERVICIO_SALUD" Type="BDCLINICAModel.Store.T_SERVICIO_SALUD" Multiplicity="1" />
+  <Association Name="T_PROGRAMACION_MEDICAT_PERSONA">
     <End Role="T_PROGRAMACION_MEDICA" Type="BDCLINICAModel.Store.T_PROGRAMACION_MEDICA" Multiplicity="*" />
+    <End Role="T_PERSONA" Type="BDCLINICAModel.Store.T_PERSONA" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="T_SERVICIO_SALUD">
-        <PropertyRef Name="id_servicio" />
+      <Principal Role="T_PERSONA">
+        <PropertyRef Name="codPersona" />
       </Principal>
       <Dependent Role="T_PROGRAMACION_MEDICA">
-        <PropertyRef Name="id_servicio_salud" />
+        <PropertyRef Name="codPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD">
+    <End Role="T_PROGRAMACION_MEDICA" Type="BDCLINICAModel.Store.T_PROGRAMACION_MEDICA" Multiplicity="*" />
+    <End Role="T_PERSONA_PLANSALUD" Type="BDCLINICAModel.Store.T_PERSONA_PLANSALUD" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="T_PERSONA_PLANSALUD">
+        <PropertyRef Name="id_persona_plansalud" />
+      </Principal>
+      <Dependent Role="T_PROGRAMACION_MEDICA">
+        <PropertyRef Name="id_persona_plansalud" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BDCLINICAModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="BDCLINICAModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="BDCLINICAEntities" p1:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BDCLINICAModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BDCLINICAModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="T_BASE_FINANCIERA" EntityType="BDCLINICAModel.T_BASE_FINANCIERA" />
           <EntitySet Name="T_BASE_LEGAL" EntityType="BDCLINICAModel.T_BASE_LEGAL" />
           <EntitySet Name="T_BIEN" EntityType="BDCLINICAModel.T_BIEN" />
@@ -1035,6 +1271,7 @@
           <EntitySet Name="T_EQUIPO_MEDICO" EntityType="BDCLINICAModel.T_EQUIPO_MEDICO" />
           <EntitySet Name="T_EQUIPO_USO" EntityType="BDCLINICAModel.T_EQUIPO_USO" />
           <EntitySet Name="T_ESPECIALIDAD_MEDICA" EntityType="BDCLINICAModel.T_ESPECIALIDAD_MEDICA" />
+          <EntitySet Name="T_ESPECIALIDAD_SERVICIO" EntityType="BDCLINICAModel.T_ESPECIALIDAD_SERVICIO" />
           <EntitySet Name="T_ESTRATEGIA_COMERCIAL" EntityType="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL" />
           <EntitySet Name="T_INMUEBLE" EntityType="BDCLINICAModel.T_INMUEBLE" />
           <EntitySet Name="T_INVESTIGACION_COMERCIAL" EntityType="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" />
@@ -1043,24 +1280,28 @@
           <EntitySet Name="T_MUEBLE" EntityType="BDCLINICAModel.T_MUEBLE" />
           <EntitySet Name="T_PACIENTE" EntityType="BDCLINICAModel.T_PACIENTE" />
           <EntitySet Name="T_PERSONA" EntityType="BDCLINICAModel.T_PERSONA" />
+          <EntitySet Name="T_PLAN_BASE_FINANCIERA" EntityType="BDCLINICAModel.T_PLAN_BASE_FINANCIERA" />
+          <EntitySet Name="T_PLAN_BASE_LEGAL" EntityType="BDCLINICAModel.T_PLAN_BASE_LEGAL" />
           <EntitySet Name="T_PLAN_DE_SALUD" EntityType="BDCLINICAModel.T_PLAN_DE_SALUD" />
+          <EntitySet Name="T_PLAN_ESPECIALIDADxSERVICIO" EntityType="BDCLINICAModel.T_PLAN_ESPECIALIDADxSERVICIO" />
+          <EntitySet Name="T_PLAN_ESTRATEGIA_COMERCIAL" EntityType="BDCLINICAModel.T_PLAN_ESTRATEGIA_COMERCIAL" />
           <EntitySet Name="T_PLAN_MANTENIMIENTO" EntityType="BDCLINICAModel.T_PLAN_MANTENIMIENTO" />
           <EntitySet Name="T_PLAN_PACIENTE" EntityType="BDCLINICAModel.T_PLAN_PACIENTE" />
-          <EntitySet Name="T_PLAN_SERVICIO" EntityType="BDCLINICAModel.T_PLAN_SERVICIO" />
           <EntitySet Name="T_PROGRAMACION_MEDICA" EntityType="BDCLINICAModel.T_PROGRAMACION_MEDICA" />
           <EntitySet Name="T_PROYECTO_PLANSALUD" EntityType="BDCLINICAModel.T_PROYECTO_PLANSALUD" />
           <EntitySet Name="T_RESERVA_SERVICIO_SALUD" EntityType="BDCLINICAModel.T_RESERVA_SERVICIO_SALUD" />
+          <EntitySet Name="T_SEGUIMIENTO" EntityType="BDCLINICAModel.T_SEGUIMIENTO" />
           <EntitySet Name="T_SERVICIO_SALUD" EntityType="BDCLINICAModel.T_SERVICIO_SALUD" />
           <EntitySet Name="T_SOLICITUD_MANTENIMIENTO" EntityType="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" />
           <EntitySet Name="T_TECNICO_MANTENIMIENTO" EntityType="BDCLINICAModel.T_TECNICO_MANTENIMIENTO" />
           <EntitySet Name="T_TIPO_PERSONA" EntityType="BDCLINICAModel.T_TIPO_PERSONA" />
-          <AssociationSet Name="FK__T_PLAN_DE__id_ba__5AEE82B9" Association="BDCLINICAModel.FK__T_PLAN_DE__id_ba__5AEE82B9">
+          <AssociationSet Name="FK_T_BASE_FINANCIERA" Association="BDCLINICAModel.FK_T_BASE_FINANCIERA">
             <End Role="T_BASE_FINANCIERA" EntitySet="T_BASE_FINANCIERA" />
-            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+            <End Role="T_PLAN_BASE_FINANCIERA" EntitySet="T_PLAN_BASE_FINANCIERA" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_PLAN_DE__id_ba__5BE2A6F2" Association="BDCLINICAModel.FK__T_PLAN_DE__id_ba__5BE2A6F2">
+          <AssociationSet Name="FK_T_PLAN_BASE_LEGAL" Association="BDCLINICAModel.FK_T_PLAN_BASE_LEGAL">
             <End Role="T_BASE_LEGAL" EntitySet="T_BASE_LEGAL" />
-            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+            <End Role="T_PLAN_BASE_LEGAL" EntitySet="T_PLAN_BASE_LEGAL" />
           </AssociationSet>
           <AssociationSet Name="FK__T_MUEBLE__codBie__571DF1D5" Association="BDCLINICAModel.FK__T_MUEBLE__codBie__571DF1D5">
             <End Role="T_BIEN" EntitySet="T_BIEN" />
@@ -1070,13 +1311,17 @@
             <End Role="T_BIEN" EntitySet="T_BIEN" />
             <End Role="T_INMUEBLE" EntitySet="T_INMUEBLE" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_BITACOR__id_in__47DBAE45" Association="BDCLINICAModel.FK__T_BITACOR__id_in__47DBAE45">
-            <End Role="T_INVESTIGACION_COMERCIAL" EntitySet="T_INVESTIGACION_COMERCIAL" />
-            <End Role="T_BITACORA_INCIDENCIA" EntitySet="T_BITACORA_INCIDENCIA" />
-          </AssociationSet>
           <AssociationSet Name="FK__T_BITACOR__idemp__4D94879B" Association="BDCLINICAModel.FK__T_BITACOR__idemp__4D94879B">
             <End Role="T_EMPLEADO" EntitySet="T_EMPLEADO" />
             <End Role="T_BITACORA_INCIDENCIA" EntitySet="T_BITACORA_INCIDENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD" Association="BDCLINICAModel.FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD">
+            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+            <End Role="T_BITACORA_INCIDENCIA" EntitySet="T_BITACORA_INCIDENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA" Association="BDCLINICAModel.FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA">
+            <End Role="T_BITACORA_INCIDENCIA" EntitySet="T_BITACORA_INCIDENCIA" />
+            <End Role="T_SEGUIMIENTO" EntitySet="T_SEGUIMIENTO" />
           </AssociationSet>
           <AssociationSet Name="FK__T_COMPROB__id_pa__49C3F6B7" Association="BDCLINICAModel.FK__T_COMPROB__id_pa__49C3F6B7">
             <End Role="T_PACIENTE" EntitySet="T_PACIENTE" />
@@ -1142,15 +1387,31 @@
             <End Role="T_EQUIPO_MEDICO" EntitySet="T_EQUIPO_MEDICO" />
             <End Role="T_SOLICITUD_MANTENIMIENTO" EntitySet="T_SOLICITUD_MANTENIMIENTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_PLAN_DE__id_es__5CD6CB2B" Association="BDCLINICAModel.FK__T_PLAN_DE__id_es__5CD6CB2B">
+          <AssociationSet Name="FK_T_ESPECIALIDAD_x_SERVICIO" Association="BDCLINICAModel.FK_T_ESPECIALIDAD_x_SERVICIO">
+            <End Role="T_ESPECIALIDAD_MEDICA" EntitySet="T_ESPECIALIDAD_MEDICA" />
+            <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PLAN_ESPECIALIDADSERVICIO" Association="BDCLINICAModel.FK_T_PLAN_ESPECIALIDADSERVICIO">
+            <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
+            <End Role="T_PLAN_ESPECIALIDADxSERVICIO" EntitySet="T_PLAN_ESPECIALIDADxSERVICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO" Association="BDCLINICAModel.FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO">
+            <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
+            <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_SERVICIO_ESPECIALIDAD" Association="BDCLINICAModel.FK_T_SERVICIO_ESPECIALIDAD">
+            <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
+            <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PLAN_ESTRATEGIA_COMERCIAL" Association="BDCLINICAModel.FK_T_PLAN_ESTRATEGIA_COMERCIAL">
             <End Role="T_ESTRATEGIA_COMERCIAL" EntitySet="T_ESTRATEGIA_COMERCIAL" />
-            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+            <End Role="T_PLAN_ESTRATEGIA_COMERCIAL" EntitySet="T_PLAN_ESTRATEGIA_COMERCIAL" />
           </AssociationSet>
           <AssociationSet Name="FK__T_PROGRAM__codIn__6754599E" Association="BDCLINICAModel.FK__T_PROGRAM__codIn__6754599E">
             <End Role="T_INMUEBLE" EntitySet="T_INMUEBLE" />
             <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
           </AssociationSet>
-          <AssociationSet Name="FK__T_PLAN_DE__id_in__5DCAEF64" Association="BDCLINICAModel.FK__T_PLAN_DE__id_in__5DCAEF64">
+          <AssociationSet Name="FK__T_PLAN_DE_SALUD1" Association="BDCLINICAModel.FK__T_PLAN_DE_SALUD1">
             <End Role="T_INVESTIGACION_COMERCIAL" EntitySet="T_INVESTIGACION_COMERCIAL" />
             <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
           </AssociationSet>
@@ -1182,21 +1443,29 @@
             <End Role="T_PACIENTE" EntitySet="T_PACIENTE" />
             <End Role="T_PLAN_PACIENTE" EntitySet="T_PLAN_PACIENTE" />
           </AssociationSet>
+          <AssociationSet Name="FK_T_PLAN_DE_SALUD" Association="BDCLINICAModel.FK_T_PLAN_DE_SALUD">
+            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+            <End Role="T_PLAN_BASE_FINANCIERA" EntitySet="T_PLAN_BASE_FINANCIERA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PLAN" Association="BDCLINICAModel.FK_T_PLAN">
+            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+            <End Role="T_PLAN_BASE_LEGAL" EntitySet="T_PLAN_BASE_LEGAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_PLAN_COMERCIAL" Association="BDCLINICAModel.FK_T_PLAN_COMERCIAL">
+            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+            <End Role="T_PLAN_ESTRATEGIA_COMERCIAL" EntitySet="T_PLAN_ESTRATEGIA_COMERCIAL" />
+          </AssociationSet>
           <AssociationSet Name="FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD" Association="BDCLINICAModel.FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD">
             <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
             <End Role="T_PLAN_PACIENTE" EntitySet="T_PLAN_PACIENTE" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD" Association="BDCLINICAModel.FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD">
+          <AssociationSet Name="FK_T_PLANSALUD_ESPECIALIDADSERVICIO" Association="BDCLINICAModel.FK_T_PLANSALUD_ESPECIALIDADSERVICIO">
             <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
-            <End Role="T_PLAN_SERVICIO" EntitySet="T_PLAN_SERVICIO" />
+            <End Role="T_PLAN_ESPECIALIDADxSERVICIO" EntitySet="T_PLAN_ESPECIALIDADxSERVICIO" />
           </AssociationSet>
           <AssociationSet Name="FK__T_PLAN_MA__idTec__5EBF139D" Association="BDCLINICAModel.FK__T_PLAN_MA__idTec__5EBF139D">
             <End Role="T_TECNICO_MANTENIMIENTO" EntitySet="T_TECNICO_MANTENIMIENTO" />
             <End Role="T_PLAN_MANTENIMIENTO" EntitySet="T_PLAN_MANTENIMIENTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD" Association="BDCLINICAModel.FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD">
-            <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
-            <End Role="T_PLAN_SERVICIO" EntitySet="T_PLAN_SERVICIO" />
           </AssociationSet>
           <AssociationSet Name="FK__T_RESERVA__id_se__5EBF139D" Association="BDCLINICAModel.FK__T_RESERVA__id_se__5EBF139D">
             <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
@@ -1206,45 +1475,65 @@
             <End Role="T_TECNICO_MANTENIMIENTO" EntitySet="T_TECNICO_MANTENIMIENTO" />
             <End Role="T_SOLICITUD_MANTENIMIENTO" EntitySet="T_SOLICITUD_MANTENIMIENTO" />
           </AssociationSet>
-          <AssociationSet Name="T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA" Association="BDCLINICAModel.T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA">
+          <EntitySet Name="T_PERSONA_PLANSALUD" EntityType="BDCLINICAModel.T_PERSONA_PLANSALUD" />
+          <AssociationSet Name="T_PERSONAT_PERSONA_PLANSALUD" Association="BDCLINICAModel.T_PERSONAT_PERSONA_PLANSALUD">
+            <End Role="T_PERSONA_PLANSALUD" EntitySet="T_PERSONA_PLANSALUD" />
+            <End Role="T_PERSONA" EntitySet="T_PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="T_PERSONA_PLANSALUDT_PLAN_DE_SALUD" Association="BDCLINICAModel.T_PERSONA_PLANSALUDT_PLAN_DE_SALUD">
+            <End Role="T_PERSONA_PLANSALUD" EntitySet="T_PERSONA_PLANSALUD" />
             <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
-            <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
           </AssociationSet>
-          <AssociationSet Name="T_SERVICIO_SALUDT_PROGRAMACION_MEDICA" Association="BDCLINICAModel.T_SERVICIO_SALUDT_PROGRAMACION_MEDICA">
-            <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
+          <AssociationSet Name="T_PROGRAMACION_MEDICAT_PERSONA" Association="BDCLINICAModel.T_PROGRAMACION_MEDICAT_PERSONA">
             <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
+            <End Role="T_PERSONA" EntitySet="T_PERSONA" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD" Association="BDCLINICAModel.T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD">
+            <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
+            <End Role="T_PERSONA_PLANSALUD" EntitySet="T_PERSONA_PLANSALUD" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <EntityType Name="T_BASE_FINANCIERA">
           <Key>
             <PropertyRef Name="id_base_financiera" />
           </Key>
           <Property Name="id_base_financiera" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="comentario" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="comentario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="monto" Type="Int32" />
           <Property Name="presupuesto" Type="Int32" />
-          <Property Name="promocion" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="promocion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="fecha_registro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK__T_PLAN_DE__id_ba__5AEE82B9" FromRole="T_BASE_FINANCIERA" ToRole="T_PLAN_DE_SALUD" />
+          <NavigationProperty Name="T_PLAN_BASE_FINANCIERA" Relationship="BDCLINICAModel.FK_T_BASE_FINANCIERA" FromRole="T_BASE_FINANCIERA" ToRole="T_PLAN_BASE_FINANCIERA" />
         </EntityType>
         <EntityType Name="T_BASE_LEGAL">
           <Key>
             <PropertyRef Name="id_base_legal" />
           </Key>
           <Property Name="id_base_legal" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_normativa" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="descripcion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="autorizacion" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="nombre_normativa" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="autorizacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="fecha_registro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK__T_PLAN_DE__id_ba__5BE2A6F2" FromRole="T_BASE_LEGAL" ToRole="T_PLAN_DE_SALUD" />
+          <NavigationProperty Name="T_PLAN_BASE_LEGAL" Relationship="BDCLINICAModel.FK_T_PLAN_BASE_LEGAL" FromRole="T_BASE_LEGAL" ToRole="T_PLAN_BASE_LEGAL" />
         </EntityType>
         <EntityType Name="T_BIEN">
           <Key>
             <PropertyRef Name="codBien" />
           </Key>
           <Property Name="codBien" Type="Int32" Nullable="false" />
-          <Property Name="dscBien" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="dscBien" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="fecAdquisicion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="T_MUEBLE" Relationship="BDCLINICAModel.FK__T_MUEBLE__codBie__571DF1D5" FromRole="T_BIEN" ToRole="T_MUEBLE" />
           <NavigationProperty Name="T_INMUEBLE" Relationship="BDCLINICAModel.FK_T_INMUEBLE_T_BIEN" FromRole="T_BIEN" ToRole="T_INMUEBLE" />
@@ -1254,27 +1543,28 @@
             <PropertyRef Name="id_bitacora" />
           </Key>
           <Property Name="id_bitacora" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="tipo_incidencia" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="tipo_incidencia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="fecha_registro" Type="DateTime" Precision="3" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_plan_salud" Type="Int32" />
           <Property Name="idempleado" Type="Int32" />
-          <Property Name="id_investigacion_comercial" Type="Int32" />
-          <NavigationProperty Name="T_INVESTIGACION_COMERCIAL" Relationship="BDCLINICAModel.FK__T_BITACOR__id_in__47DBAE45" FromRole="T_BITACORA_INCIDENCIA" ToRole="T_INVESTIGACION_COMERCIAL" />
           <NavigationProperty Name="T_EMPLEADO" Relationship="BDCLINICAModel.FK__T_BITACOR__idemp__4D94879B" FromRole="T_BITACORA_INCIDENCIA" ToRole="T_EMPLEADO" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD" FromRole="T_BITACORA_INCIDENCIA" ToRole="T_PLAN_DE_SALUD" />
+          <NavigationProperty Name="T_SEGUIMIENTO" Relationship="BDCLINICAModel.FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA" FromRole="T_BITACORA_INCIDENCIA" ToRole="T_SEGUIMIENTO" />
         </EntityType>
         <EntityType Name="T_COMPROBANTE">
           <Key>
             <PropertyRef Name="id_comprobante" />
           </Key>
           <Property Name="id_comprobante" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="numero" Type="String" MaxLength="11" Unicode="false" FixedLength="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="numero" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="fecha_emision" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="fecha_pago" Type="DateTime" Precision="3" />
           <Property Name="moneda" Type="Int32" />
           <Property Name="importe" Type="Int32" />
           <Property Name="impuesto" Type="Int32" />
-          <Property Name="area_venta" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="area_venta" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="total" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="id_paciente" Type="Int32" />
           <NavigationProperty Name="T_PACIENTE" Relationship="BDCLINICAModel.FK__T_COMPROB__id_pa__49C3F6B7" FromRole="T_COMPROBANTE" ToRole="T_PACIENTE" />
@@ -1284,11 +1574,11 @@
             <PropertyRef Name="id_configuracion" />
           </Key>
           <Property Name="id_configuracion" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="modulo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="area" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="indicador" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="valor_minimo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="valor_maximo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="modulo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="area" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="indicador" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="valor_minimo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="valor_maximo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_investigacion_comercial" Type="Int32" />
           <NavigationProperty Name="T_INVESTIGACION_COMERCIAL" Relationship="BDCLINICAModel.FK__T_CONFIGU__id_in__4AB81AF0" FromRole="T_CONFIGURACION" ToRole="T_INVESTIGACION_COMERCIAL" />
@@ -1299,13 +1589,13 @@
           </Key>
           <Property Name="idEmpleado" Type="Int32" Nullable="false" />
           <Property Name="nroDni" Type="Int32" />
-          <Property Name="nomEmpleado" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="nomEmpleado" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="fecIngreso" Type="DateTime" Precision="3" />
-          <Property Name="stdEmplead" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
-          <Property Name="dscCargo" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="dscProfesion" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="dscArea" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="dscCorreo" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="stdEmplead" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="dscCargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dscProfesion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dscArea" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dscCorreo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idEspecialidad" Type="Int32" />
           <Property Name="codPersona" Type="Int32" />
           <NavigationProperty Name="T_BITACORA_INCIDENCIA" Relationship="BDCLINICAModel.FK__T_BITACOR__idemp__4D94879B" FromRole="T_EMPLEADO" ToRole="T_BITACORA_INCIDENCIA" />
@@ -1320,10 +1610,10 @@
             <PropertyRef Name="codEmpresa" />
           </Key>
           <Property Name="codEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="nroRuc" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="razonSocial" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
-          <Property Name="direccion" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
-          <Property Name="telefono" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="nroRuc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="razonSocial" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="codPersona" Type="Int32" />
           <NavigationProperty Name="T_PERSONA" Relationship="BDCLINICAModel.FK__T_EMPRESA__codPe__4D94879B" FromRole="T_EMPRESA" ToRole="T_PERSONA" />
           <NavigationProperty Name="T_MANTENIMIENTO_EQUIPO" Relationship="BDCLINICAModel.FK__T_MANTENI__codEm__534D60F1" FromRole="T_EMPRESA" ToRole="T_MANTENIMIENTO_EQUIPO" />
@@ -1337,7 +1627,7 @@
           <Property Name="intervaloMant" Type="Int32" />
           <Property Name="nivelPrioridad" Type="Int32" />
           <Property Name="fecUltimoMant" Type="DateTime" Precision="3" />
-          <Property Name="estEquipo" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="estEquipo" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="codMueble" Type="Int32" />
           <Property Name="idEspecialidad" Type="Int32" />
           <Property Name="codInmueble" Type="Int32" />
@@ -1354,7 +1644,7 @@
           </Key>
           <Property Name="idequipousoo" Type="Int32" Nullable="false" />
           <Property Name="idEquipoMedico" Type="Int32" />
-          <Property Name="fecUso" Type="DateTime" Precision="0" />
+          <Property Name="fecUso" Type="DateTime" Precision="3" />
           <NavigationProperty Name="T_EQUIPO_MEDICO" Relationship="BDCLINICAModel.FK__T_EQUIPO___idEqu__4CA06362" FromRole="T_EQUIPO_USO" ToRole="T_EQUIPO_MEDICO" />
         </EntityType>
         <EntityType Name="T_ESPECIALIDAD_MEDICA">
@@ -1362,28 +1652,43 @@
             <PropertyRef Name="idEspecialidad" />
           </Key>
           <Property Name="idEspecialidad" Type="Int32" Nullable="false" />
-          <Property Name="nomEspecialidad" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="nomEspecialidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_EMPLEADO" Relationship="BDCLINICAModel.FK_T_EMPLEADO_T_ESPECIALIDAD_MEDICA" FromRole="T_ESPECIALIDAD_MEDICA" ToRole="T_EMPLEADO" />
           <NavigationProperty Name="T_EQUIPO_MEDICO" Relationship="BDCLINICAModel.FK__T_EQUIPO___idEsp__5070F446" FromRole="T_ESPECIALIDAD_MEDICA" ToRole="T_EQUIPO_MEDICO" />
+          <NavigationProperty Name="T_ESPECIALIDAD_SERVICIO" Relationship="BDCLINICAModel.FK_T_ESPECIALIDAD_x_SERVICIO" FromRole="T_ESPECIALIDAD_MEDICA" ToRole="T_ESPECIALIDAD_SERVICIO" />
+        </EntityType>
+        <EntityType Name="T_ESPECIALIDAD_SERVICIO">
+          <Key>
+            <PropertyRef Name="id_especialidad_servicio" />
+          </Key>
+          <Property Name="id_especialidad_servicio" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="id_servicio" Type="Int32" />
+          <Property Name="id_especialidad" Type="Int32" />
+          <NavigationProperty Name="T_ESPECIALIDAD_MEDICA" Relationship="BDCLINICAModel.FK_T_ESPECIALIDAD_x_SERVICIO" FromRole="T_ESPECIALIDAD_SERVICIO" ToRole="T_ESPECIALIDAD_MEDICA" />
+          <NavigationProperty Name="T_PLAN_ESPECIALIDADxSERVICIO" Relationship="BDCLINICAModel.FK_T_PLAN_ESPECIALIDADSERVICIO" FromRole="T_ESPECIALIDAD_SERVICIO" ToRole="T_PLAN_ESPECIALIDADxSERVICIO" />
+          <NavigationProperty Name="T_PROGRAMACION_MEDICA" Relationship="BDCLINICAModel.FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO" FromRole="T_ESPECIALIDAD_SERVICIO" ToRole="T_PROGRAMACION_MEDICA" />
+          <NavigationProperty Name="T_SERVICIO_SALUD" Relationship="BDCLINICAModel.FK_T_SERVICIO_ESPECIALIDAD" FromRole="T_ESPECIALIDAD_SERVICIO" ToRole="T_SERVICIO_SALUD" />
         </EntityType>
         <EntityType Name="T_ESTRATEGIA_COMERCIAL">
           <Key>
             <PropertyRef Name="id_estrategia_comercial" />
           </Key>
           <Property Name="id_estrategia_comercial" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="descripcion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="objetivo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="objetivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fecha_registro" Type="DateTime" Precision="3" />
           <Property Name="presupuesto" Type="Int32" />
-          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK__T_PLAN_DE__id_es__5CD6CB2B" FromRole="T_ESTRATEGIA_COMERCIAL" ToRole="T_PLAN_DE_SALUD" />
+          <NavigationProperty Name="T_PLAN_ESTRATEGIA_COMERCIAL" Relationship="BDCLINICAModel.FK_T_PLAN_ESTRATEGIA_COMERCIAL" FromRole="T_ESTRATEGIA_COMERCIAL" ToRole="T_PLAN_ESTRATEGIA_COMERCIAL" />
         </EntityType>
         <EntityType Name="T_INMUEBLE">
           <Key>
             <PropertyRef Name="codInmueble" />
           </Key>
           <Property Name="codInmueble" Type="Int32" Nullable="false" />
-          <Property Name="dscTipoEstado" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="dscTipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="codBien" Type="Int32" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="T_BIEN" Relationship="BDCLINICAModel.FK_T_INMUEBLE_T_BIEN" FromRole="T_INMUEBLE" ToRole="T_BIEN" />
@@ -1395,15 +1700,14 @@
             <PropertyRef Name="id_investigacion_comercial" />
           </Key>
           <Property Name="id_investigacion_comercial" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="resultado_sexo" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="resultado_edad" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="resultado_servicio" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="resultado_especialidad" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="fecha_creacion" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="T_BITACORA_INCIDENCIA" Relationship="BDCLINICAModel.FK__T_BITACOR__id_in__47DBAE45" FromRole="T_INVESTIGACION_COMERCIAL" ToRole="T_BITACORA_INCIDENCIA" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="resultado_sexo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="resultado_edad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="resultado_servicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="resultado_especialidad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_CONFIGURACION" Relationship="BDCLINICAModel.FK__T_CONFIGU__id_in__4AB81AF0" FromRole="T_INVESTIGACION_COMERCIAL" ToRole="T_CONFIGURACION" />
-          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK__T_PLAN_DE__id_in__5DCAEF64" FromRole="T_INVESTIGACION_COMERCIAL" ToRole="T_PLAN_DE_SALUD" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK__T_PLAN_DE_SALUD1" FromRole="T_INVESTIGACION_COMERCIAL" ToRole="T_PLAN_DE_SALUD" />
           <NavigationProperty Name="T_PROYECTO_PLANSALUD" Relationship="BDCLINICAModel.FK__T_PROYECT__id_in__656C112C" FromRole="T_INVESTIGACION_COMERCIAL" ToRole="T_PROYECTO_PLANSALUD" />
         </EntityType>
         <EntityType Name="T_MANTENIMIENTO_EQUIPO">
@@ -1415,8 +1719,8 @@
           <Property Name="fecMantenimiento1" Type="DateTime" Precision="3" />
           <Property Name="fecMantenimiento2" Type="DateTime" Precision="3" />
           <Property Name="fecMantenimiento3" Type="DateTime" Precision="3" />
-          <Property Name="dscTipoMantenimiento" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="estMantenimiento" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="dscTipoMantenimiento" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estMantenimiento" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="idEquipoMedico" Type="Int32" />
           <Property Name="idSolicitud" Type="Int32" />
           <Property Name="codEmpresa" Type="Int32" />
@@ -1430,8 +1734,8 @@
             <PropertyRef Name="codModelo" />
           </Key>
           <Property Name="codModelo" Type="Int32" Nullable="false" />
-          <Property Name="nomModelo" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="dscMarca" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="nomModelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dscMarca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_MUEBLE" Relationship="BDCLINICAModel.FK__T_MUEBLE__codMod__59063A47" FromRole="T_MODELO" ToRole="T_MUEBLE" />
         </EntityType>
         <EntityType Name="T_MUEBLE">
@@ -1439,10 +1743,10 @@
             <PropertyRef Name="codMueble" />
           </Key>
           <Property Name="codMueble" Type="Int32" Nullable="false" />
-          <Property Name="dscFuncion" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="dscAplicacionMedica" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="dscFuncion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dscAplicacionMedica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="garantia" Type="Boolean" />
-          <Property Name="tipoMueble" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="tipoMueble" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="codBien" Type="Int32" />
           <Property Name="codEmpresa" Type="Int32" />
           <Property Name="codModelo" Type="Int32" />
@@ -1456,10 +1760,10 @@
             <PropertyRef Name="id_paciente" />
           </Key>
           <Property Name="id_paciente" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nom_paciente" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="nom_paciente" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="segmentacion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="estado" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="segmentacion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="codPersona" Type="Int32" />
           <NavigationProperty Name="T_COMPROBANTE" Relationship="BDCLINICAModel.FK__T_COMPROB__id_pa__49C3F6B7" FromRole="T_PACIENTE" ToRole="T_COMPROBANTE" />
           <NavigationProperty Name="T_PERSONA" Relationship="BDCLINICAModel.FK__T_PACIENT__codPe__59FA5E80" FromRole="T_PACIENTE" ToRole="T_PERSONA" />
@@ -1471,33 +1775,82 @@
             <PropertyRef Name="codPersona" />
           </Key>
           <Property Name="codPersona" Type="Int32" Nullable="false" />
-          <Property Name="nompersona" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="nompersona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_EMPLEADO" Relationship="BDCLINICAModel.FK__T_EMPLEAD__codPe__1273C1CD" FromRole="T_PERSONA" ToRole="T_EMPLEADO" />
           <NavigationProperty Name="T_EMPRESA" Relationship="BDCLINICAModel.FK__T_EMPRESA__codPe__4D94879B" FromRole="T_PERSONA" ToRole="T_EMPRESA" />
           <NavigationProperty Name="T_PACIENTE" Relationship="BDCLINICAModel.FK__T_PACIENT__codPe__59FA5E80" FromRole="T_PERSONA" ToRole="T_PACIENTE" />
+          <NavigationProperty Name="T_PERSONA_PLANSALUD" Relationship="BDCLINICAModel.T_PERSONAT_PERSONA_PLANSALUD" FromRole="T_PERSONA" ToRole="T_PERSONA_PLANSALUD" />
+          <NavigationProperty Name="T_PROGRAMACION_MEDICA" Relationship="BDCLINICAModel.T_PROGRAMACION_MEDICAT_PERSONA" FromRole="T_PERSONA" ToRole="T_PROGRAMACION_MEDICA" />
+        </EntityType>
+        <EntityType Name="T_PLAN_BASE_FINANCIERA">
+          <Key>
+            <PropertyRef Name="id_plan_base_financiera" />
+          </Key>
+          <Property Name="id_plan_base_financiera" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="id_base_financiera" Type="Int32" />
+          <Property Name="id_plan_salud" Type="Int32" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="T_BASE_FINANCIERA" Relationship="BDCLINICAModel.FK_T_BASE_FINANCIERA" FromRole="T_PLAN_BASE_FINANCIERA" ToRole="T_BASE_FINANCIERA" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK_T_PLAN_DE_SALUD" FromRole="T_PLAN_BASE_FINANCIERA" ToRole="T_PLAN_DE_SALUD" />
+        </EntityType>
+        <EntityType Name="T_PLAN_BASE_LEGAL">
+          <Key>
+            <PropertyRef Name="id_plan_base_financiera" />
+          </Key>
+          <Property Name="id_plan_base_financiera" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="id_base_legal" Type="Int32" />
+          <Property Name="id_plan_salud" Type="Int32" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="T_BASE_LEGAL" Relationship="BDCLINICAModel.FK_T_PLAN_BASE_LEGAL" FromRole="T_PLAN_BASE_LEGAL" ToRole="T_BASE_LEGAL" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK_T_PLAN" FromRole="T_PLAN_BASE_LEGAL" ToRole="T_PLAN_DE_SALUD" />
         </EntityType>
         <EntityType Name="T_PLAN_DE_SALUD">
           <Key>
             <PropertyRef Name="id_plan_salud" />
           </Key>
           <Property Name="id_plan_salud" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_plan" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="descripcion" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="nombre_plan" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="fecha_inicio" Type="DateTime" Precision="3" />
           <Property Name="fecha_fin" Type="DateTime" Precision="3" />
-          <Property Name="objetivo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="objetivo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="id_investigacion_comercial" Type="Int32" />
-          <Property Name="id_estrategia_comercial" Type="Int32" />
-          <Property Name="id_base_financiera" Type="Int32" />
-          <Property Name="id_base_legal" Type="Int32" />
-          <Property Name="id_servicio" Type="Int32" />
-          <NavigationProperty Name="T_BASE_FINANCIERA" Relationship="BDCLINICAModel.FK__T_PLAN_DE__id_ba__5AEE82B9" FromRole="T_PLAN_DE_SALUD" ToRole="T_BASE_FINANCIERA" />
-          <NavigationProperty Name="T_BASE_LEGAL" Relationship="BDCLINICAModel.FK__T_PLAN_DE__id_ba__5BE2A6F2" FromRole="T_PLAN_DE_SALUD" ToRole="T_BASE_LEGAL" />
-          <NavigationProperty Name="T_ESTRATEGIA_COMERCIAL" Relationship="BDCLINICAModel.FK__T_PLAN_DE__id_es__5CD6CB2B" FromRole="T_PLAN_DE_SALUD" ToRole="T_ESTRATEGIA_COMERCIAL" />
-          <NavigationProperty Name="T_INVESTIGACION_COMERCIAL" Relationship="BDCLINICAModel.FK__T_PLAN_DE__id_in__5DCAEF64" FromRole="T_PLAN_DE_SALUD" ToRole="T_INVESTIGACION_COMERCIAL" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="T_BITACORA_INCIDENCIA" Relationship="BDCLINICAModel.FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_BITACORA_INCIDENCIA" />
+          <NavigationProperty Name="T_INVESTIGACION_COMERCIAL" Relationship="BDCLINICAModel.FK__T_PLAN_DE_SALUD1" FromRole="T_PLAN_DE_SALUD" ToRole="T_INVESTIGACION_COMERCIAL" />
+          <NavigationProperty Name="T_PLAN_BASE_FINANCIERA" Relationship="BDCLINICAModel.FK_T_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_BASE_FINANCIERA" />
+          <NavigationProperty Name="T_PLAN_BASE_LEGAL" Relationship="BDCLINICAModel.FK_T_PLAN" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_BASE_LEGAL" />
+          <NavigationProperty Name="T_PLAN_ESTRATEGIA_COMERCIAL" Relationship="BDCLINICAModel.FK_T_PLAN_COMERCIAL" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_ESTRATEGIA_COMERCIAL" />
           <NavigationProperty Name="T_PLAN_PACIENTE" Relationship="BDCLINICAModel.FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_PACIENTE" />
-          <NavigationProperty Name="T_PLAN_SERVICIO" Relationship="BDCLINICAModel.FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_SERVICIO" />
-          <NavigationProperty Name="T_PROGRAMACION_MEDICA" Relationship="BDCLINICAModel.T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA" FromRole="T_PLAN_DE_SALUD" ToRole="T_PROGRAMACION_MEDICA" />
+          <NavigationProperty Name="T_PLAN_ESPECIALIDADxSERVICIO" Relationship="BDCLINICAModel.FK_T_PLANSALUD_ESPECIALIDADSERVICIO" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_ESPECIALIDADxSERVICIO" />
+          <NavigationProperty Name="T_PERSONA_PLANSALUD" Relationship="BDCLINICAModel.T_PERSONA_PLANSALUDT_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PERSONA_PLANSALUD" />
+        </EntityType>
+        <EntityType Name="T_PLAN_ESPECIALIDADxSERVICIO">
+          <Key>
+            <PropertyRef Name="id_plan_especialidad" />
+          </Key>
+          <Property Name="id_plan_especialidad" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="id_especialidad_servicio" Type="Int32" />
+          <Property Name="id_plan_salud" Type="Int32" />
+          <Property Name="fecha_inicio" Type="DateTime" Precision="3" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="T_ESPECIALIDAD_SERVICIO" Relationship="BDCLINICAModel.FK_T_PLAN_ESPECIALIDADSERVICIO" FromRole="T_PLAN_ESPECIALIDADxSERVICIO" ToRole="T_ESPECIALIDAD_SERVICIO" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK_T_PLANSALUD_ESPECIALIDADSERVICIO" FromRole="T_PLAN_ESPECIALIDADxSERVICIO" ToRole="T_PLAN_DE_SALUD" />
+        </EntityType>
+        <EntityType Name="T_PLAN_ESTRATEGIA_COMERCIAL">
+          <Key>
+            <PropertyRef Name="id_plan_estrategia_comercial" />
+          </Key>
+          <Property Name="id_plan_estrategia_comercial" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="id_estrategia_comercial" Type="Int32" />
+          <Property Name="id_plan_salud" Type="Int32" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="T_ESTRATEGIA_COMERCIAL" Relationship="BDCLINICAModel.FK_T_PLAN_ESTRATEGIA_COMERCIAL" FromRole="T_PLAN_ESTRATEGIA_COMERCIAL" ToRole="T_ESTRATEGIA_COMERCIAL" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK_T_PLAN_COMERCIAL" FromRole="T_PLAN_ESTRATEGIA_COMERCIAL" ToRole="T_PLAN_DE_SALUD" />
         </EntityType>
         <EntityType Name="T_PLAN_MANTENIMIENTO">
           <Key>
@@ -1505,7 +1858,7 @@
           </Key>
           <Property Name="codPlan" Type="Int32" Nullable="false" />
           <Property Name="fecRegistro" Type="DateTime" Precision="3" />
-          <Property Name="estPlan" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="estPlan" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="idTecnicoMant" Type="Int32" />
           <NavigationProperty Name="T_MANTENIMIENTO_EQUIPO" Relationship="BDCLINICAModel.FK__T_MANTENI__codPl__5441852A" FromRole="T_PLAN_MANTENIMIENTO" ToRole="T_MANTENIMIENTO_EQUIPO" />
           <NavigationProperty Name="T_TECNICO_MANTENIMIENTO" Relationship="BDCLINICAModel.FK__T_PLAN_MA__idTec__5EBF139D" FromRole="T_PLAN_MANTENIMIENTO" ToRole="T_TECNICO_MANTENIMIENTO" />
@@ -1517,25 +1870,11 @@
           <Property Name="id_plan_paciente" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="id_paciente" Type="Int32" />
           <Property Name="id_plan_salud" Type="Int32" />
-          <Property Name="fecha_registro" Type="DateTime" Precision="0" />
-          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
-          <Property Name="estado" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="T_PACIENTE" Relationship="BDCLINICAModel.FK_T_PLAN_PACIENTE_T_PACIENTE" FromRole="T_PLAN_PACIENTE" ToRole="T_PACIENTE" />
           <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD" FromRole="T_PLAN_PACIENTE" ToRole="T_PLAN_DE_SALUD" />
-        </EntityType>
-        <EntityType Name="T_PLAN_SERVICIO">
-          <Key>
-            <PropertyRef Name="id_plan_servicio" />
-          </Key>
-          <Property Name="id_plan_servicio" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="id_servicio" Type="Int32" />
-          <Property Name="id_plan_salud" Type="Int32" />
-          <Property Name="fecha_registro" Type="DateTime" Precision="0" />
-          <Property Name="fecha_retiro" Type="DateTime" Precision="0" />
-          <Property Name="idempleado" Type="Int32" />
-          <Property Name="estado" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
-          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD" FromRole="T_PLAN_SERVICIO" ToRole="T_PLAN_DE_SALUD" />
-          <NavigationProperty Name="T_SERVICIO_SALUD" Relationship="BDCLINICAModel.FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD" FromRole="T_PLAN_SERVICIO" ToRole="T_SERVICIO_SALUD" />
         </EntityType>
         <EntityType Name="T_PROGRAMACION_MEDICA">
           <Key>
@@ -1547,26 +1886,27 @@
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hora_inicio" Type="Time" Nullable="false" Precision="7" />
           <Property Name="hora_fin" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="anotaciones" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="estado" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="anotaciones" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_empleado" Type="Int32" Nullable="false" />
-          <Property Name="id_paciente" Type="Int32" Nullable="false" />
+          <Property Name="id_especialidad_servicio" Type="Int32" />
           <Property Name="codInmueble" Type="Int32" />
           <NavigationProperty Name="T_EMPLEADO" Relationship="BDCLINICAModel.FK_T_PROGRAMACION_MEDICA_T_EMPLEADO" FromRole="T_PROGRAMACION_MEDICA" ToRole="T_EMPLEADO" />
+          <NavigationProperty Name="T_ESPECIALIDAD_SERVICIO" Relationship="BDCLINICAModel.FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO" FromRole="T_PROGRAMACION_MEDICA" ToRole="T_ESPECIALIDAD_SERVICIO" />
           <NavigationProperty Name="T_INMUEBLE" Relationship="BDCLINICAModel.FK__T_PROGRAM__codIn__6754599E" FromRole="T_PROGRAMACION_MEDICA" ToRole="T_INMUEBLE" />
-          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA" FromRole="T_PROGRAMACION_MEDICA" ToRole="T_PLAN_DE_SALUD" />
-          <NavigationProperty Name="T_SERVICIO_SALUD" Relationship="BDCLINICAModel.T_SERVICIO_SALUDT_PROGRAMACION_MEDICA" FromRole="T_PROGRAMACION_MEDICA" ToRole="T_SERVICIO_SALUD" />
-          <Property Name="id_plan_salud" Type="Int32" Nullable="true" />
-          <Property Name="id_servicio_salud" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_PERSONA" Relationship="BDCLINICAModel.T_PROGRAMACION_MEDICAT_PERSONA" FromRole="T_PROGRAMACION_MEDICA" ToRole="T_PERSONA" />
+          <Property Name="codPersona" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_PERSONA_PLANSALUD" Relationship="BDCLINICAModel.T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD" FromRole="T_PROGRAMACION_MEDICA" ToRole="T_PERSONA_PLANSALUD" />
+          <Property Name="id_persona_plansalud" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="T_PROYECTO_PLANSALUD">
           <Key>
             <PropertyRef Name="id_proyecto" />
           </Key>
           <Property Name="id_proyecto" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_proyecto" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="nombre_proyecto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="fecha_inicio" Type="DateTime" Precision="3" />
           <Property Name="fecha_fin" Type="DateTime" Precision="3" />
           <Property Name="estado" Type="Int16" Nullable="false" />
@@ -1579,23 +1919,33 @@
           </Key>
           <Property Name="id_reserva" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="fecha_reserva" Type="DateTime" Precision="3" />
-          <Property Name="tipo_atencion" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="estado" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="tipo_atencion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="id_paciente" Type="Int32" />
           <Property Name="id_servicio" Type="Int32" />
           <NavigationProperty Name="T_PACIENTE" Relationship="BDCLINICAModel.FK__T_RESERVA__id_pa__5DCAEF64" FromRole="T_RESERVA_SERVICIO_SALUD" ToRole="T_PACIENTE" />
           <NavigationProperty Name="T_SERVICIO_SALUD" Relationship="BDCLINICAModel.FK__T_RESERVA__id_se__5EBF139D" FromRole="T_RESERVA_SERVICIO_SALUD" ToRole="T_SERVICIO_SALUD" />
+        </EntityType>
+        <EntityType Name="T_SEGUIMIENTO">
+          <Key>
+            <PropertyRef Name="id_seguimiento" />
+          </Key>
+          <Property Name="id_seguimiento" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="id_bitacora" Type="Int32" />
+          <Property Name="id_plan_salud" Type="Int32" />
+          <Property Name="seguimiento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="T_BITACORA_INCIDENCIA" Relationship="BDCLINICAModel.FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA" FromRole="T_SEGUIMIENTO" ToRole="T_BITACORA_INCIDENCIA" />
         </EntityType>
         <EntityType Name="T_SERVICIO_SALUD">
           <Key>
             <PropertyRef Name="id_servicio" />
           </Key>
           <Property Name="id_servicio" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_servicio" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="tipo_servicio" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="T_PLAN_SERVICIO" Relationship="BDCLINICAModel.FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD" FromRole="T_SERVICIO_SALUD" ToRole="T_PLAN_SERVICIO" />
+          <Property Name="nombre_servicio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tipo_servicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_ESPECIALIDAD_SERVICIO" Relationship="BDCLINICAModel.FK_T_SERVICIO_ESPECIALIDAD" FromRole="T_SERVICIO_SALUD" ToRole="T_ESPECIALIDAD_SERVICIO" />
           <NavigationProperty Name="T_RESERVA_SERVICIO_SALUD" Relationship="BDCLINICAModel.FK__T_RESERVA__id_se__5EBF139D" FromRole="T_SERVICIO_SALUD" ToRole="T_RESERVA_SERVICIO_SALUD" />
-          <NavigationProperty Name="T_PROGRAMACION_MEDICA" Relationship="BDCLINICAModel.T_SERVICIO_SALUDT_PROGRAMACION_MEDICA" FromRole="T_SERVICIO_SALUD" ToRole="T_PROGRAMACION_MEDICA" />
         </EntityType>
         <EntityType Name="T_SOLICITUD_MANTENIMIENTO">
           <Key>
@@ -1603,9 +1953,9 @@
           </Key>
           <Property Name="idSolicitud" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="fecSolicitud" Type="DateTime" Precision="3" />
-          <Property Name="estSolicitud" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="estSolicitud" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="fecAtencion" Type="DateTime" Precision="3" />
-          <Property Name="dscObservacion" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="dscObservacion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="idTecnicoMant" Type="Int32" />
           <Property Name="idEmpleado" Type="Int32" />
           <Property Name="idEquipoMedico" Type="Int32" />
@@ -1620,11 +1970,11 @@
           </Key>
           <Property Name="idTecnicoMant" Type="Int32" Nullable="false" />
           <Property Name="idEmpleado" Type="Int32" />
-          <Property Name="experienciaTrabajoRiesgo" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="seguroRiesgo" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="experienciaTrabajoRiesgo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="seguroRiesgo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="vigenciaEPP" Type="DateTime" Precision="3" />
           <Property Name="vigenciaExamenMedicoOcup" Type="DateTime" Precision="3" />
-          <Property Name="habilidades" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="habilidades" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_EMPLEADO" Relationship="BDCLINICAModel.FK__T_TECNICO__idEmp__15502E78" FromRole="T_TECNICO_MANTENIMIENTO" ToRole="T_EMPLEADO" />
           <NavigationProperty Name="T_PLAN_MANTENIMIENTO" Relationship="BDCLINICAModel.FK__T_PLAN_MA__idTec__5EBF139D" FromRole="T_TECNICO_MANTENIMIENTO" ToRole="T_PLAN_MANTENIMIENTO" />
           <NavigationProperty Name="T_SOLICITUD_MANTENIMIENTO" Relationship="BDCLINICAModel.FK__T_SOLICIT__idTec__6A30C649" FromRole="T_TECNICO_MANTENIMIENTO" ToRole="T_SOLICITUD_MANTENIMIENTO" />
@@ -1634,36 +1984,36 @@
             <PropertyRef Name="id_tipo_persona" />
           </Key>
           <Property Name="id_tipo_persona" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_servicio" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="tipo_servicio" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="nombre_servicio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tipo_servicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK__T_PLAN_DE__id_ba__5AEE82B9">
-          <End Role="T_BASE_FINANCIERA" Type="BDCLINICAModel.T_BASE_FINANCIERA" Multiplicity="0..1" />
-          <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.T_PLAN_DE_SALUD" Multiplicity="*" />
+        <Association Name="FK_T_BASE_FINANCIERA">
+          <End Type="BDCLINICAModel.T_BASE_FINANCIERA" Role="T_BASE_FINANCIERA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_BASE_FINANCIERA" Role="T_PLAN_BASE_FINANCIERA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_BASE_FINANCIERA">
               <PropertyRef Name="id_base_financiera" />
             </Principal>
-            <Dependent Role="T_PLAN_DE_SALUD">
+            <Dependent Role="T_PLAN_BASE_FINANCIERA">
               <PropertyRef Name="id_base_financiera" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_PLAN_DE__id_ba__5BE2A6F2">
-          <End Role="T_BASE_LEGAL" Type="BDCLINICAModel.T_BASE_LEGAL" Multiplicity="0..1" />
-          <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.T_PLAN_DE_SALUD" Multiplicity="*" />
+        <Association Name="FK_T_PLAN_BASE_LEGAL">
+          <End Type="BDCLINICAModel.T_BASE_LEGAL" Role="T_BASE_LEGAL" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_BASE_LEGAL" Role="T_PLAN_BASE_LEGAL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_BASE_LEGAL">
               <PropertyRef Name="id_base_legal" />
             </Principal>
-            <Dependent Role="T_PLAN_DE_SALUD">
+            <Dependent Role="T_PLAN_BASE_LEGAL">
               <PropertyRef Name="id_base_legal" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_MUEBLE__codBie__571DF1D5">
-          <End Role="T_BIEN" Type="BDCLINICAModel.T_BIEN" Multiplicity="0..1" />
-          <End Role="T_MUEBLE" Type="BDCLINICAModel.T_MUEBLE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_BIEN" Role="T_BIEN" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_MUEBLE" Role="T_MUEBLE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_BIEN">
               <PropertyRef Name="codBien" />
@@ -1674,8 +2024,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_T_INMUEBLE_T_BIEN">
-          <End Role="T_BIEN" Type="BDCLINICAModel.T_BIEN" Multiplicity="0..1" />
-          <End Role="T_INMUEBLE" Type="BDCLINICAModel.T_INMUEBLE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_BIEN" Role="T_BIEN" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_INMUEBLE" Role="T_INMUEBLE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_BIEN">
               <PropertyRef Name="codBien" />
@@ -1685,21 +2035,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_BITACOR__id_in__47DBAE45">
-          <End Role="T_INVESTIGACION_COMERCIAL" Type="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
-          <End Role="T_BITACORA_INCIDENCIA" Type="BDCLINICAModel.T_BITACORA_INCIDENCIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_INVESTIGACION_COMERCIAL">
-              <PropertyRef Name="id_investigacion_comercial" />
-            </Principal>
-            <Dependent Role="T_BITACORA_INCIDENCIA">
-              <PropertyRef Name="id_investigacion_comercial" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__T_BITACOR__idemp__4D94879B">
-          <End Role="T_EMPLEADO" Type="BDCLINICAModel.T_EMPLEADO" Multiplicity="0..1" />
-          <End Role="T_BITACORA_INCIDENCIA" Type="BDCLINICAModel.T_BITACORA_INCIDENCIA" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EMPLEADO" Role="T_EMPLEADO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_BITACORA_INCIDENCIA" Role="T_BITACORA_INCIDENCIA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EMPLEADO">
               <PropertyRef Name="idEmpleado" />
@@ -1709,9 +2047,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD">
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_BITACORA_INCIDENCIA" Role="T_BITACORA_INCIDENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_PLAN_DE_SALUD">
+              <PropertyRef Name="id_plan_salud" />
+            </Principal>
+            <Dependent Role="T_BITACORA_INCIDENCIA">
+              <PropertyRef Name="id_plan_salud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA">
+          <End Type="BDCLINICAModel.T_BITACORA_INCIDENCIA" Role="T_BITACORA_INCIDENCIA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_SEGUIMIENTO" Role="T_SEGUIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_BITACORA_INCIDENCIA">
+              <PropertyRef Name="id_bitacora" />
+            </Principal>
+            <Dependent Role="T_SEGUIMIENTO">
+              <PropertyRef Name="id_bitacora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__T_COMPROB__id_pa__49C3F6B7">
-          <End Role="T_PACIENTE" Type="BDCLINICAModel.T_PACIENTE" Multiplicity="0..1" />
-          <End Role="T_COMPROBANTE" Type="BDCLINICAModel.T_COMPROBANTE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PACIENTE" Role="T_PACIENTE" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_COMPROBANTE" Role="T_COMPROBANTE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PACIENTE">
               <PropertyRef Name="id_paciente" />
@@ -1722,8 +2084,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_CONFIGU__id_in__4AB81AF0">
-          <End Role="T_INVESTIGACION_COMERCIAL" Type="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
-          <End Role="T_CONFIGURACION" Type="BDCLINICAModel.T_CONFIGURACION" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" Role="T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_CONFIGURACION" Role="T_CONFIGURACION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_INVESTIGACION_COMERCIAL">
               <PropertyRef Name="id_investigacion_comercial" />
@@ -1734,8 +2096,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_EMPLEAD__codPe__1273C1CD">
-          <End Role="T_PERSONA" Type="BDCLINICAModel.T_PERSONA" Multiplicity="0..1" />
-          <End Role="T_EMPLEADO" Type="BDCLINICAModel.T_EMPLEADO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PERSONA" Role="T_PERSONA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_EMPLEADO" Role="T_EMPLEADO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PERSONA">
               <PropertyRef Name="codPersona" />
@@ -1746,8 +2108,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_SOLICIT__idEmp__300424B4">
-          <End Role="T_EMPLEADO" Type="BDCLINICAModel.T_EMPLEADO" Multiplicity="0..1" />
-          <End Role="T_SOLICITUD_MANTENIMIENTO" Type="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EMPLEADO" Role="T_EMPLEADO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" Role="T_SOLICITUD_MANTENIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EMPLEADO">
               <PropertyRef Name="idEmpleado" />
@@ -1758,8 +2120,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_TECNICO__idEmp__15502E78">
-          <End Role="T_EMPLEADO" Type="BDCLINICAModel.T_EMPLEADO" Multiplicity="0..1" />
-          <End Role="T_TECNICO_MANTENIMIENTO" Type="BDCLINICAModel.T_TECNICO_MANTENIMIENTO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EMPLEADO" Role="T_EMPLEADO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_TECNICO_MANTENIMIENTO" Role="T_TECNICO_MANTENIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EMPLEADO">
               <PropertyRef Name="idEmpleado" />
@@ -1770,8 +2132,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_T_EMPLEADO_T_ESPECIALIDAD_MEDICA">
-          <End Role="T_ESPECIALIDAD_MEDICA" Type="BDCLINICAModel.T_ESPECIALIDAD_MEDICA" Multiplicity="0..1" />
-          <End Role="T_EMPLEADO" Type="BDCLINICAModel.T_EMPLEADO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_ESPECIALIDAD_MEDICA" Role="T_ESPECIALIDAD_MEDICA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_EMPLEADO" Role="T_EMPLEADO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_ESPECIALIDAD_MEDICA">
               <PropertyRef Name="idEspecialidad" />
@@ -1782,8 +2144,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_T_PROGRAMACION_MEDICA_T_EMPLEADO">
-          <End Role="T_EMPLEADO" Type="BDCLINICAModel.T_EMPLEADO" Multiplicity="1" />
-          <End Role="T_PROGRAMACION_MEDICA" Type="BDCLINICAModel.T_PROGRAMACION_MEDICA" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EMPLEADO" Role="T_EMPLEADO" Multiplicity="1" />
+          <End Type="BDCLINICAModel.T_PROGRAMACION_MEDICA" Role="T_PROGRAMACION_MEDICA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EMPLEADO">
               <PropertyRef Name="idEmpleado" />
@@ -1794,8 +2156,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_EMPRESA__codPe__4D94879B">
-          <End Role="T_PERSONA" Type="BDCLINICAModel.T_PERSONA" Multiplicity="0..1" />
-          <End Role="T_EMPRESA" Type="BDCLINICAModel.T_EMPRESA" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PERSONA" Role="T_PERSONA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_EMPRESA" Role="T_EMPRESA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PERSONA">
               <PropertyRef Name="codPersona" />
@@ -1806,8 +2168,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_MANTENI__codEm__534D60F1">
-          <End Role="T_EMPRESA" Type="BDCLINICAModel.T_EMPRESA" Multiplicity="0..1" />
-          <End Role="T_MANTENIMIENTO_EQUIPO" Type="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EMPRESA" Role="T_EMPRESA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Role="T_MANTENIMIENTO_EQUIPO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EMPRESA">
               <PropertyRef Name="codEmpresa" />
@@ -1818,8 +2180,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_MUEBLE__codEmp__5812160E">
-          <End Role="T_EMPRESA" Type="BDCLINICAModel.T_EMPRESA" Multiplicity="0..1" />
-          <End Role="T_MUEBLE" Type="BDCLINICAModel.T_MUEBLE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EMPRESA" Role="T_EMPRESA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_MUEBLE" Role="T_MUEBLE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EMPRESA">
               <PropertyRef Name="codEmpresa" />
@@ -1830,8 +2192,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_EQUIPO___codIn__2C3393D0">
-          <End Role="T_INMUEBLE" Type="BDCLINICAModel.T_INMUEBLE" Multiplicity="0..1" />
-          <End Role="T_EQUIPO_MEDICO" Type="BDCLINICAModel.T_EQUIPO_MEDICO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_INMUEBLE" Role="T_INMUEBLE" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_EQUIPO_MEDICO" Role="T_EQUIPO_MEDICO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_INMUEBLE">
               <PropertyRef Name="codInmueble" />
@@ -1842,8 +2204,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_EQUIPO___codMu__4F7CD00D">
-          <End Role="T_MUEBLE" Type="BDCLINICAModel.T_MUEBLE" Multiplicity="0..1" />
-          <End Role="T_EQUIPO_MEDICO" Type="BDCLINICAModel.T_EQUIPO_MEDICO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_MUEBLE" Role="T_MUEBLE" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_EQUIPO_MEDICO" Role="T_EQUIPO_MEDICO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_MUEBLE">
               <PropertyRef Name="codMueble" />
@@ -1854,8 +2216,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_EQUIPO___idEqu__4CA06362">
-          <End Role="T_EQUIPO_MEDICO" Type="BDCLINICAModel.T_EQUIPO_MEDICO" Multiplicity="0..1" />
-          <End Role="T_EQUIPO_USO" Type="BDCLINICAModel.T_EQUIPO_USO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EQUIPO_MEDICO" Role="T_EQUIPO_MEDICO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_EQUIPO_USO" Role="T_EQUIPO_USO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EQUIPO_MEDICO">
               <PropertyRef Name="idEquipoMedico" />
@@ -1866,8 +2228,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_EQUIPO___idEsp__5070F446">
-          <End Role="T_ESPECIALIDAD_MEDICA" Type="BDCLINICAModel.T_ESPECIALIDAD_MEDICA" Multiplicity="0..1" />
-          <End Role="T_EQUIPO_MEDICO" Type="BDCLINICAModel.T_EQUIPO_MEDICO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_ESPECIALIDAD_MEDICA" Role="T_ESPECIALIDAD_MEDICA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_EQUIPO_MEDICO" Role="T_EQUIPO_MEDICO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_ESPECIALIDAD_MEDICA">
               <PropertyRef Name="idEspecialidad" />
@@ -1878,8 +2240,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_MANTENI__idEqu__5535A963">
-          <End Role="T_EQUIPO_MEDICO" Type="BDCLINICAModel.T_EQUIPO_MEDICO" Multiplicity="0..1" />
-          <End Role="T_MANTENIMIENTO_EQUIPO" Type="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EQUIPO_MEDICO" Role="T_EQUIPO_MEDICO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Role="T_MANTENIMIENTO_EQUIPO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EQUIPO_MEDICO">
               <PropertyRef Name="idEquipoMedico" />
@@ -1890,8 +2252,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_SOLICIT__idEqu__693CA210">
-          <End Role="T_EQUIPO_MEDICO" Type="BDCLINICAModel.T_EQUIPO_MEDICO" Multiplicity="0..1" />
-          <End Role="T_SOLICITUD_MANTENIMIENTO" Type="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_EQUIPO_MEDICO" Role="T_EQUIPO_MEDICO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" Role="T_SOLICITUD_MANTENIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_EQUIPO_MEDICO">
               <PropertyRef Name="idEquipoMedico" />
@@ -1901,21 +2263,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_PLAN_DE__id_es__5CD6CB2B">
-          <End Role="T_ESTRATEGIA_COMERCIAL" Type="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL" Multiplicity="0..1" />
-          <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.T_PLAN_DE_SALUD" Multiplicity="*" />
+        <Association Name="FK_T_ESPECIALIDAD_x_SERVICIO">
+          <End Type="BDCLINICAModel.T_ESPECIALIDAD_MEDICA" Role="T_ESPECIALIDAD_MEDICA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_ESPECIALIDAD_SERVICIO" Role="T_ESPECIALIDAD_SERVICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ESPECIALIDAD_MEDICA">
+              <PropertyRef Name="idEspecialidad" />
+            </Principal>
+            <Dependent Role="T_ESPECIALIDAD_SERVICIO">
+              <PropertyRef Name="id_especialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PLAN_ESPECIALIDADSERVICIO">
+          <End Type="BDCLINICAModel.T_ESPECIALIDAD_SERVICIO" Role="T_ESPECIALIDAD_SERVICIO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_ESPECIALIDADxSERVICIO" Role="T_PLAN_ESPECIALIDADxSERVICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ESPECIALIDAD_SERVICIO">
+              <PropertyRef Name="id_especialidad_servicio" />
+            </Principal>
+            <Dependent Role="T_PLAN_ESPECIALIDADxSERVICIO">
+              <PropertyRef Name="id_especialidad_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PROGRAMACION_MEDICA_ESPECIALIDAD_SERVICIO">
+          <End Type="BDCLINICAModel.T_ESPECIALIDAD_SERVICIO" Role="T_ESPECIALIDAD_SERVICIO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PROGRAMACION_MEDICA" Role="T_PROGRAMACION_MEDICA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ESPECIALIDAD_SERVICIO">
+              <PropertyRef Name="id_especialidad_servicio" />
+            </Principal>
+            <Dependent Role="T_PROGRAMACION_MEDICA">
+              <PropertyRef Name="id_especialidad_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_SERVICIO_ESPECIALIDAD">
+          <End Type="BDCLINICAModel.T_SERVICIO_SALUD" Role="T_SERVICIO_SALUD" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_ESPECIALIDAD_SERVICIO" Role="T_ESPECIALIDAD_SERVICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_SERVICIO_SALUD">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="T_ESPECIALIDAD_SERVICIO">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PLAN_ESTRATEGIA_COMERCIAL">
+          <End Type="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL" Role="T_ESTRATEGIA_COMERCIAL" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_ESTRATEGIA_COMERCIAL" Role="T_PLAN_ESTRATEGIA_COMERCIAL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_ESTRATEGIA_COMERCIAL">
               <PropertyRef Name="id_estrategia_comercial" />
             </Principal>
-            <Dependent Role="T_PLAN_DE_SALUD">
+            <Dependent Role="T_PLAN_ESTRATEGIA_COMERCIAL">
               <PropertyRef Name="id_estrategia_comercial" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_PROGRAM__codIn__6754599E">
-          <End Role="T_INMUEBLE" Type="BDCLINICAModel.T_INMUEBLE" Multiplicity="0..1" />
-          <End Role="T_PROGRAMACION_MEDICA" Type="BDCLINICAModel.T_PROGRAMACION_MEDICA" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_INMUEBLE" Role="T_INMUEBLE" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PROGRAMACION_MEDICA" Role="T_PROGRAMACION_MEDICA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_INMUEBLE">
               <PropertyRef Name="codInmueble" />
@@ -1925,9 +2335,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__T_PLAN_DE__id_in__5DCAEF64">
-          <End Role="T_INVESTIGACION_COMERCIAL" Type="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
-          <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.T_PLAN_DE_SALUD" Multiplicity="*" />
+        <Association Name="FK__T_PLAN_DE_SALUD1">
+          <End Type="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" Role="T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_INVESTIGACION_COMERCIAL">
               <PropertyRef Name="id_investigacion_comercial" />
@@ -1938,8 +2348,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_PROYECT__id_in__656C112C">
-          <End Role="T_INVESTIGACION_COMERCIAL" Type="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
-          <End Role="T_PROYECTO_PLANSALUD" Type="BDCLINICAModel.T_PROYECTO_PLANSALUD" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" Role="T_INVESTIGACION_COMERCIAL" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PROYECTO_PLANSALUD" Role="T_PROYECTO_PLANSALUD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_INVESTIGACION_COMERCIAL">
               <PropertyRef Name="id_investigacion_comercial" />
@@ -1950,8 +2360,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_MANTENI__codPl__5441852A">
-          <End Role="T_PLAN_MANTENIMIENTO" Type="BDCLINICAModel.T_PLAN_MANTENIMIENTO" Multiplicity="0..1" />
-          <End Role="T_MANTENIMIENTO_EQUIPO" Type="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PLAN_MANTENIMIENTO" Role="T_PLAN_MANTENIMIENTO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Role="T_MANTENIMIENTO_EQUIPO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PLAN_MANTENIMIENTO">
               <PropertyRef Name="codPlan" />
@@ -1962,8 +2372,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_MANTENI__idSol__5629CD9C">
-          <End Role="T_SOLICITUD_MANTENIMIENTO" Type="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" Multiplicity="0..1" />
-          <End Role="T_MANTENIMIENTO_EQUIPO" Type="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" Role="T_SOLICITUD_MANTENIMIENTO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Role="T_MANTENIMIENTO_EQUIPO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_SOLICITUD_MANTENIMIENTO">
               <PropertyRef Name="idSolicitud" />
@@ -1974,8 +2384,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_MUEBLE__codMod__59063A47">
-          <End Role="T_MODELO" Type="BDCLINICAModel.T_MODELO" Multiplicity="0..1" />
-          <End Role="T_MUEBLE" Type="BDCLINICAModel.T_MUEBLE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_MODELO" Role="T_MODELO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_MUEBLE" Role="T_MUEBLE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_MODELO">
               <PropertyRef Name="codModelo" />
@@ -1986,8 +2396,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_PACIENT__codPe__59FA5E80">
-          <End Role="T_PERSONA" Type="BDCLINICAModel.T_PERSONA" Multiplicity="0..1" />
-          <End Role="T_PACIENTE" Type="BDCLINICAModel.T_PACIENTE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PERSONA" Role="T_PERSONA" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PACIENTE" Role="T_PACIENTE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PERSONA">
               <PropertyRef Name="codPersona" />
@@ -1998,8 +2408,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_RESERVA__id_pa__5DCAEF64">
-          <End Role="T_PACIENTE" Type="BDCLINICAModel.T_PACIENTE" Multiplicity="0..1" />
-          <End Role="T_RESERVA_SERVICIO_SALUD" Type="BDCLINICAModel.T_RESERVA_SERVICIO_SALUD" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PACIENTE" Role="T_PACIENTE" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_RESERVA_SERVICIO_SALUD" Role="T_RESERVA_SERVICIO_SALUD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PACIENTE">
               <PropertyRef Name="id_paciente" />
@@ -2010,8 +2420,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_T_PLAN_PACIENTE_T_PACIENTE">
-          <End Role="T_PACIENTE" Type="BDCLINICAModel.T_PACIENTE" Multiplicity="0..1" />
-          <End Role="T_PLAN_PACIENTE" Type="BDCLINICAModel.T_PLAN_PACIENTE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PACIENTE" Role="T_PACIENTE" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_PACIENTE" Role="T_PLAN_PACIENTE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PACIENTE">
               <PropertyRef Name="id_paciente" />
@@ -2021,9 +2431,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_T_PLAN_DE_SALUD">
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_BASE_FINANCIERA" Role="T_PLAN_BASE_FINANCIERA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_PLAN_DE_SALUD">
+              <PropertyRef Name="id_plan_salud" />
+            </Principal>
+            <Dependent Role="T_PLAN_BASE_FINANCIERA">
+              <PropertyRef Name="id_plan_salud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PLAN">
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_BASE_LEGAL" Role="T_PLAN_BASE_LEGAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_PLAN_DE_SALUD">
+              <PropertyRef Name="id_plan_salud" />
+            </Principal>
+            <Dependent Role="T_PLAN_BASE_LEGAL">
+              <PropertyRef Name="id_plan_salud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PLAN_COMERCIAL">
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_ESTRATEGIA_COMERCIAL" Role="T_PLAN_ESTRATEGIA_COMERCIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_PLAN_DE_SALUD">
+              <PropertyRef Name="id_plan_salud" />
+            </Principal>
+            <Dependent Role="T_PLAN_ESTRATEGIA_COMERCIAL">
+              <PropertyRef Name="id_plan_salud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD">
-          <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.T_PLAN_DE_SALUD" Multiplicity="0..1" />
-          <End Role="T_PLAN_PACIENTE" Type="BDCLINICAModel.T_PLAN_PACIENTE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_PACIENTE" Role="T_PLAN_PACIENTE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PLAN_DE_SALUD">
               <PropertyRef Name="id_plan_salud" />
@@ -2033,21 +2479,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_PLAN_SERVICIO_T_PLAN_DE_SALUD">
-          <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.T_PLAN_DE_SALUD" Multiplicity="0..1" />
-          <End Role="T_PLAN_SERVICIO" Type="BDCLINICAModel.T_PLAN_SERVICIO" Multiplicity="*" />
+        <Association Name="FK_T_PLANSALUD_ESPECIALIDADSERVICIO">
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_ESPECIALIDADxSERVICIO" Role="T_PLAN_ESPECIALIDADxSERVICIO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_PLAN_DE_SALUD">
               <PropertyRef Name="id_plan_salud" />
             </Principal>
-            <Dependent Role="T_PLAN_SERVICIO">
+            <Dependent Role="T_PLAN_ESPECIALIDADxSERVICIO">
               <PropertyRef Name="id_plan_salud" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_PLAN_MA__idTec__5EBF139D">
-          <End Role="T_TECNICO_MANTENIMIENTO" Type="BDCLINICAModel.T_TECNICO_MANTENIMIENTO" Multiplicity="0..1" />
-          <End Role="T_PLAN_MANTENIMIENTO" Type="BDCLINICAModel.T_PLAN_MANTENIMIENTO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_TECNICO_MANTENIMIENTO" Role="T_TECNICO_MANTENIMIENTO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_PLAN_MANTENIMIENTO" Role="T_PLAN_MANTENIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_TECNICO_MANTENIMIENTO">
               <PropertyRef Name="idTecnicoMant" />
@@ -2057,21 +2503,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_PLAN_SERVICIO_T_SERVICIO_SALUD">
-          <End Role="T_SERVICIO_SALUD" Type="BDCLINICAModel.T_SERVICIO_SALUD" Multiplicity="0..1" />
-          <End Role="T_PLAN_SERVICIO" Type="BDCLINICAModel.T_PLAN_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_SERVICIO_SALUD">
-              <PropertyRef Name="id_servicio" />
-            </Principal>
-            <Dependent Role="T_PLAN_SERVICIO">
-              <PropertyRef Name="id_servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__T_RESERVA__id_se__5EBF139D">
-          <End Role="T_SERVICIO_SALUD" Type="BDCLINICAModel.T_SERVICIO_SALUD" Multiplicity="0..1" />
-          <End Role="T_RESERVA_SERVICIO_SALUD" Type="BDCLINICAModel.T_RESERVA_SERVICIO_SALUD" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_SERVICIO_SALUD" Role="T_SERVICIO_SALUD" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_RESERVA_SERVICIO_SALUD" Role="T_RESERVA_SERVICIO_SALUD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_SERVICIO_SALUD">
               <PropertyRef Name="id_servicio" />
@@ -2082,8 +2516,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__T_SOLICIT__idTec__6A30C649">
-          <End Role="T_TECNICO_MANTENIMIENTO" Type="BDCLINICAModel.T_TECNICO_MANTENIMIENTO" Multiplicity="0..1" />
-          <End Role="T_SOLICITUD_MANTENIMIENTO" Type="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_TECNICO_MANTENIMIENTO" Role="T_TECNICO_MANTENIMIENTO" Multiplicity="0..1" />
+          <End Type="BDCLINICAModel.T_SOLICITUD_MANTENIMIENTO" Role="T_SOLICITUD_MANTENIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_TECNICO_MANTENIMIENTO">
               <PropertyRef Name="idTecnicoMant" />
@@ -2093,31 +2527,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="T_PLAN_DE_SALUDT_PROGRAMACION_MEDICA">
-          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="0..1" />
-          <End Type="BDCLINICAModel.T_PROGRAMACION_MEDICA" Role="T_PROGRAMACION_MEDICA" Multiplicity="*" />
+        <EntityType Name="T_PERSONA_PLANSALUD">
+          <Key>
+            <PropertyRef Name="id_persona_plansalud" />
+          </Key>
+          <Property Name="id_persona_plansalud" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="T_PERSONA" Relationship="BDCLINICAModel.T_PERSONAT_PERSONA_PLANSALUD" FromRole="T_PERSONA_PLANSALUD" ToRole="T_PERSONA" />
+          <Property Name="codPersona" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.T_PERSONA_PLANSALUDT_PLAN_DE_SALUD" FromRole="T_PERSONA_PLANSALUD" ToRole="T_PLAN_DE_SALUD" />
+          <Property Name="id_plan_salud" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_PROGRAMACION_MEDICA" Relationship="BDCLINICAModel.T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD" FromRole="T_PERSONA_PLANSALUD" ToRole="T_PROGRAMACION_MEDICA" />
+        </EntityType>
+        <Association Name="T_PERSONAT_PERSONA_PLANSALUD">
+          <End Type="BDCLINICAModel.T_PERSONA_PLANSALUD" Role="T_PERSONA_PLANSALUD" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PERSONA" Role="T_PERSONA" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="T_PERSONA">
+              <PropertyRef Name="codPersona" />
+            </Principal>
+            <Dependent Role="T_PERSONA_PLANSALUD">
+              <PropertyRef Name="codPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="T_PERSONA_PLANSALUDT_PLAN_DE_SALUD">
+          <End Type="BDCLINICAModel.T_PERSONA_PLANSALUD" Role="T_PERSONA_PLANSALUD" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="T_PLAN_DE_SALUD">
               <PropertyRef Name="id_plan_salud" />
             </Principal>
-            <Dependent Role="T_PROGRAMACION_MEDICA">
+            <Dependent Role="T_PERSONA_PLANSALUD">
               <PropertyRef Name="id_plan_salud" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="T_SERVICIO_SALUDT_PROGRAMACION_MEDICA">
-          <End Type="BDCLINICAModel.T_SERVICIO_SALUD" Role="T_SERVICIO_SALUD" Multiplicity="1" />
+        <Association Name="T_PROGRAMACION_MEDICAT_PERSONA">
           <End Type="BDCLINICAModel.T_PROGRAMACION_MEDICA" Role="T_PROGRAMACION_MEDICA" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PERSONA" Role="T_PERSONA" Multiplicity="1" />
           <ReferentialConstraint>
-            <Principal Role="T_SERVICIO_SALUD">
-              <PropertyRef Name="id_servicio" />
+            <Principal Role="T_PERSONA">
+              <PropertyRef Name="codPersona" />
             </Principal>
             <Dependent Role="T_PROGRAMACION_MEDICA">
-              <PropertyRef Name="id_servicio_salud" />
+              <PropertyRef Name="codPersona" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD">
+          <End Type="BDCLINICAModel.T_PROGRAMACION_MEDICA" Role="T_PROGRAMACION_MEDICA" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PERSONA_PLANSALUD" Role="T_PERSONA_PLANSALUD" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="T_PERSONA_PLANSALUD">
+              <PropertyRef Name="id_persona_plansalud" />
+            </Principal>
+            <Dependent Role="T_PROGRAMACION_MEDICA">
+              <PropertyRef Name="id_persona_plansalud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2163,8 +2634,8 @@
           <ScalarProperty Name="tipo_incidencia" ColumnName="tipo_incidencia" />
           <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
           <ScalarProperty Name="idempleado" ColumnName="idempleado" />
-          <ScalarProperty Name="id_investigacion_comercial" ColumnName="id_investigacion_comercial" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2256,6 +2727,17 @@
         <MappingFragment StoreEntitySet="T_ESPECIALIDAD_MEDICA">
           <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
           <ScalarProperty Name="nomEspecialidad" ColumnName="nomEspecialidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ESPECIALIDAD_SERVICIO">
+      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_ESPECIALIDAD_SERVICIO)">
+        <MappingFragment StoreEntitySet="T_ESPECIALIDAD_SERVICIO">
+          <ScalarProperty Name="id_especialidad_servicio" ColumnName="id_especialidad_servicio" />
+          <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+          <ScalarProperty Name="id_especialidad" ColumnName="id_especialidad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2353,6 +2835,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="T_PLAN_BASE_FINANCIERA">
+      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_PLAN_BASE_FINANCIERA)">
+        <MappingFragment StoreEntitySet="T_PLAN_BASE_FINANCIERA">
+          <ScalarProperty Name="id_plan_base_financiera" ColumnName="id_plan_base_financiera" />
+          <ScalarProperty Name="id_base_financiera" ColumnName="id_base_financiera" />
+          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
+          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_PLAN_BASE_LEGAL">
+      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_PLAN_BASE_LEGAL)">
+        <MappingFragment StoreEntitySet="T_PLAN_BASE_LEGAL">
+          <ScalarProperty Name="id_plan_base_financiera" ColumnName="id_plan_base_financiera" />
+          <ScalarProperty Name="id_base_legal" ColumnName="id_base_legal" />
+          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
+          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="T_PLAN_DE_SALUD">
       <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_PLAN_DE_SALUD)">
         <MappingFragment StoreEntitySet="T_PLAN_DE_SALUD">
@@ -2363,10 +2867,30 @@
           <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
           <ScalarProperty Name="objetivo" ColumnName="objetivo" />
           <ScalarProperty Name="id_investigacion_comercial" ColumnName="id_investigacion_comercial" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_PLAN_ESPECIALIDADxSERVICIO">
+      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_PLAN_ESPECIALIDADxSERVICIO)">
+        <MappingFragment StoreEntitySet="T_PLAN_ESPECIALIDADxSERVICIO">
+          <ScalarProperty Name="id_plan_especialidad" ColumnName="id_plan_especialidad" />
+          <ScalarProperty Name="id_especialidad_servicio" ColumnName="id_especialidad_servicio" />
+          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_PLAN_ESTRATEGIA_COMERCIAL">
+      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_PLAN_ESTRATEGIA_COMERCIAL)">
+        <MappingFragment StoreEntitySet="T_PLAN_ESTRATEGIA_COMERCIAL">
+          <ScalarProperty Name="id_plan_estrategia_comercial" ColumnName="id_plan_estrategia_comercial" />
           <ScalarProperty Name="id_estrategia_comercial" ColumnName="id_estrategia_comercial" />
-          <ScalarProperty Name="id_base_financiera" ColumnName="id_base_financiera" />
-          <ScalarProperty Name="id_base_legal" ColumnName="id_base_legal" />
-          <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
+          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2392,19 +2916,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="T_PLAN_SERVICIO">
-      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_PLAN_SERVICIO)">
-        <MappingFragment StoreEntitySet="T_PLAN_SERVICIO">
-          <ScalarProperty Name="id_plan_servicio" ColumnName="id_plan_servicio" />
-          <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
-          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
-          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
-          <ScalarProperty Name="fecha_retiro" ColumnName="fecha_retiro" />
-          <ScalarProperty Name="idempleado" ColumnName="idempleado" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="T_PROGRAMACION_MEDICA">
       <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_PROGRAMACION_MEDICA)">
         <MappingFragment StoreEntitySet="T_PROGRAMACION_MEDICA">
@@ -2418,10 +2929,10 @@
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
           <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
-          <ScalarProperty Name="id_paciente" ColumnName="id_paciente" />
+          <ScalarProperty Name="id_especialidad_servicio" ColumnName="id_especialidad_servicio" />
           <ScalarProperty Name="codInmueble" ColumnName="codInmueble" />
-          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
-          <ScalarProperty Name="id_servicio_salud" ColumnName="id_servicio_salud" />
+          <ScalarProperty Name="codPersona" ColumnName="codPersona" />
+          <ScalarProperty Name="id_persona_plansalud" ColumnName="id_persona_plansalud" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2447,6 +2958,17 @@
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="id_paciente" ColumnName="id_paciente" />
           <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_SEGUIMIENTO">
+      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_SEGUIMIENTO)">
+        <MappingFragment StoreEntitySet="T_SEGUIMIENTO">
+          <ScalarProperty Name="id_seguimiento" ColumnName="id_seguimiento" />
+          <ScalarProperty Name="id_bitacora" ColumnName="id_bitacora" />
+          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
+          <ScalarProperty Name="seguimiento" ColumnName="seguimiento" />
+          <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2495,6 +3017,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="T_PERSONA_PLANSALUD">
+      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_PERSONA_PLANSALUD)">
+        <MappingFragment StoreEntitySet="T_PERSONA_PLANSALUD">
+          <ScalarProperty Name="id_persona_plansalud" ColumnName="id_persona_plansalud" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="codPersona" ColumnName="codPersona" />
+          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -2515,6 +3048,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams />
   </Designer>
 </edmx:Edmx>
