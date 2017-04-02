@@ -1492,6 +1492,15 @@
             <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
             <End Role="T_PERSONA_PLANSALUD" EntitySet="T_PERSONA_PLANSALUD" />
           </AssociationSet>
+          <EntitySet Name="T_PLAN_SERVICIO" EntityType="BDCLINICAModel.T_PLAN_SERVICIO" />
+          <AssociationSet Name="T_PLAN_SERVICIOT_SERVICIO_SALUD" Association="BDCLINICAModel.T_PLAN_SERVICIOT_SERVICIO_SALUD">
+            <End Role="T_PLAN_SERVICIO" EntitySet="T_PLAN_SERVICIO" />
+            <End Role="T_SERVICIO_SALUD" EntitySet="T_SERVICIO_SALUD" />
+          </AssociationSet>
+          <AssociationSet Name="T_PLAN_SERVICIOT_PLAN_DE_SALUD" Association="BDCLINICAModel.T_PLAN_SERVICIOT_PLAN_DE_SALUD">
+            <End Role="T_PLAN_SERVICIO" EntitySet="T_PLAN_SERVICIO" />
+            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1826,6 +1835,7 @@
           <NavigationProperty Name="T_PLAN_PACIENTE" Relationship="BDCLINICAModel.FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_PACIENTE" />
           <NavigationProperty Name="T_PLAN_ESPECIALIDADxSERVICIO" Relationship="BDCLINICAModel.FK_T_PLANSALUD_ESPECIALIDADSERVICIO" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_ESPECIALIDADxSERVICIO" />
           <NavigationProperty Name="T_PERSONA_PLANSALUD" Relationship="BDCLINICAModel.T_PERSONA_PLANSALUDT_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PERSONA_PLANSALUD" />
+          <NavigationProperty Name="T_PLAN_SERVICIO" Relationship="BDCLINICAModel.T_PLAN_SERVICIOT_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_SERVICIO" />
         </EntityType>
         <EntityType Name="T_PLAN_ESPECIALIDADxSERVICIO">
           <Key>
@@ -1946,6 +1956,7 @@
           <Property Name="tipo_servicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="T_ESPECIALIDAD_SERVICIO" Relationship="BDCLINICAModel.FK_T_SERVICIO_ESPECIALIDAD" FromRole="T_SERVICIO_SALUD" ToRole="T_ESPECIALIDAD_SERVICIO" />
           <NavigationProperty Name="T_RESERVA_SERVICIO_SALUD" Relationship="BDCLINICAModel.FK__T_RESERVA__id_se__5EBF139D" FromRole="T_SERVICIO_SALUD" ToRole="T_RESERVA_SERVICIO_SALUD" />
+          <NavigationProperty Name="T_PLAN_SERVICIO" Relationship="BDCLINICAModel.T_PLAN_SERVICIOT_SERVICIO_SALUD" FromRole="T_SERVICIO_SALUD" ToRole="T_PLAN_SERVICIO" />
         </EntityType>
         <EntityType Name="T_SOLICITUD_MANTENIMIENTO">
           <Key>
@@ -2585,6 +2596,42 @@
             </Principal>
             <Dependent Role="T_PROGRAMACION_MEDICA">
               <PropertyRef Name="id_persona_plansalud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="T_PLAN_SERVICIO">
+          <Key>
+            <PropertyRef Name="id_plan_servicio" />
+          </Key>
+          <Property Name="id_plan_servicio" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="T_SERVICIO_SALUD" Relationship="BDCLINICAModel.T_PLAN_SERVICIOT_SERVICIO_SALUD" FromRole="T_PLAN_SERVICIO" ToRole="T_SERVICIO_SALUD" />
+          <Property Name="id_servicio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.T_PLAN_SERVICIOT_PLAN_DE_SALUD" FromRole="T_PLAN_SERVICIO" ToRole="T_PLAN_DE_SALUD" />
+          <Property Name="id_plan_salud" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="T_PLAN_SERVICIOT_SERVICIO_SALUD">
+          <End Type="BDCLINICAModel.T_PLAN_SERVICIO" Role="T_PLAN_SERVICIO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_SERVICIO_SALUD" Role="T_SERVICIO_SALUD" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="T_SERVICIO_SALUD">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="T_PLAN_SERVICIO">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="T_PLAN_SERVICIOT_PLAN_DE_SALUD">
+          <End Type="BDCLINICAModel.T_PLAN_SERVICIO" Role="T_PLAN_SERVICIO" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="T_PLAN_DE_SALUD">
+              <PropertyRef Name="id_plan_salud" />
+            </Principal>
+            <Dependent Role="T_PLAN_SERVICIO">
+              <PropertyRef Name="id_plan_salud" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

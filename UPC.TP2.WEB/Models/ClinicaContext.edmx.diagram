@@ -5,35 +5,35 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f03d7334c4e94915baa4fb3cd5523519" Name="Diagrama1" ZoomLevel="79">
-        <EntityTypeShape EntityType="BDCLINICAModel.T_BASE_FINANCIERA" Width="1.5" PointX="15.75" PointY="27.75" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_BASE_LEGAL" Width="1.5" PointX="15.75" PointY="19" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_BIEN" Width="1.5" PointX="6.75" PointY="14.625" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_BASE_FINANCIERA" Width="1.5" PointX="18.75" PointY="14.75" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_BASE_LEGAL" Width="1.5" PointX="15.75" PointY="27" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_BIEN" Width="1.5" PointX="6.75" PointY="14.5" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_BITACORA_INCIDENCIA" Width="1.5" PointX="8.25" PointY="22.625" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_COMPROBANTE" Width="1.5" PointX="23.25" PointY="27.25" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_CONFIGURACION" Width="1.5" PointX="15.75" PointY="15" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_CONFIGURACION" Width="1.5" PointX="15.75" PointY="30.375" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_EMPLEADO" Width="1.5" PointX="6" PointY="21.875" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_EMPRESA" Width="1.5" PointX="21" PointY="24.75" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_EQUIPO_MEDICO" Width="1.5" PointX="28.5" PointY="24.5" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_EQUIPO_USO" Width="1.5" PointX="30.75" PointY="25.5" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_ESPECIALIDAD_MEDICA" Width="1.5" PointX="0.75" PointY="23" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_ESPECIALIDAD_SERVICIO" Width="1.5" PointX="3" PointY="22.625" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL" Width="1.5" PointX="18.75" PointY="14.875" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_INMUEBLE" Width="1.5" PointX="9" PointY="14.5" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL" Width="1.5" PointX="15.75" PointY="17.875" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_INMUEBLE" Width="1.5" PointX="9" PointY="14.25" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_INVESTIGACION_COMERCIAL" Width="1.5" PointX="13.5" PointY="18.625" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_MANTENIMIENTO_EQUIPO" Width="1.5" PointX="12.75" PointY="31.5" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_MODELO" Width="1.5" PointX="24" PointY="32.125" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_MUEBLE" Width="1.5" PointX="26.25" PointY="26.375" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_PACIENTE" Width="1.5" PointX="21" PointY="20.875" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_PERSONA" Width="1.5" PointX="18.75" PointY="22.875" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_BASE_FINANCIERA" Width="1.5" PointX="18" PointY="26.875" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_BASE_LEGAL" Width="1.5" PointX="18" PointY="18.875" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_DE_SALUD" Width="1.5" PointX="15.75" PointY="22" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_BASE_FINANCIERA" Width="1.5" PointX="21" PointY="16.875" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_BASE_LEGAL" Width="1.5" PointX="18" PointY="26.875" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_DE_SALUD" Width="1.5" PointX="15.75" PointY="21.875" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_ESPECIALIDADxSERVICIO" Width="1.5" PointX="21" PointY="28.75" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_ESTRATEGIA_COMERCIAL" Width="1.5" PointX="21" PointY="16.875" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_ESTRATEGIA_COMERCIAL" Width="1.5" PointX="18" PointY="18.875" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_MANTENIMIENTO" Width="1.5" PointX="10.5" PointY="36" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_PACIENTE" Width="1.5" PointX="26.25" PointY="22.125" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_PACIENTE" Width="1.5" PointX="26.25" PointY="22.25" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_PROGRAMACION_MEDICA" Width="1.5" PointX="11.25" PointY="21.75" />
-        <EntityTypeShape EntityType="BDCLINICAModel.T_PROYECTO_PLANSALUD" Width="1.5" PointX="15.75" PointY="11.5" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_PROYECTO_PLANSALUD" Width="1.5" PointX="15.75" PointY="14" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_RESERVA_SERVICIO_SALUD" Width="1.5" PointX="23.25" PointY="21" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_SEGUIMIENTO" Width="1.5" PointX="10.5" PointY="18" />
         <EntityTypeShape EntityType="BDCLINICAModel.T_SERVICIO_SALUD" Width="1.5" PointX="0.75" PointY="20" />
@@ -90,6 +90,9 @@
         <AssociationConnector Association="BDCLINICAModel.T_PERSONA_PLANSALUDT_PLAN_DE_SALUD" />
         <AssociationConnector Association="BDCLINICAModel.T_PROGRAMACION_MEDICAT_PERSONA" />
         <AssociationConnector Association="BDCLINICAModel.T_PROGRAMACION_MEDICAT_PERSONA_PLANSALUD" />
+        <EntityTypeShape EntityType="BDCLINICAModel.T_PLAN_SERVICIO" Width="1.5" PointX="1.5" PointY="15.875" />
+        <AssociationConnector Association="BDCLINICAModel.T_PLAN_SERVICIOT_SERVICIO_SALUD" />
+        <AssociationConnector Association="BDCLINICAModel.T_PLAN_SERVICIOT_PLAN_DE_SALUD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

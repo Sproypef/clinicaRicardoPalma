@@ -64,6 +64,7 @@ namespace UPC.TP2.WEB.Models
         public DbSet<T_TECNICO_MANTENIMIENTO> T_TECNICO_MANTENIMIENTO { get; set; }
         public DbSet<T_TIPO_PERSONA> T_TIPO_PERSONA { get; set; }
         public DbSet<T_PERSONA_PLANSALUD> T_PERSONA_PLANSALUD { get; set; }
+        public DbSet<T_PLAN_SERVICIO> T_PLAN_SERVICIO { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
