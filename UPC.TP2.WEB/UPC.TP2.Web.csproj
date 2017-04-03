@@ -225,6 +225,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicaContext.tt</DependentUpon>
     </Compile>
+    <Content Include="App_Data\03_04_2017_database.sql" />
     <Content Include="Models\ClinicaContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2218,7 +2219,6 @@
     <Content Include="Views\PlanSalud\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Mantenimiento\Scripts\" />
     <Folder Include="Areas\Mantenimiento\Views\Shared\" />
     <Folder Include="Filters\" />

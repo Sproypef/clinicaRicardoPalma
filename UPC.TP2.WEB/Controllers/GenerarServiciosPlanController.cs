@@ -119,9 +119,10 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                                   from pla_ser in gj_ppp.DefaultIfEmpty() //This is LEFT JOIN
                                   join per_pla in db.T_PERSONA_PLANSALUD on per.codPersona equals per_pla.codPersona into gj_pppp
                                   from per_pla in gj_pppp.DefaultIfEmpty() //This is LEFT JOIN                                 
-                                  where pla_ser.estado == "1" &&
-                                        pro.fecha >= per_pla.fecha_inicio &&
-                                        pro.fecha <= per_pla.fecha_fin
+                                  where pla_ser == null || 
+                                        (pla_ser.estado == "0" &&
+                                        pro.fecha < per_pla.fecha_inicio &&
+                                        pro.fecha > per_pla.fecha_fin)
                                   group
                                     new { pro, per, per_pla, pla_ser }
                                     by new { pro.idEspecialidad, pro.id_servicio } into gb
