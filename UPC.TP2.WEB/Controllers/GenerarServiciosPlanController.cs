@@ -115,10 +115,10 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                                   join per in db.T_PERSONA on pro.codPersona equals per.codPersona
                                   join pla_ser in db.T_PLAN_SERVICIO on 
                                     new { pro.idEspecialidad, pro.id_servicio } equals
-                                    new { pla_ser.idEspecialidad, pla_ser.id_servicio } into gj_ppp
+                                    new { pla_ser.idEspecialidad, pla_ser.id_servicio } into gj_ppp                                
                                   from pla_ser in gj_ppp.DefaultIfEmpty() //This is LEFT JOIN
-                                  join per_pla in db.T_PERSONA_PLANSALUD on per.codPersona equals per_pla.codPersona into g_join
-                                  from per_pla in g_join.DefaultIfEmpty() //This is LEFT JOIN                                 
+                                  join per_pla in db.T_PERSONA_PLANSALUD on per.codPersona equals per_pla.codPersona into gj_pppp
+                                  from per_pla in gj_pppp.DefaultIfEmpty() //This is LEFT JOIN                                 
                                   where pla_ser.estado == "1" &&
                                         pro.fecha >= per_pla.fecha_inicio &&
                                         pro.fecha <= per_pla.fecha_fin
