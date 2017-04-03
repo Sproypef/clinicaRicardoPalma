@@ -209,6 +209,7 @@
     <Compile Include="Areas\Mantenimiento\Controllers\PlanMantenimientoController.cs" />
     <Compile Include="Areas\Mantenimiento\MantenimientoAreaRegistration.cs" />
     <Compile Include="Areas\Mantenimiento\Models\PlanMantenimiento.cs" />
+    <Compile Include="Controllers\BitacoraController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlanSaludController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2217,6 +2218,11 @@
     <Content Include="Views\GenerarServiciosPlan\Index_OLD.cshtml" />
     <Content Include="Views\GenerarServiciosPlan\GenerateServices.cshtml" />
     <Content Include="Views\PlanSalud\Create.cshtml" />
+    <Content Include="Views\Bitacora\Index.cshtml" />
+    <Content Include="Views\Bitacora\Details.cshtml" />
+    <Content Include="Views\Bitacora\Create.cshtml" />
+    <Content Include="Views\Bitacora\Edit.cshtml" />
+    <Content Include="Views\Bitacora\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Mantenimiento\Scripts\" />

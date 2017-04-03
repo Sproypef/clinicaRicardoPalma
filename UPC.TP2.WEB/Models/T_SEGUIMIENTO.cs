@@ -19,6 +19,7 @@ namespace UPC.TP2.WEB.Models
         public Nullable<int> id_plan_salud { get; set; }
         public string seguimiento { get; set; }
         public Nullable<System.DateTime> fecha_registro { get; set; }
+        public string usuario { get; set; }
     
         public virtual T_BITACORA_INCIDENCIA T_BITACORA_INCIDENCIA { get; set; }
     }

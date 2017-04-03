@@ -85,44 +85,42 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
             T_CONFIGURACION config_retirar = db.T_CONFIGURACION.Where(x => x.indicador == "retirar_servicio").FirstOrDefault();
 
             //## TABLA DE RETIRO
-            object obj_ret_serv = from pro in ret_serv
-                                  join per in db.T_PERSONA on pro.codPersona equals per.codPersona
-                                  join per_pla in db.T_PERSONA_PLANSALUD on per.codPersona equals per_pla.codPersona
-                                  join pla in db.T_PLAN_DE_SALUD on per_pla.id_plan_salud equals pla.id_plan_salud
-                                  join pla_ser in db.T_PLAN_SERVICIO on 
-                                    new { pla.id_plan_salud, pro.idEspecialidad, pro.id_servicio } equals 
-                                    new { pla_ser.id_plan_salud, pla_ser.idEspecialidad, pla_ser.id_servicio } 
-                                  where pla_ser.estado == "1" && 
-                                        pro.fecha >= per_pla.fecha_inicio &&
-                                        pro.fecha <= per_pla.fecha_fin
+            object obj_ret_serv = from pla_ser in db.T_PLAN_SERVICIO.ToList()
+                                  join pla in db.T_PLAN_DE_SALUD on pla_ser.id_plan_salud equals pla.id_plan_salud
+                                  join per_pla in db.T_PERSONA_PLANSALUD on pla.id_plan_salud equals per_pla.id_plan_salud
+                                  join per in db.T_PERSONA on per_pla.codPersona equals per.codPersona 
+                                  join pro in db.T_PROGRAMACION_MEDICA.Where(x=> x.estado == "1" && x.fecha >= FechaInicio && x.fecha <= FechaFin) on //Use direct table in replace of "ret_ser"
+                                    new { pla_ser.idEspecialidad, pla_ser.id_servicio } equals
+                                    new { pro.idEspecialidad, pro.id_servicio }                                                              
+                                  where  pro.fecha >= per_pla.fecha_inicio && pro.fecha <= per_pla.fecha_fin
                                   group 
-                                    new { pro, per, per_pla, pla, pla_ser } 
-                                    by new { pla.id_plan_salud, pro.idEspecialidad, pro.id_servicio } into gb
-                                  select new {
-                                      id_plan_salud = gb.Key.id_plan_salud,
-                                      id_especialidad = gb.Key.idEspecialidad,
-                                      id_servicio = gb.Key.id_servicio,
-                                      nombre_plan_salud = gb.ToList().FirstOrDefault().pla.nombre_plan,
-                                      nombre_especialidad = gb.ToList().FirstOrDefault().pro.T_ESPECIALIDAD_SERVICIO.T_ESPECIALIDAD_MEDICA.nomEspecialidad,
-                                      nombre_servicio = gb.ToList().FirstOrDefault().pro.T_ESPECIALIDAD_SERVICIO.T_SERVICIO_SALUD.nombre_servicio,
-                                      cantidad = gb.Count(),
-                                      color = (gb.Count() <= Int32.Parse(config_retirar.valor_maximo) && gb.Count() >= Int32.Parse(config_retirar.valor_minimo)) ? "orange" : ""
+                                    new { pla_ser, pla, per_pla } 
+                                    by new { pla_ser.id_plan_salud, pla_ser.idEspecialidad, pla_ser.id_servicio } into gbx
+                                  select new
+                                  {
+                                      id_plan_salud = gbx.Key.id_plan_salud,
+                                      id_especialidad = gbx.Key.idEspecialidad,
+                                      id_servicio = gbx.Key.id_servicio,
+                                      nombre_plan_salud = gbx.ToList().FirstOrDefault().pla_ser.T_PLAN_DE_SALUD.nombre_plan,
+                                      nombre_especialidad = gbx.ToList().FirstOrDefault().pla_ser.T_ESPECIALIDAD_SERVICIO.T_ESPECIALIDAD_MEDICA.nomEspecialidad,
+                                      nombre_servicio = gbx.ToList().FirstOrDefault().pla_ser.T_ESPECIALIDAD_SERVICIO.T_SERVICIO_SALUD.nombre_servicio,
+                                      cantidad = gbx.Count(c => c != null),
+                                      color = (gbx.Count(c => c != null) <= Int32.Parse(config_retirar.valor_maximo) && gbx.Count(c => c != null) >= Int32.Parse(config_retirar.valor_minimo)) ? "orange" : ""
                                   };
 
 
             //## TABLA DE ASIGNACION
-            object obj_asi_plan = from pro in ret_serv
+            object obj_asi_plan = from pro in asi_plan
                                   join per in db.T_PERSONA on pro.codPersona equals per.codPersona
                                   join pla_ser in db.T_PLAN_SERVICIO on 
                                     new { pro.idEspecialidad, pro.id_servicio } equals
                                     new { pla_ser.idEspecialidad, pla_ser.id_servicio } into gj_ppp                                
                                   from pla_ser in gj_ppp.DefaultIfEmpty() //This is LEFT JOIN
-                                  join per_pla in db.T_PERSONA_PLANSALUD on per.codPersona equals per_pla.codPersona into gj_pppp
-                                  from per_pla in gj_pppp.DefaultIfEmpty() //This is LEFT JOIN                                 
-                                  where pla_ser == null || 
-                                        (pla_ser.estado == "0" &&
-                                        pro.fecha < per_pla.fecha_inicio &&
-                                        pro.fecha > per_pla.fecha_fin)
+                                  join per_pla in db.T_PERSONA_PLANSALUD on per.codPersona equals per_pla.codPersona into gj_per_pla
+                                  from per_pla in gj_per_pla.DefaultIfEmpty() //This is LEFT JOIN                                 
+                                  where per_pla == null ||
+                                        ((pla_ser != null && pla_ser.estado == "0") &&
+                                        (pro.fecha < per_pla.fecha_inicio && pro.fecha > per_pla.fecha_fin))
                                   group
                                     new { pro, per, per_pla, pla_ser }
                                     by new { pro.idEspecialidad, pro.id_servicio } into gb
@@ -136,57 +134,6 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                                       color = (gb.Count() <= Int32.Parse(config_retirar.valor_maximo) && gb.Count() >= Int32.Parse(config_retirar.valor_minimo)) ? "orange" : ""
                                   };
 
-            //BEGIN: ## Pending to remove
-
-            object obj_ret_serv_ = ret_serv
-                .Join(db.T_PERSONA, rs => rs.codPersona, pe => pe.codPersona, (rs, pe)=> new { rs, pe})
-                .Join(db.T_PERSONA_PLANSALUD, rs_pe => rs_pe.pe.codPersona, pp => pp.codPersona, (rs_pe, pp) => new { rs_pe.rs, rs_pe.pe, pp })
-                //.Join(db.T_PLAN_SERVICIO, rs_pp => rs_pp.pp.id_plan_salud, ps => ps.id_plan_salud, (rs_pp, ps) => new { rs_pp.rs, rs_pp.pe, rs_pp.pp, ps })
-                .Join(db.T_ESPECIALIDAD_SERVICIO, ret_pp => new { ret_pp.rs.id_servicio, ret_pp.rs.idEspecialidad }, esp_ser => new { esp_ser.id_servicio, esp_ser.idEspecialidad }, (ret_pp, esp_ser) => new { ret_pp.rs, ret_pp.pe, ret_pp.pp, esp_ser })
-                .Where(x => x.rs.fecha >= x.pp.fecha_inicio && x.rs.fecha <= x.pp.fecha_fin)
-                .GroupBy(gb => new { gb.pp.id_plan_salud, gb.esp_ser.idEspecialidad, gb.esp_ser.id_servicio }, (key, group) => new { id_plan_salud = key.id_plan_salud, id_esp = key.idEspecialidad, id_ser = key.id_servicio, group = group.ToList() })
-                .Select(x => new
-                {
-                    id_plan_salud = x.id_plan_salud,
-                    id_esp = x.id_esp,
-                    id_ser = x.id_ser,
-                    id_especialidad = x.group.First().esp_ser.idEspecialidad,
-                    id_servicio = x.group.First().esp_ser.id_servicio,
-                    programacion = x.group,
-                    nombre_plan_salud = x.group.First().pp.T_PLAN_DE_SALUD.nombre_plan,
-                    nombre_especialidad = x.group.First().esp_ser.T_ESPECIALIDAD_MEDICA.nomEspecialidad,
-                    nombre_servicio = x.group.First().esp_ser.T_SERVICIO_SALUD.nombre_servicio,
-                    cantidad = x.group.Count(),
-                    color = (x.group.Count() <= Int32.Parse(config_retirar.valor_maximo) && x.group.Count() >= Int32.Parse(config_retirar.valor_minimo)) ? "orange" : ""
-                })
-                .ToList();
-
-            //## 
-            object obj_asi_plan_ =  
-                
-                
-                asi_plan
-                .Join(db.T_PERSONA, rs => rs.codPersona, pe => pe.codPersona, (rs, pe) => new { rs, pe })
-                .Join(db.T_PERSONA_PLANSALUD, rs_pe => rs_pe.pe.codPersona, pp => pp.codPersona, (rs_pe, pp) => new { rs_pe.rs, rs_pe.pe, pp })
-                .DefaultIfEmpty()
-                .Join(db.T_ESPECIALIDAD_SERVICIO, ret_pp => new { ret_pp.rs.id_servicio, ret_pp.rs.idEspecialidad }, esp_ser => new { esp_ser.id_servicio, esp_ser.idEspecialidad }, (ret_pp, esp_ser) => new { ret_pp.rs, ret_pp.pe, ret_pp.pp, esp_ser })
-                .Where(x => x.pp == null || x.rs.fecha < x.pp.fecha_inicio || x.rs.fecha > x.pp.fecha_fin)
-                .GroupBy(gb => new { gb.esp_ser.idEspecialidad, gb.esp_ser.id_servicio }, (key, group) => new { id_esp = key.idEspecialidad, id_ser = key.id_servicio , group = group.ToList() })
-                .Select(x => new
-                {
-                    id_esp = x.id_esp,
-                    id_ser = x.id_ser,
-                    id_especialidad = x.group.First().esp_ser.idEspecialidad,
-                    id_servicio = x.group.First().esp_ser.id_servicio,
-                    nombre_plan_salud = x.group.First().pp.T_PLAN_DE_SALUD.nombre_plan,
-                    nombre_especialidad = x.group.First().esp_ser.T_ESPECIALIDAD_MEDICA.nomEspecialidad,
-                    nombre_servicio = x.group.First().esp_ser.T_SERVICIO_SALUD.nombre_servicio,
-                    cantidad = x.group.Count(),
-                    color = (x.group.Count() <= Int32.Parse(config_asignar.valor_maximo) && x.group.Count() >= Int32.Parse(config_asignar.valor_minimo)) ? "orange" : ""
-                })
-                .ToList();
-
-            //END: ## Pending to remove
 
             GenerateServiceModel GSM = new GenerateServiceModel()
             {
@@ -195,8 +142,8 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                 LIST_PLAN_DE_SALUD = pla_salu,
                 T_CONFIGURACION_ASIGNAR = config_asignar,
                 T_CONFIGURACION_RETIRAR = config_retirar,
-                JSON_LIST_ASIGNA_PLAN = JArray.FromObject(obj_asi_plan, Util.jsonNoLoop()),
-                JSON_LIST_RETIRO_SERVICIO = JArray.FromObject(obj_ret_serv, Util.jsonNoLoop())
+                JSON_LIST_RETIRO_SERVICIO = JArray.FromObject(obj_ret_serv, Util.jsonNoLoop()),
+                JSON_LIST_ASIGNA_PLAN = JArray.FromObject(obj_asi_plan, Util.jsonNoLoop())
             };
 
             //-- END: Full logic
