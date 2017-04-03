@@ -42,3 +42,10 @@ $("#submit_asignar").on("click", function (e) {
     }
         
 });
+
+$("#bitacora_action_select_plan").on("change", function (e) {
+    if ($(this).val() != "default") {
+        $("#form_bitacora_index").attr("action", "/Bitacora/ChangePlanSalud");
+        $("#form_bitacora_index").submit();
+    }
+});

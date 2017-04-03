@@ -8,6 +8,12 @@ namespace UPC.TP2.WEB.Utils
 {
     public static class Util
     {
+        enum BitacoraEstados{
+            ABIERTO,
+            COMPLETO,
+            RECHAZADO
+        }
+         
         public static JsonSerializerSettings jsonNoLoopSettings()
         {
             return new JsonSerializerSettings {
@@ -22,5 +28,6 @@ namespace UPC.TP2.WEB.Utils
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
         }
+
     }
 }
