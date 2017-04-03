@@ -20,8 +20,5 @@ namespace UPC.TP2.WEB.Models
         public Nullable<System.DateTime> fecha_inicio { get; set; }
         public Nullable<System.DateTime> fecha_fin { get; set; }
         public string estado { get; set; }
-    
-        public virtual T_ESPECIALIDAD_SERVICIO T_ESPECIALIDAD_SERVICIO { get; set; }
-        public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
     }
 }

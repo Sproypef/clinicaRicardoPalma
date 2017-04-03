@@ -21,7 +21,6 @@ namespace UPC.TP2.WEB.Models
             this.T_PLAN_BASE_LEGAL = new HashSet<T_PLAN_BASE_LEGAL>();
             this.T_PLAN_ESTRATEGIA_COMERCIAL = new HashSet<T_PLAN_ESTRATEGIA_COMERCIAL>();
             this.T_PLAN_PACIENTE = new HashSet<T_PLAN_PACIENTE>();
-            this.T_PLAN_ESPECIALIDADxSERVICIO = new HashSet<T_PLAN_ESPECIALIDADxSERVICIO>();
             this.T_PERSONA_PLANSALUD = new HashSet<T_PERSONA_PLANSALUD>();
             this.T_PLAN_SERVICIO = new HashSet<T_PLAN_SERVICIO>();
         }
@@ -41,7 +40,6 @@ namespace UPC.TP2.WEB.Models
         public virtual ICollection<T_PLAN_BASE_LEGAL> T_PLAN_BASE_LEGAL { get; set; }
         public virtual ICollection<T_PLAN_ESTRATEGIA_COMERCIAL> T_PLAN_ESTRATEGIA_COMERCIAL { get; set; }
         public virtual ICollection<T_PLAN_PACIENTE> T_PLAN_PACIENTE { get; set; }
-        public virtual ICollection<T_PLAN_ESPECIALIDADxSERVICIO> T_PLAN_ESPECIALIDADxSERVICIO { get; set; }
         public virtual ICollection<T_PERSONA_PLANSALUD> T_PERSONA_PLANSALUD { get; set; }
         public virtual ICollection<T_PLAN_SERVICIO> T_PLAN_SERVICIO { get; set; }
     }

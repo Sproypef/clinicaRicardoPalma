@@ -17,10 +17,11 @@ namespace UPC.TP2.WEB.Models
         public int id_plan_servicio { get; set; }
         public System.DateTime fecha_inicio { get; set; }
         public Nullable<System.DateTime> fecha_fin { get; set; }
-        public int id_servicio { get; set; }
         public int id_plan_salud { get; set; }
+        public int id_servicio { get; set; }
+        public int idEspecialidad { get; set; }
     
-        public virtual T_SERVICIO_SALUD T_SERVICIO_SALUD { get; set; }
         public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
+        public virtual T_ESPECIALIDAD_SERVICIO T_ESPECIALIDAD_SERVICIO { get; set; }
     }
 }

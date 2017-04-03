@@ -14,11 +14,6 @@ namespace UPC.TP2.WEB.Models
     
     public partial class T_PERSONA_PLANSALUD
     {
-        public T_PERSONA_PLANSALUD()
-        {
-            this.T_PROGRAMACION_MEDICA = new HashSet<T_PROGRAMACION_MEDICA>();
-        }
-    
         public int id_persona_plansalud { get; set; }
         public System.DateTime fecha_inicio { get; set; }
         public System.DateTime fecha_fin { get; set; }
@@ -27,6 +22,5 @@ namespace UPC.TP2.WEB.Models
     
         public virtual T_PERSONA T_PERSONA { get; set; }
         public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
-        public virtual ICollection<T_PROGRAMACION_MEDICA> T_PROGRAMACION_MEDICA { get; set; }
     }
 }
