@@ -644,6 +644,7 @@
     <Property Name="id_plan_salud" Type="int" Nullable="false" />
     <Property Name="id_servicio" Type="int" Nullable="false" />
     <Property Name="idEspecialidad" Type="int" Nullable="false" />
+    <Property Name="estado" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK_T_BASE_FINANCIERA">
     <End Role="T_BASE_FINANCIERA" Type="BDCLINICAModel.Store.T_BASE_FINANCIERA" Multiplicity="0..1" />
@@ -2533,6 +2534,7 @@
           <NavigationProperty Name="T_ESPECIALIDAD_SERVICIO" Relationship="BDCLINICAModel.T_PLAN_SERVICIOT_ESPECIALIDAD_SERVICIO" FromRole="T_PLAN_SERVICIO" ToRole="T_ESPECIALIDAD_SERVICIO" />
           <Property Name="id_servicio" Type="Int32" Nullable="false" />
           <Property Name="idEspecialidad" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="T_PLAN_SERVICIOT_PLAN_DE_SALUD">
           <End Type="BDCLINICAModel.T_PLAN_SERVICIO" Role="T_PLAN_SERVICIO" Multiplicity="*" />
@@ -3034,6 +3036,7 @@
           <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
           <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
           <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

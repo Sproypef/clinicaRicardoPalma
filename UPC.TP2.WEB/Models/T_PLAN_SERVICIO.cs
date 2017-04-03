@@ -20,6 +20,7 @@ namespace UPC.TP2.WEB.Models
         public int id_plan_salud { get; set; }
         public int id_servicio { get; set; }
         public int idEspecialidad { get; set; }
+        public string estado { get; set; }
     
         public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
         public virtual T_ESPECIALIDAD_SERVICIO T_ESPECIALIDAD_SERVICIO { get; set; }

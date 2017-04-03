@@ -53,8 +53,9 @@
                     @{  }
                     @foreach (JObject item in Model.JSON_LIST_RETIRO_SERVICIO)
                     {
+                        var keys = item["id_plan_salud"] + "_" + item["id_especialidad"] + "_" + item["id_servicio"];
                         <tr style="background-color: @item["color"]">
-                            <td><input type="checkbox"/></td>
+                            <td><input type="checkbox" name="checkbox_retirar_@keys"/></td>
                             <td>@item["nombre_plan_salud"]</td>
                             <td>@item["nombre_especialidad"]</td>
                             <td>@item["nombre_servicio"]</td>
@@ -87,12 +88,20 @@
                     @{  }
                     @foreach (JObject item in Model.JSON_LIST_ASIGNA_PLAN)
                     {
+                        var keys = item["id_especialidad"] + "_" + item["id_servicio"];
                         <tr style="background-color: @item["color"]">
-                            <td><input type="checkbox" /></td>                           
+                            <td><input type="checkbox" name="checkbox_asignar_@keys"/></td>                           
                             <td>@item["nombre_especialidad"]</td>
                             <td>@item["nombre_servicio"]</td>
                             <td>@item["cantidad"]</td>
-                            <td></td>
+                            <td>
+                                <select id="select_plan_salud_@keys" name="select_plan_salud_@keys">
+                                    @foreach (var p in Model.LIST_PLAN_DE_SALUD)
+                                    {
+                                        <option value="@p.id_plan_salud">@p.nombre_plan</option>
+                                    }
+                                </select>
+                            </td>
                         </tr>
                     }
                 </tbody>

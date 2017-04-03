@@ -70,12 +70,10 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
 
             List<T_PROGRAMACION_MEDICA> ret_serv = db.T_PROGRAMACION_MEDICA
                 .Where(x => x.fecha >= FechaInicio && x.fecha <= FechaFin)
-                .OrderBy(x => x.id_persona_plansalud)
                 .ToList();
 
             List<T_PROGRAMACION_MEDICA> asi_plan = db.T_PROGRAMACION_MEDICA
                 .Where(x => x.fecha >= FechaInicio && x.fecha <= FechaFin)
-                .OrderBy(x => x.id_persona_plansalud)
                 .ToList();
 
             List<T_ESPECIALIDAD_MEDICA> esp = db.T_ESPECIALIDAD_MEDICA.ToList();
@@ -90,37 +88,43 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
             object obj_ret_serv = ret_serv
                 .Join(db.T_PERSONA, rs => rs.codPersona, pe => pe.codPersona, (rs, pe)=> new { rs, pe})
                 .Join(db.T_PERSONA_PLANSALUD, rs_pe => rs_pe.pe.codPersona, pp => pp.codPersona, (rs_pe, pp) => new { rs_pe.rs, rs_pe.pe, pp })
-                .Join(db.T_ESPECIALIDAD_SERVICIO, ret_pp => ret_pp.rs.id_especialidad_servicio, esp_ser => esp_ser.id_especialidad_servicio, (ret_pp, esp_ser) => new { ret_pp.rs, ret_pp.pe, ret_pp.pp, esp_ser })
+                //.Join(db.T_PLAN_SERVICIO, rs_pp => rs_pp.pp.id_plan_salud, ps => ps.id_plan_salud, (rs_pp, ps) => new { rs_pp.rs, rs_pp.pe, rs_pp.pp, ps })
+                .Join(db.T_ESPECIALIDAD_SERVICIO, ret_pp => new { ret_pp.rs.id_servicio, ret_pp.rs.idEspecialidad }, esp_ser => new { esp_ser.id_servicio, esp_ser.idEspecialidad }, (ret_pp, esp_ser) => new { ret_pp.rs, ret_pp.pe, ret_pp.pp, esp_ser })
                 .Where(x => x.rs.fecha >= x.pp.fecha_inicio && x.rs.fecha <= x.pp.fecha_fin)
-                .GroupBy(gb => new { gb.pp.id_plan_salud, gb.esp_ser.id_especialidad_servicio }, (key, group) => new { id_plan_salud = key.id_plan_salud, id_esp_ser = key.id_especialidad_servicio, group = group.ToList() })
+                .GroupBy(gb => new { gb.pp.id_plan_salud, gb.esp_ser.idEspecialidad, gb.esp_ser.id_servicio }, (key, group) => new { id_plan_salud = key.id_plan_salud, id_esp = key.idEspecialidad, id_ser = key.id_servicio, group = group.ToList() })
                 .Select(x => new
                 {
                     id_plan_salud = x.id_plan_salud,
-                    id_esp_ser = x.id_esp_ser,
-                    id_especialidad = x.group.First().esp_ser.id_especialidad,
-                    id_servicio = x.group.First().esp_ser.T_ESPECIALIDAD_MEDICA.nomEspecialidad,
+                    id_esp = x.id_esp,
+                    id_ser = x.id_ser,
+                    id_especialidad = x.group.First().esp_ser.idEspecialidad,
+                    id_servicio = x.group.First().esp_ser.id_servicio,
                     programacion = x.group,
                     nombre_plan_salud = x.group.First().pp.T_PLAN_DE_SALUD.nombre_plan,
                     nombre_especialidad = x.group.First().esp_ser.T_ESPECIALIDAD_MEDICA.nomEspecialidad,
                     nombre_servicio = x.group.First().esp_ser.T_SERVICIO_SALUD.nombre_servicio,
                     cantidad = x.group.Count(),
                     color = (x.group.Count() <= Int32.Parse(config_retirar.valor_maximo) && x.group.Count() >= Int32.Parse(config_retirar.valor_minimo)) ? "orange" : ""
-        })
+                })
                 .ToList();
 
-            //To json asi_plan //TEMP
-            object obj_asi_plan = asi_plan
+            //To json asi_plan
+            object obj_asi_plan =  
+                
+                
+                asi_plan
                 .Join(db.T_PERSONA, rs => rs.codPersona, pe => pe.codPersona, (rs, pe) => new { rs, pe })
                 .Join(db.T_PERSONA_PLANSALUD, rs_pe => rs_pe.pe.codPersona, pp => pp.codPersona, (rs_pe, pp) => new { rs_pe.rs, rs_pe.pe, pp })
                 .DefaultIfEmpty()
-                .Join(db.T_ESPECIALIDAD_SERVICIO, ret_pp => ret_pp.rs.id_especialidad_servicio, esp_ser => esp_ser.id_especialidad_servicio, (ret_pp, esp_ser) => new { ret_pp.rs, ret_pp.pe, ret_pp.pp, esp_ser })
+                .Join(db.T_ESPECIALIDAD_SERVICIO, ret_pp => new { ret_pp.rs.id_servicio, ret_pp.rs.idEspecialidad }, esp_ser => new { esp_ser.id_servicio, esp_ser.idEspecialidad }, (ret_pp, esp_ser) => new { ret_pp.rs, ret_pp.pe, ret_pp.pp, esp_ser })
                 .Where(x => x.pp == null || x.rs.fecha < x.pp.fecha_inicio || x.rs.fecha > x.pp.fecha_fin)
-                .GroupBy(gb => new { gb.esp_ser.id_especialidad_servicio }, (key, group) => new { id_esp_ser = key.id_especialidad_servicio, group = group.ToList() })
+                .GroupBy(gb => new { gb.esp_ser.idEspecialidad, gb.esp_ser.id_servicio }, (key, group) => new { id_esp = key.idEspecialidad, id_ser = key.id_servicio , group = group.ToList() })
                 .Select(x => new
                 {
-                    id_esp_ser = x.id_esp_ser,
-                    id_especialidad = x.group.First().esp_ser.id_especialidad,
-                    id_servicio = x.group.First().esp_ser.T_ESPECIALIDAD_MEDICA.nomEspecialidad,
+                    id_esp = x.id_esp,
+                    id_ser = x.id_ser,
+                    id_especialidad = x.group.First().esp_ser.idEspecialidad,
+                    id_servicio = x.group.First().esp_ser.id_servicio,
                     nombre_plan_salud = x.group.First().pp.T_PLAN_DE_SALUD.nombre_plan,
                     nombre_especialidad = x.group.First().esp_ser.T_ESPECIALIDAD_MEDICA.nomEspecialidad,
                     nombre_servicio = x.group.First().esp_ser.T_SERVICIO_SALUD.nombre_servicio,
@@ -148,7 +152,7 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
         [HttpPost]
         public ActionResult GenerarAction()
         {
-            /*
+            
             TempData["request"] = Request;
             string accion = Request["accion"] ?? "";
 
@@ -159,27 +163,38 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                 {
                     string[] splits = item.Split('_');
                     int key_plan = Int32.Parse(splits[2]);
-                    int key_serv = Int32.Parse(splits[3]);
+                    int key_espe = Int32.Parse(splits[3]);
+                    int key_serv = Int32.Parse(splits[4]);
 
-                    T_PLAN_SERVICIO ps_m = null;
+                    T_PLAN_SERVICIO ps_m = null; //PLAN SERVICIO MODIFICAR
+                    T_PLAN_SERVICIO ps_n = null; //PLAN SERVICIO NUEVO
                     try
                     {
-                        ps_m = db.T_PLAN_SERVICIO.Where(x => x.id_plan_salud == key_plan && x.id_servicio == key_serv).First();
+                        ps_m = db.T_PLAN_SERVICIO.Where(x => x.id_plan_salud == key_plan && x.idEspecialidad == key_espe && x.id_servicio == key_serv).First();
                     }
                     catch (Exception e)
                     {
 
-                    }
-                    
+                    }                   
 
                     if (ps_m != null)
                     {
+                        //SET VALUES FOR NEW RECORD
+                        ps_n = ps_m;
+                        ps_n.estado = "1";
+                        ps_n.fecha_inicio = DateTime.Now;
+                        ps_n.fecha_fin = ps_n.T_PLAN_DE_SALUD.fecha_fin;
+
+                        //MODIFY VALUES FOR RECORD
                         ps_m.estado = "0";
+                        ps_m.fecha_fin = DateTime.Now;
                         db.Entry(ps_m).State = EntityState.Modified;
 
                         try
                         {
-                            db.SaveChanges();
+                            db.SaveChanges(); //MODIFY RECORD
+                            db.T_PLAN_SERVICIO.Add(ps_n);
+                            db.SaveChanges(); //ADD RECORD
                             ViewBag.Message = "El retiro de servicio se a realizado corectamente";
                         }
                         catch (Exception e)
@@ -201,14 +216,16 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                 foreach (string item in keys_retirar)
                 {
                     string[] splits = item.Split('_');
-                    int key_serv = Int32.Parse(splits[2]);
-                    int key_plan = Int32.Parse(Request["select_plan_salud_" + key_serv]);
+                    int key_espe = Int32.Parse(splits[2]);
+                    int key_serv = Int32.Parse(splits[3]);
+                    int key_plan = Int32.Parse(Request["select_plan_salud_" + key_espe + "_" + key_serv]);
 
                     T_PLAN_SERVICIO ps = new T_PLAN_SERVICIO()
                     {
                         estado = "1",
-                        fecha_registro = DateTime.Today,
+                        fecha_inicio = DateTime.Today,
                         id_plan_salud = key_plan,
+                        idEspecialidad = key_espe,
                         id_servicio = key_serv
                     };
 
@@ -221,8 +238,7 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
             else
             {
 
-            }
-            */
+            }           
 
             TempData["Message"] = ViewBag.Message;
 
