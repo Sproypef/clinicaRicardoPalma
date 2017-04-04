@@ -87,11 +87,13 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
             //## TABLA DE RETIRO
             object obj_ret_serv = from pla_ser in db.T_PLAN_SERVICIO.ToList()
                                   join pla in db.T_PLAN_DE_SALUD on pla_ser.id_plan_salud equals pla.id_plan_salud
-                                  join per_pla in db.T_PERSONA_PLANSALUD on pla.id_plan_salud equals per_pla.id_plan_salud
-                                  join per in db.T_PERSONA on per_pla.codPersona equals per.codPersona 
+                                  join per_pla in db.T_PERSONA_PLANSALUD on pla.id_plan_salud equals per_pla.id_plan_salud into gj_per_pla
+                                  from per_pla in gj_per_pla.DefaultIfEmpty(new T_PERSONA_PLANSALUD())
+                                  join per in db.T_PERSONA on per_pla.codPersona equals per.codPersona
                                   join pro in db.T_PROGRAMACION_MEDICA.Where(x=> x.estado == "1" && x.fecha >= FechaInicio && x.fecha <= FechaFin) on //Use direct table in replace of "ret_ser"
                                     new { pla_ser.idEspecialidad, pla_ser.id_servicio } equals
-                                    new { pro.idEspecialidad, pro.id_servicio }                                                              
+                                    new { pro.idEspecialidad, pro.id_servicio }  into gj_pro
+                                  from pro in gj_pro.DefaultIfEmpty()
                                   where  pro.fecha >= per_pla.fecha_inicio && pro.fecha <= per_pla.fecha_fin
                                   group 
                                     new { pla_ser, pla, per_pla } 

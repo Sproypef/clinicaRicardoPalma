@@ -47,7 +47,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
     <IncludeIisSettings>false</IncludeIisSettings>
@@ -229,6 +229,8 @@
     <Content Include="App_Data\03_04_2017_%282%29_data.sql" />
     <Content Include="App_Data\03_04_2017_%282%29_schema.sql" />
     <Content Include="App_Data\03_04_2017_database.sql" />
+    <Content Include="App_Data\04_04_2017_data.sql" />
+    <Content Include="App_Data\04_04_2017_schema.sql" />
     <Content Include="Models\ClinicaContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2241,9 +2243,11 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <!--
   <ItemGroup>
     <Analyzer Include="bin\UPC.TP2.UTIL.dll" />
   </ItemGroup>
+  -->
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
