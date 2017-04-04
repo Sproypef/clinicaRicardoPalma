@@ -46,7 +46,7 @@ namespace UPC.TP2.WEB.Controllers
             BitacoraViewModel bvm = new BitacoraViewModel
             {
                 BITACORAS = (id_plan_salud == -1) ? t_bitacora_incidencia.ToList() : t_bitacora_incidencia.Where(x => x.id_plan_salud == id_plan_salud).ToList(),
-                PLANES_DE_SALUD = db.T_PLAN_DE_SALUD.ToList(),
+                PLANES_DE_SALUD = db.T_PLAN_DE_SALUD.Where(x => x.estado == "1" && x.fecha_inicio <= DateTime.Now && x.fecha_fin >= DateTime.Now).ToList(),
                 EMPLEADOS = db.T_EMPLEADO.ToList()               
             };
             return View("Index", bvm);

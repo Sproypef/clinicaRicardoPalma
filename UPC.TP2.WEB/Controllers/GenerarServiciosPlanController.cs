@@ -94,7 +94,7 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                                     new { pla_ser.idEspecialidad, pla_ser.id_servicio } equals
                                     new { pro.idEspecialidad, pro.id_servicio }  into gj_pro
                                   from pro in gj_pro.DefaultIfEmpty()
-                                  where  pro.fecha >= per_pla.fecha_inicio && pro.fecha <= per_pla.fecha_fin
+                                  where pro != null && pro.fecha >= per_pla.fecha_inicio && pro.fecha <= per_pla.fecha_fin
                                   group 
                                     new { pla_ser, pla, per_pla } 
                                     by new { pla_ser.id_plan_salud, pla_ser.idEspecialidad, pla_ser.id_servicio } into gbx

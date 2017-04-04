@@ -9,6 +9,27 @@
 <hr />
 <h3>@ViewBag.Message</h3>
 <hr />
+
+@{ 
+    bool bita_modific = false;
+    bool plan_vigente = false;
+
+    string bita_estado = Model.BITACORA.estado;
+    string plan_esatdo = Model.BITACORA.T_PLAN_DE_SALUD.estado;
+    DateTime? plan_fecha_inicio = Model.BITACORA.T_PLAN_DE_SALUD.fecha_inicio;
+    DateTime? plan_fecha_fin = Model.BITACORA.T_PLAN_DE_SALUD.fecha_fin;
+
+    if(plan_esatdo != null && plan_esatdo == "1" && plan_fecha_inicio <= DateTime.Now && plan_fecha_fin >= DateTime.Now)
+    {
+        plan_vigente = true;
+    }
+
+    if (bita_estado != null && bita_estado.ToLower() != "cerrado" && bita_estado.ToLower() != "rechazado")
+    {
+        bita_modific = true;
+    }
+}
+
 <form action="/Bitacora/EditSave" method="post" id="bitacora_edit_form">
     <div class="form-horizontal" id="bitacora_edit_form_div">
         <!--
@@ -32,11 +53,7 @@
         <div class="control-group">
             <label class="control-label">Estado</label>
             <div class="controls">
-                @if (Model.BITACORA.estado.ToLower() == "cerrado")
-                {
-                    <input name="bitacora_edit_estado" value="@Model.BITACORA.estado" readonly="readonly"/>
-                }
-                else
+                @if (bita_modific && plan_vigente)
                 {
                     <select name="bitacora_edit_estado">
                         @foreach (var es in Util.BitacoraEstados())
@@ -51,6 +68,10 @@
                             }
                         }
                     </select>
+                }
+                else
+                {
+                    <input name="bitacora_edit_estado" value="@Model.BITACORA.estado" readonly="readonly" />
                 }                
             </div>
         </div>
@@ -79,7 +100,7 @@
         </div>
         <br />
         <hr />
-        @if (Model.BITACORA.estado.ToLower() != "cerrado")
+        @if (bita_modific && plan_vigente)
         {
             <div class="control-group">
                 <label class="control-label">NUEVO SEGUIMIENTO</label>
@@ -91,7 +112,7 @@
         <br />
         <p>
             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn"})
-            @if (Model.BITACORA.estado.ToLower() != "cerrado")
+            @if (bita_modific && plan_vigente)
             {
                 <input class="btn" type="submit" value="Grabar" />
             }
