@@ -22,7 +22,7 @@ namespace UPC.TP2.WEB.Controllers
             var t_bitacora_incidencia = db.T_BITACORA_INCIDENCIA.Include(t => t.T_EMPLEADO).Include(t => t.T_PLAN_DE_SALUD);
             BitacoraViewModel bvm = new BitacoraViewModel {
                 BITACORAS = t_bitacora_incidencia.ToList(),
-                PLANES_DE_SALUD = db.T_PLAN_DE_SALUD.ToList()
+                PLANES_DE_SALUD = db.T_PLAN_DE_SALUD.Where(x => x.estado == "1" && x.fecha_inicio <= DateTime.Now && x.fecha_fin >= DateTime.Now).ToList()
             };
             return View(bvm);
         }
@@ -132,15 +132,16 @@ namespace UPC.TP2.WEB.Controllers
                 BITACORA = t_bitacora_incidencia
             };
 
+            ViewBag.Message = TempData["Message"];
             return View("Edit", bvm);
         }
 
         public ActionResult EditSave()
         {
-            int bit_id = Int32.Parse(Request["bitacora_edit_id"]);
+            int bit_id = Int32.Parse(Request["bitacora_edit_id"] ?? "-1");
 
-            string bit_estado = Request["bitacora_edit_estado"];
-            string bit_seguimiento = Request["bitacora_edit_seguimiento"];
+            string bit_estado = Request["bitacora_edit_estado"] ?? String.Empty;
+            string bit_seguimiento = Request["bitacora_edit_seguimiento"] ?? String.Empty;
 
             T_BITACORA_INCIDENCIA bit = db.T_BITACORA_INCIDENCIA.Find(bit_id);
             bit.estado = bit_estado;
@@ -150,26 +151,30 @@ namespace UPC.TP2.WEB.Controllers
                 db.Entry(bit).State = EntityState.Modified;
                 db.SaveChanges();
 
-                T_SEGUIMIENTO bit_seg = new T_SEGUIMIENTO()
+                if(bit_estado != String.Empty && bit_estado.ToLower() != "cerrado")
                 {
-                    id_bitacora = bit.id_bitacora,
-                    id_plan_salud = bit.id_plan_salud,
-                    seguimiento = bit_seguimiento,
-                    fecha_registro = DateTime.Now,
-                    usuario = "Dennis Urbano"
-                };
+                    T_SEGUIMIENTO bit_seg = new T_SEGUIMIENTO()
+                    {
+                        id_bitacora = bit.id_bitacora,
+                        id_plan_salud = bit.id_plan_salud,
+                        seguimiento = bit_seguimiento,
+                        fecha_registro = DateTime.Now,
+                        usuario = "Dennis Urbano"
+                    };
 
-                db.T_SEGUIMIENTO.Add(bit_seg);
-                db.SaveChanges();
+                    db.T_SEGUIMIENTO.Add(bit_seg);
+                    db.SaveChanges();
+                }
 
                 ViewBag.Message = "La incidencia a sido grabada correctamente";
-
+                TempData["Message"] = ViewBag.Message;
                 return RedirectToAction("Edit", new { id = bit_id });
 
             }
             catch (Exception e)
             {
                 ViewBag.Message = "No se pudo grabar la incidencia";
+                TempData["Message"] = ViewBag.Message;
                 return View("Edit");
             }
         }

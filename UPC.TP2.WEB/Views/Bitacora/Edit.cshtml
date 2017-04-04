@@ -11,13 +11,16 @@
 <hr />
 <form action="/Bitacora/EditSave" method="post" id="bitacora_edit_form">
     <div class="form-horizontal" id="bitacora_edit_form_div">
+        <!--
         <div class="control-group">
             <label class="control-label">Item</label>
-            <div class="controls">
+            <div class="controls">-->
                 <input type="hidden" name="bitacora_edit_id" value="@Model.BITACORA.id_bitacora"/>
-                <input type="text"  disabled="disabled" value="@Model.BITACORA.id_bitacora">                
+        <!--
+                <input type="text"  disabled="disabled" value="">                
             </div>
         </div>
+        -->
 
         <div class="control-group">
             <label class="control-label">Fecha</label>
@@ -29,18 +32,26 @@
         <div class="control-group">
             <label class="control-label">Estado</label>
             <div class="controls">
-                <select name="bitacora_edit_estado">
-                    @foreach (var es in Util.BitacoraEstados())
-                    {
-                        if(es.Value == Model.BITACORA.estado)
+                @if (Model.BITACORA.estado.ToLower() == "cerrado")
+                {
+                    <input name="bitacora_edit_estado" value="@Model.BITACORA.estado" readonly="readonly"/>
+                }
+                else
+                {
+                    <select name="bitacora_edit_estado">
+                        @foreach (var es in Util.BitacoraEstados())
                         {
-                            <option value="@es.Value" selected>@es.Value</option>
-                        } else
-                        {
-                            <option value="@es.Value">@es.Value</option>
+                            if (es.Value == Model.BITACORA.estado)
+                            {
+                                <option value="@es.Value" selected>@es.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@es.Value">@es.Value</option>
+                            }
                         }
-                    }
-                </select>
+                    </select>
+                }                
             </div>
         </div>
 
@@ -68,16 +79,27 @@
         </div>
         <br />
         <hr />
-        <div class="control-group">
-            <label class="control-label">NUEVO SEGUIMIENTO</label>
-            <div class="controls"><input name="bitacora_edit_seguimiento" value="" placeholder="Ingrese nuevo seguimiento"/></div>
-        </div>
+        @if (Model.BITACORA.estado.ToLower() != "cerrado")
+        {
+            <div class="control-group">
+                <label class="control-label">NUEVO SEGUIMIENTO</label>
+                <div class="controls"><input name="bitacora_edit_seguimiento" value="" placeholder="Ingrese nuevo seguimiento" /></div>
+            </div>
+        }
 
         <br />
         <br />
         <p>
-            @Html.ActionLink("Regresar a la lista", "Index", null, new { @class = "btn"})
-            <input class="btn" type="submit" value="Guardar cambios" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn"})
+            @if (Model.BITACORA.estado.ToLower() != "cerrado")
+            {
+                <input class="btn" type="submit" value="Grabar" />
+            }
+            else
+            {
+                <input class="btn" type="submit" value="Grabar" disabled="disabled"/>
+            }
+            
         </p>
 
     </div>
