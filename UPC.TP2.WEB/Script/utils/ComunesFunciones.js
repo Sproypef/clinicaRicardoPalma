@@ -1,4 +1,14 @@
-﻿//=== Valida fecha Inicio / Fin
+﻿//=== Onload
+(function ($) {
+    
+    if ($("#bitacora_action_select_plan").val() == "default" || $("#bitacora_action_select_plan").val() == "-1") {
+        $("#bitacora_create_button").attr("disabled", "disabled");
+        $("#bitacora_create_button").prop("disabled", "disabled");
+    }
+
+})(jQuery);
+
+//=== Valida fecha Inicio / Fin
 
 $('#form_generar_servicio_salud').on('submit', function (e) {
 
@@ -47,5 +57,37 @@ $("#bitacora_action_select_plan").on("change", function (e) {
     if ($(this).val() != "default") {
         $("#form_bitacora_index").attr("action", "/Bitacora/ChangePlanSalud");
         $("#form_bitacora_index").submit();
+    } 
+});
+
+$("#bitacora_create_button").on("click", function (e) {
+    if ($(this).attr("disabled") == "disabled") {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
     }
+
+    if ($("#bitacora_action_select_plan").val() == "default" || $("#bitacora_action_select_plan").val() == "-1") {
+        alert("Debe selecionar un plan de salud");
+        e.preventDefault();
+        e.stopPropagation();
+    }
+});
+
+$("#bitacora_button_create_submit").on("click", function (e) {
+
+    var to_submit = true;
+
+    $("#bitacora_create_form_div").find("input, select").each(function () {
+        if ($(this).val() == "") {
+            alert("Debe llenar todos los campos");
+            to_submit = false;
+            e.preventDefault();
+        }
+    });
+
+    if (to_submit) {
+        $("#form_bitacora_index").attr("action", "/Bitacora/Create");
+        $("#form_bitacora_index").submit();
+    } 
 });

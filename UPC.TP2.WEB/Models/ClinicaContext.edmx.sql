@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/03/2017 10:19:33
+-- Date Created: 04/03/2017 20:59:16
 -- Generated from EDMX file: E:\PROJECTS_VS\VS2017\ProyectoClinicaRP\UPC.TP2.WEB\Models\ClinicaContext.edmx
 -- --------------------------------------------------
 
@@ -319,7 +319,8 @@ CREATE TABLE [dbo].[T_BITACORA_INCIDENCIA] (
     [fecha_registro] datetime  NULL,
     [descripcion] nvarchar(max)  NOT NULL,
     [id_plan_salud] int  NULL,
-    [idempleado] int  NULL
+    [idempleado] int  NULL,
+    [estado] nvarchar(max)  NULL
 );
 GO
 

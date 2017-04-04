@@ -276,6 +276,7 @@
     <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
     <Property Name="id_plan_salud" Type="int" Nullable="true" />
     <Property Name="idempleado" Type="int" Nullable="true" />
+    <Property Name="estado" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="T_COMPROBANTE">
     <Key>
@@ -1550,6 +1551,7 @@
           <NavigationProperty Name="T_EMPLEADO" Relationship="BDCLINICAModel.FK__T_BITACOR__idemp__4D94879B" FromRole="T_BITACORA_INCIDENCIA" ToRole="T_EMPLEADO" />
           <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.FK_T_BITACORA_INCIDENCIA_PLAN_DE_SALUD" FromRole="T_BITACORA_INCIDENCIA" ToRole="T_PLAN_DE_SALUD" />
           <NavigationProperty Name="T_SEGUIMIENTO" Relationship="BDCLINICAModel.FK_T_SEGUIMIENTO_BITACORA_INCIDENCIA" FromRole="T_BITACORA_INCIDENCIA" ToRole="T_SEGUIMIENTO" />
+          <Property Name="estado" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="T_COMPROBANTE">
           <Key>
@@ -2638,6 +2640,7 @@
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
           <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
           <ScalarProperty Name="idempleado" ColumnName="idempleado" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

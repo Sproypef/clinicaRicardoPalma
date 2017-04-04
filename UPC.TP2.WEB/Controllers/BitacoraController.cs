@@ -42,12 +42,12 @@ namespace UPC.TP2.WEB.Controllers
             }
 
 
-            var t_bitacora_incidencia = db.T_BITACORA_INCIDENCIA.Include(t => t.T_EMPLEADO).Include(t => t.T_PLAN_DE_SALUD);               
+            var t_bitacora_incidencia = db.T_BITACORA_INCIDENCIA.Include(t => t.T_EMPLEADO).Include(t => t.T_PLAN_DE_SALUD);
             BitacoraViewModel bvm = new BitacoraViewModel
             {
                 BITACORAS = (id_plan_salud == -1) ? t_bitacora_incidencia.ToList() : t_bitacora_incidencia.Where(x => x.id_plan_salud == id_plan_salud).ToList(),
                 PLANES_DE_SALUD = db.T_PLAN_DE_SALUD.ToList(),
-               
+                EMPLEADOS = db.T_EMPLEADO.ToList()               
             };
             return View("Index", bvm);
         }
@@ -70,28 +70,50 @@ namespace UPC.TP2.WEB.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.idempleado = new SelectList(db.T_EMPLEADO, "idEmpleado", "nomEmpleado");
-            ViewBag.id_plan_salud = new SelectList(db.T_PLAN_DE_SALUD, "id_plan_salud", "nombre_plan");
-            return View();
-        }
+            int bit_plan = Int32.Parse(Request["bitacora_action_select_plan"]);
+            ViewData["id_plan_salud"] = bit_plan.ToString();
 
-        //
-        // POST: /Bitacora/Create
+            string bit_tipo = Request["bitacora_tipo"];
+            string bit_incidencia = Request["bitacora_incidencia"];
+            string bit_seguimiento = Request["bitacora_seguimiento"];
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(T_BITACORA_INCIDENCIA t_bitacora_incidencia)
-        {
-            if (ModelState.IsValid)
+            T_BITACORA_INCIDENCIA bit = new T_BITACORA_INCIDENCIA()
             {
-                db.T_BITACORA_INCIDENCIA.Add(t_bitacora_incidencia);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                fecha_registro = DateTime.Now,
+                descripcion = bit_incidencia,
+                tipo_incidencia = bit_tipo,
+                id_plan_salud  = bit_plan,
+                estado = "ABIERTO"
+            };
 
-            ViewBag.idempleado = new SelectList(db.T_EMPLEADO, "idEmpleado", "nomEmpleado", t_bitacora_incidencia.idempleado);
-            ViewBag.id_plan_salud = new SelectList(db.T_PLAN_DE_SALUD, "id_plan_salud", "nombre_plan", t_bitacora_incidencia.id_plan_salud);
-            return View(t_bitacora_incidencia);
+
+            try
+            {
+                db.T_BITACORA_INCIDENCIA.Add(bit);
+                db.SaveChanges();
+
+                T_SEGUIMIENTO bit_seg = new T_SEGUIMIENTO()
+                {
+                    id_bitacora = bit.id_bitacora,
+                    id_plan_salud = bit_plan,
+                    seguimiento = bit_seguimiento,
+                    fecha_registro = DateTime.Now,
+                    usuario = "Dennis Urbano"
+                    
+                };
+
+                db.T_SEGUIMIENTO.Add(bit_seg);
+                db.SaveChanges();
+
+                ViewBag.Message = "La incidencia a sido grabada correctamente";
+
+                return RedirectToAction("Index");
+
+            } catch (Exception e)
+            {
+                ViewBag.Message = "No se pudo grabar la incidencia";
+                return View("Index");
+            }
         }
 
         //
@@ -104,27 +126,52 @@ namespace UPC.TP2.WEB.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idempleado = new SelectList(db.T_EMPLEADO, "idEmpleado", "nomEmpleado", t_bitacora_incidencia.idempleado);
-            ViewBag.id_plan_salud = new SelectList(db.T_PLAN_DE_SALUD, "id_plan_salud", "nombre_plan", t_bitacora_incidencia.id_plan_salud);
-            return View(t_bitacora_incidencia);
+
+            BitacoraViewModel bvm = new BitacoraViewModel()
+            {
+                BITACORA = t_bitacora_incidencia
+            };
+
+            return View("Edit", bvm);
         }
 
-        //
-        // POST: /Bitacora/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(T_BITACORA_INCIDENCIA t_bitacora_incidencia)
+        public ActionResult EditSave()
         {
-            if (ModelState.IsValid)
+            int bit_id = Int32.Parse(Request["bitacora_edit_id"]);
+
+            string bit_estado = Request["bitacora_edit_estado"];
+            string bit_seguimiento = Request["bitacora_edit_seguimiento"];
+
+            T_BITACORA_INCIDENCIA bit = db.T_BITACORA_INCIDENCIA.Find(bit_id);
+            bit.estado = bit_estado;
+
+            try
             {
-                db.Entry(t_bitacora_incidencia).State = EntityState.Modified;
+                db.Entry(bit).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                T_SEGUIMIENTO bit_seg = new T_SEGUIMIENTO()
+                {
+                    id_bitacora = bit.id_bitacora,
+                    id_plan_salud = bit.id_plan_salud,
+                    seguimiento = bit_seguimiento,
+                    fecha_registro = DateTime.Now,
+                    usuario = "Dennis Urbano"
+                };
+
+                db.T_SEGUIMIENTO.Add(bit_seg);
+                db.SaveChanges();
+
+                ViewBag.Message = "La incidencia a sido grabada correctamente";
+
+                return RedirectToAction("Edit", new { id = bit_id });
+
             }
-            ViewBag.idempleado = new SelectList(db.T_EMPLEADO, "idEmpleado", "nomEmpleado", t_bitacora_incidencia.idempleado);
-            ViewBag.id_plan_salud = new SelectList(db.T_PLAN_DE_SALUD, "id_plan_salud", "nombre_plan", t_bitacora_incidencia.id_plan_salud);
-            return View(t_bitacora_incidencia);
+            catch (Exception e)
+            {
+                ViewBag.Message = "No se pudo grabar la incidencia";
+                return View("Edit");
+            }
         }
 
         //
