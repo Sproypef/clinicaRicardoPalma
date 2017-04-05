@@ -23,6 +23,7 @@ namespace UPC.TP2.WEB.Models
             this.T_PLAN_PACIENTE = new HashSet<T_PLAN_PACIENTE>();
             this.T_PERSONA_PLANSALUD = new HashSet<T_PERSONA_PLANSALUD>();
             this.T_PLAN_SERVICIO = new HashSet<T_PLAN_SERVICIO>();
+            this.T_ESTRATEGIA_COMERCIAL = new HashSet<T_ESTRATEGIA_COMERCIAL>();
         }
     
         public int id_plan_salud { get; set; }
@@ -42,5 +43,6 @@ namespace UPC.TP2.WEB.Models
         public virtual ICollection<T_PLAN_PACIENTE> T_PLAN_PACIENTE { get; set; }
         public virtual ICollection<T_PERSONA_PLANSALUD> T_PERSONA_PLANSALUD { get; set; }
         public virtual ICollection<T_PLAN_SERVICIO> T_PLAN_SERVICIO { get; set; }
+        public virtual ICollection<T_ESTRATEGIA_COMERCIAL> T_ESTRATEGIA_COMERCIAL { get; set; }
     }
 }

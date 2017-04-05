@@ -43,6 +43,7 @@
     <EntitySet Name="T_TIPO_PERSONA" EntityType="BDCLINICAModel.Store.T_TIPO_PERSONA" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PERSONA_PLANSALUD" EntityType="BDCLINICAModel.Store.T_PERSONA_PLANSALUD" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="T_PLAN_SERVICIO" EntityType="BDCLINICAModel.Store.T_PLAN_SERVICIO" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_ESTRATEGIA_COMERCIAL_DETALLE" EntityType="BDCLINICAModel.Store.T_ESTRATEGIA_COMERCIAL_DETALLE" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_T_BASE_FINANCIERA" Association="BDCLINICAModel.Store.FK_T_BASE_FINANCIERA">
       <End Role="T_BASE_FINANCIERA" EntitySet="T_BASE_FINANCIERA" />
       <End Role="T_PLAN_BASE_FINANCIERA" EntitySet="T_PLAN_BASE_FINANCIERA" />
@@ -235,6 +236,14 @@
       <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
       <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
     </AssociationSet>
+    <AssociationSet Name="T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD" Association="BDCLINICAModel.Store.T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD">
+      <End Role="T_ESTRATEGIA_COMERCIAL" EntitySet="T_ESTRATEGIA_COMERCIAL" />
+      <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+    </AssociationSet>
+    <AssociationSet Name="T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL" Association="BDCLINICAModel.Store.T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL">
+      <End Role="T_ESTRATEGIA_COMERCIAL_DETALLE" EntitySet="T_ESTRATEGIA_COMERCIAL_DETALLE" />
+      <End Role="T_ESTRATEGIA_COMERCIAL" EntitySet="T_ESTRATEGIA_COMERCIAL" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="T_BASE_FINANCIERA">
     <Key>
@@ -380,8 +389,9 @@
     <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
     <Property Name="descripcion" Type="varchar" Nullable="true" MaxLength="50" />
     <Property Name="objetivo" Type="varchar" Nullable="true" MaxLength="50" />
-    <Property Name="fecha_registro" Type="datetime" Nullable="true" />
-    <Property Name="presupuesto" Type="int" Nullable="true" />
+    <Property Name="fecha_registro" Type="datetime" Nullable="false" />
+    <Property Name="presupuesto" Type="decimal" Nullable="false" />
+    <Property Name="id_plan_salud" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="T_INMUEBLE">
     <Key>
@@ -647,6 +657,22 @@
     <Property Name="id_servicio" Type="int" Nullable="false" />
     <Property Name="idEspecialidad" Type="int" Nullable="false" />
     <Property Name="estado" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_ESTRATEGIA_COMERCIAL_DETALLE">
+    <Key>
+      <PropertyRef Name="id_estrategia_detalle" />
+    </Key>
+    <Property Name="id_estrategia_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="medio_campana" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="canal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="false" />
+    <Property Name="monto" Type="decimal" Nullable="false" />
+    <Property Name="objetivo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="estado" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="usuario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="comprobante" Type="varbinary(max)" Nullable="true" />
+    <Property Name="id_estrategia_comercial" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_T_BASE_FINANCIERA">
     <End Role="T_BASE_FINANCIERA" Type="BDCLINICAModel.Store.T_BASE_FINANCIERA" Multiplicity="0..1" />
@@ -1228,6 +1254,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD">
+    <End Role="T_ESTRATEGIA_COMERCIAL" Type="BDCLINICAModel.Store.T_ESTRATEGIA_COMERCIAL" Multiplicity="*" />
+    <End Role="T_PLAN_DE_SALUD" Type="BDCLINICAModel.Store.T_PLAN_DE_SALUD" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="T_PLAN_DE_SALUD">
+        <PropertyRef Name="id_plan_salud" />
+      </Principal>
+      <Dependent Role="T_ESTRATEGIA_COMERCIAL">
+        <PropertyRef Name="id_plan_salud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL">
+    <End Role="T_ESTRATEGIA_COMERCIAL_DETALLE" Type="BDCLINICAModel.Store.T_ESTRATEGIA_COMERCIAL_DETALLE" Multiplicity="*" />
+    <End Role="T_ESTRATEGIA_COMERCIAL" Type="BDCLINICAModel.Store.T_ESTRATEGIA_COMERCIAL" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="T_ESTRATEGIA_COMERCIAL">
+        <PropertyRef Name="id_estrategia_comercial" />
+      </Principal>
+      <Dependent Role="T_ESTRATEGIA_COMERCIAL_DETALLE">
+        <PropertyRef Name="id_estrategia_comercial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1492,6 +1542,15 @@
             <End Role="T_PROGRAMACION_MEDICA" EntitySet="T_PROGRAMACION_MEDICA" />
             <End Role="T_ESPECIALIDAD_SERVICIO" EntitySet="T_ESPECIALIDAD_SERVICIO" />
           </AssociationSet>
+          <EntitySet Name="T_ESTRATEGIA_COMERCIAL_DETALLE" EntityType="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL_DETALLE" />
+          <AssociationSet Name="T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD" Association="BDCLINICAModel.T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD">
+            <End Role="T_ESTRATEGIA_COMERCIAL" EntitySet="T_ESTRATEGIA_COMERCIAL" />
+            <End Role="T_PLAN_DE_SALUD" EntitySet="T_PLAN_DE_SALUD" />
+          </AssociationSet>
+          <AssociationSet Name="T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL" Association="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL">
+            <End Role="T_ESTRATEGIA_COMERCIAL_DETALLE" EntitySet="T_ESTRATEGIA_COMERCIAL_DETALLE" />
+            <End Role="T_ESTRATEGIA_COMERCIAL" EntitySet="T_ESTRATEGIA_COMERCIAL" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1678,11 +1737,14 @@
           </Key>
           <Property Name="id_estrategia_comercial" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="objetivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
-          <Property Name="presupuesto" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="objetivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="presupuesto" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="T_PLAN_ESTRATEGIA_COMERCIAL" Relationship="BDCLINICAModel.FK_T_PLAN_ESTRATEGIA_COMERCIAL" FromRole="T_ESTRATEGIA_COMERCIAL" ToRole="T_PLAN_ESTRATEGIA_COMERCIAL" />
+          <NavigationProperty Name="T_PLAN_DE_SALUD" Relationship="BDCLINICAModel.T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD" FromRole="T_ESTRATEGIA_COMERCIAL" ToRole="T_PLAN_DE_SALUD" />
+          <Property Name="id_plan_salud" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="T_ESTRATEGIA_COMERCIAL_DETALLE" Relationship="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL" FromRole="T_ESTRATEGIA_COMERCIAL" ToRole="T_ESTRATEGIA_COMERCIAL_DETALLE" />
         </EntityType>
         <EntityType Name="T_INMUEBLE">
           <Key>
@@ -1827,6 +1889,7 @@
           <NavigationProperty Name="T_PLAN_PACIENTE" Relationship="BDCLINICAModel.FK_T_PLAN_PACIENTE_T_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_PACIENTE" />
           <NavigationProperty Name="T_PERSONA_PLANSALUD" Relationship="BDCLINICAModel.T_PERSONA_PLANSALUDT_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PERSONA_PLANSALUD" />
           <NavigationProperty Name="T_PLAN_SERVICIO" Relationship="BDCLINICAModel.T_PLAN_SERVICIOT_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_PLAN_SERVICIO" />
+          <NavigationProperty Name="T_ESTRATEGIA_COMERCIAL" Relationship="BDCLINICAModel.T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD" FromRole="T_PLAN_DE_SALUD" ToRole="T_ESTRATEGIA_COMERCIAL" />
         </EntityType>
         <EntityType Name="T_PLAN_ESPECIALIDADxSERVICIO">
           <Key>
@@ -2592,6 +2655,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="T_ESTRATEGIA_COMERCIAL_DETALLE">
+          <Key>
+            <PropertyRef Name="id_estrategia_detalle" />
+          </Key>
+          <Property Name="id_estrategia_detalle" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="medio_campana" Type="String" Nullable="false" />
+          <Property Name="canal" Type="String" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="false" />
+          <Property Name="monto" Type="Decimal" Nullable="false" />
+          <Property Name="objetivo" Type="String" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" />
+          <Property Name="usuario" Type="String" Nullable="false" />
+          <Property Name="comprobante" Type="Binary" Nullable="true" />
+          <NavigationProperty Name="T_ESTRATEGIA_COMERCIAL" Relationship="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL" FromRole="T_ESTRATEGIA_COMERCIAL_DETALLE" ToRole="T_ESTRATEGIA_COMERCIAL" />
+          <Property Name="id_estrategia_comercial" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD">
+          <End Type="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL" Role="T_ESTRATEGIA_COMERCIAL" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_PLAN_DE_SALUD" Role="T_PLAN_DE_SALUD" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="T_PLAN_DE_SALUD">
+              <PropertyRef Name="id_plan_salud" />
+            </Principal>
+            <Dependent Role="T_ESTRATEGIA_COMERCIAL">
+              <PropertyRef Name="id_plan_salud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL">
+          <End Type="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL_DETALLE" Role="T_ESTRATEGIA_COMERCIAL_DETALLE" Multiplicity="*" />
+          <End Type="BDCLINICAModel.T_ESTRATEGIA_COMERCIAL" Role="T_ESTRATEGIA_COMERCIAL" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="T_ESTRATEGIA_COMERCIAL">
+              <PropertyRef Name="id_estrategia_comercial" />
+            </Principal>
+            <Dependent Role="T_ESTRATEGIA_COMERCIAL_DETALLE">
+              <PropertyRef Name="id_estrategia_comercial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2754,6 +2858,7 @@
           <ScalarProperty Name="objetivo" ColumnName="objetivo" />
           <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
           <ScalarProperty Name="presupuesto" ColumnName="presupuesto" />
+          <ScalarProperty Name="id_plan_salud" ColumnName="id_plan_salud" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3043,6 +3148,23 @@
           <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
           <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
           <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_ESTRATEGIA_COMERCIAL_DETALLE">
+      <EntityTypeMapping TypeName="IsTypeOf(BDCLINICAModel.T_ESTRATEGIA_COMERCIAL_DETALLE)">
+        <MappingFragment StoreEntitySet="T_ESTRATEGIA_COMERCIAL_DETALLE">
+          <ScalarProperty Name="id_estrategia_detalle" ColumnName="id_estrategia_detalle" />
+          <ScalarProperty Name="medio_campana" ColumnName="medio_campana" />
+          <ScalarProperty Name="canal" ColumnName="canal" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="objetivo" ColumnName="objetivo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="comprobante" ColumnName="comprobante" />
+          <ScalarProperty Name="id_estrategia_comercial" ColumnName="id_estrategia_comercial" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

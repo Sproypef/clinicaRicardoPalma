@@ -1,15 +1,22 @@
-﻿//=== Onload
+﻿//=== MAIN LOAD ON PAGE
 (function ($) {
-    
+
+    //Bitacora
     if ($("#bitacora_action_select_plan").val() == "default" || $("#bitacora_action_select_plan").val() == "-1") {
         $("#bitacora_create_button").attr("disabled", "disabled");
         $("#bitacora_create_button").prop("disabled", "disabled");
     }
+    //Estrategia comercial
+    if ($("#estrategia_comercial_action_select_plan").val() == "default" || $("#estrategia_comercial_action_select_plan").val() == "-1") {
+        $("#estrategia_comercial_create_button").attr("disabled", "disabled");
+        $("#estrategia_comercial_create_button").prop("disabled", "disabled");
+    }
 
 })(jQuery);
 
-//=== Valida fecha Inicio / Fin
+// BEGIN ## SERVICIOS SALUD ##
 
+//-- Valida fechas
 $('#form_generar_servicio_salud').on('submit', function (e) {
 
     var fi = $("#fecha_inicio").val();//$.datepicker.formatDate("yyyy/mm/dd", $("#fecha_inicio").val());//$("#fecha_inicio").val();
@@ -17,7 +24,7 @@ $('#form_generar_servicio_salud').on('submit', function (e) {
 
 });
 
-
+//-- Retirar servicios
 $('#submit_retirar').on('click', function (e) {
     $('#accion').attr('value', 'retirar');
     var min = 0;
@@ -35,6 +42,7 @@ $('#submit_retirar').on('click', function (e) {
     } 
 });
 
+//-- Asignar servicios
 $("#submit_asignar").on("click", function (e) {
     $("#accion").attr("value", "asignar");
     var min = 0;
@@ -52,6 +60,10 @@ $("#submit_asignar").on("click", function (e) {
     }
         
 });
+
+// END ## SERVICIOS SALUD ##
+
+// BEGIN ## BITACORAS ##
 
 $("#bitacora_action_select_plan").on("change", function (e) {
     if ($(this).val() != "default") {
@@ -83,6 +95,7 @@ $("#bitacora_button_create_submit").on("click", function (e) {
             alert("Debe llenar todos los campos");
             to_submit = false;
             e.preventDefault();
+            return false; //break loop
         }
     });
 
@@ -91,3 +104,49 @@ $("#bitacora_button_create_submit").on("click", function (e) {
         $("#form_bitacora_index").submit();
     } 
 });
+
+// END ## BITACORAS ##
+
+// BEGIN ## ESTRATEGIAS COMERCIALES ##
+
+$("#estrategia_comercial_action_select_plan").on("change", function (e) {
+    if ($(this).val() != "default") {
+        $("#form_estrategia_comercial_index").attr("action", "/EstrategiaComercial/Index");
+        $("#form_estrategia_comercial_index").submit();
+    }
+});
+
+$("#estrategia_comercial_create_button").on("click", function (e) {
+    if ($(this).attr("disabled") == "disabled") {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+    }
+
+    if ($("#estrategia_comercial_select_plan").val() == "default" || $("#estrategia_comercial_action_select_plan").val() == "-1") {
+        alert("Debe selecionar un plan de salud");
+        e.preventDefault();
+        e.stopPropagation();
+    }
+});
+
+$("#estrategia_comercial_button_create_submit").on("click", function (e) {
+
+    var to_submit = true;
+
+    $("#estrategia_comercial_create_form_div").find("input, select").each(function () {
+        if ($(this).val() == "") {
+            alert("Debe llenar todos los campos");
+            to_submit = false;
+            e.preventDefault();
+            return false; //break loop
+        }
+    });
+
+    if (to_submit) {
+        $("#form_estrategia_comercial_index").attr("action", "/EstrategiaComercial/Create");
+        $("#form_estrategia_comercial_index").submit();
+    }
+});
+
+// END ## ESTRATEGIAS COMERCIALES ##

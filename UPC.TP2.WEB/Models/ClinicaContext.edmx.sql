@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/03/2017 20:59:16
+-- Date Created: 04/05/2017 14:50:38
 -- Generated from EDMX file: E:\PROJECTS_VS\VS2017\ProyectoClinicaRP\UPC.TP2.WEB\Models\ClinicaContext.edmx
 -- --------------------------------------------------
 
@@ -161,6 +161,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_T_PROGRAMACION_MEDICAT_ESPECIALIDAD_SERVICIO]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[T_PROGRAMACION_MEDICA] DROP CONSTRAINT [FK_T_PROGRAMACION_MEDICAT_ESPECIALIDAD_SERVICIO];
 GO
+IF OBJECT_ID(N'[dbo].[FK_T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_ESTRATEGIA_COMERCIAL] DROP CONSTRAINT [FK_T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[T_ESTRATEGIA_COMERCIAL_DETALLE] DROP CONSTRAINT [FK_T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -276,6 +282,9 @@ IF OBJECT_ID(N'[dbo].[T_PERSONA_PLANSALUD]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[T_PLAN_SERVICIO]', 'U') IS NOT NULL
     DROP TABLE [dbo].[T_PLAN_SERVICIO];
+GO
+IF OBJECT_ID(N'[dbo].[T_ESTRATEGIA_COMERCIAL_DETALLE]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[T_ESTRATEGIA_COMERCIAL_DETALLE];
 GO
 
 -- --------------------------------------------------
@@ -423,8 +432,9 @@ CREATE TABLE [dbo].[T_ESTRATEGIA_COMERCIAL] (
     [nombre] nvarchar(max)  NOT NULL,
     [descripcion] varchar(50)  NULL,
     [objetivo] varchar(50)  NULL,
-    [fecha_registro] datetime  NULL,
-    [presupuesto] int  NULL
+    [fecha_registro] datetime  NOT NULL,
+    [presupuesto] decimal(18,0)  NOT NULL,
+    [id_plan_salud] int  NOT NULL
 );
 GO
 
@@ -693,6 +703,22 @@ CREATE TABLE [dbo].[T_PLAN_SERVICIO] (
 );
 GO
 
+-- Creating table 'T_ESTRATEGIA_COMERCIAL_DETALLE'
+CREATE TABLE [dbo].[T_ESTRATEGIA_COMERCIAL_DETALLE] (
+    [id_estrategia_detalle] int IDENTITY(1,1) NOT NULL,
+    [medio_campana] nvarchar(max)  NOT NULL,
+    [canal] nvarchar(max)  NOT NULL,
+    [fecha_inicio] datetime  NOT NULL,
+    [fecha_fin] datetime  NOT NULL,
+    [monto] decimal(18,0)  NOT NULL,
+    [objetivo] nvarchar(max)  NOT NULL,
+    [estado] nvarchar(max)  NOT NULL,
+    [usuario] nvarchar(max)  NOT NULL,
+    [comprobante] varbinary(max)  NULL,
+    [id_estrategia_comercial] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -917,6 +943,12 @@ GO
 ALTER TABLE [dbo].[T_PLAN_SERVICIO]
 ADD CONSTRAINT [PK_T_PLAN_SERVICIO]
     PRIMARY KEY CLUSTERED ([id_plan_servicio] ASC);
+GO
+
+-- Creating primary key on [id_estrategia_detalle] in table 'T_ESTRATEGIA_COMERCIAL_DETALLE'
+ALTER TABLE [dbo].[T_ESTRATEGIA_COMERCIAL_DETALLE]
+ADD CONSTRAINT [PK_T_ESTRATEGIA_COMERCIAL_DETALLE]
+    PRIMARY KEY CLUSTERED ([id_estrategia_detalle] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1635,6 +1667,36 @@ GO
 CREATE INDEX [IX_FK_T_PROGRAMACION_MEDICAT_ESPECIALIDAD_SERVICIO]
 ON [dbo].[T_PROGRAMACION_MEDICA]
     ([id_servicio], [idEspecialidad]);
+GO
+
+-- Creating foreign key on [id_plan_salud] in table 'T_ESTRATEGIA_COMERCIAL'
+ALTER TABLE [dbo].[T_ESTRATEGIA_COMERCIAL]
+ADD CONSTRAINT [FK_T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD]
+    FOREIGN KEY ([id_plan_salud])
+    REFERENCES [dbo].[T_PLAN_DE_SALUD]
+        ([id_plan_salud])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD'
+CREATE INDEX [IX_FK_T_ESTRATEGIA_COMERCIALT_PLAN_DE_SALUD]
+ON [dbo].[T_ESTRATEGIA_COMERCIAL]
+    ([id_plan_salud]);
+GO
+
+-- Creating foreign key on [id_estrategia_comercial] in table 'T_ESTRATEGIA_COMERCIAL_DETALLE'
+ALTER TABLE [dbo].[T_ESTRATEGIA_COMERCIAL_DETALLE]
+ADD CONSTRAINT [FK_T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL]
+    FOREIGN KEY ([id_estrategia_comercial])
+    REFERENCES [dbo].[T_ESTRATEGIA_COMERCIAL]
+        ([id_estrategia_comercial])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL'
+CREATE INDEX [IX_FK_T_ESTRATEGIA_COMERCIAL_DETALLET_ESTRATEGIA_COMERCIAL]
+ON [dbo].[T_ESTRATEGIA_COMERCIAL_DETALLE]
+    ([id_estrategia_comercial]);
 GO
 
 -- --------------------------------------------------

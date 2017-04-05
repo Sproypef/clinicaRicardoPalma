@@ -17,15 +17,19 @@ namespace UPC.TP2.WEB.Models
         public T_ESTRATEGIA_COMERCIAL()
         {
             this.T_PLAN_ESTRATEGIA_COMERCIAL = new HashSet<T_PLAN_ESTRATEGIA_COMERCIAL>();
+            this.T_ESTRATEGIA_COMERCIAL_DETALLE = new HashSet<T_ESTRATEGIA_COMERCIAL_DETALLE>();
         }
     
         public int id_estrategia_comercial { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public string objetivo { get; set; }
-        public Nullable<System.DateTime> fecha_registro { get; set; }
-        public Nullable<int> presupuesto { get; set; }
+        public System.DateTime fecha_registro { get; set; }
+        public decimal presupuesto { get; set; }
+        public int id_plan_salud { get; set; }
     
         public virtual ICollection<T_PLAN_ESTRATEGIA_COMERCIAL> T_PLAN_ESTRATEGIA_COMERCIAL { get; set; }
+        public virtual T_PLAN_DE_SALUD T_PLAN_DE_SALUD { get; set; }
+        public virtual ICollection<T_ESTRATEGIA_COMERCIAL_DETALLE> T_ESTRATEGIA_COMERCIAL_DETALLE { get; set; }
     }
 }

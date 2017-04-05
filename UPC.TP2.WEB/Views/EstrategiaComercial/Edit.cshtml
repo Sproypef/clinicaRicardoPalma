@@ -1,0 +1,160 @@
+﻿@using UPC.TP2.WEB.Utils
+@model UPC.TP2.WEB.ViewModels.EstrategiaComercialViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Detalle de Estrategia Comercial</h2>
+<hr />
+<h3>@ViewBag.Message</h3>
+<hr />
+
+@{
+    bool esco_modific = false;
+    bool plan_vigente = false;
+
+    string plan_esatdo = Model.ESTRATEGIA_COMERCIAL.T_PLAN_DE_SALUD.estado;
+    DateTime? plan_fecha_inicio = Model.ESTRATEGIA_COMERCIAL.T_PLAN_DE_SALUD.fecha_inicio;
+    DateTime? plan_fecha_fin = Model.ESTRATEGIA_COMERCIAL.T_PLAN_DE_SALUD.fecha_fin;
+
+    if (plan_esatdo != null && plan_esatdo == "1" && plan_fecha_inicio <= DateTime.Now && plan_fecha_fin >= DateTime.Now)
+    {
+        plan_vigente = true;
+    }
+    esco_modific = true; //For add new detalle
+}
+
+<form action="/Bitacora/EditSave" method="post" id="bitacora_edit_form">
+    <div class="form-horizontal" id="bitacora_edit_form_div">
+
+        <input type="hidden" name="bitacora_edit_id" value="@Model.ESTRATEGIA_COMERCIAL.id_estrategia_comercial" />
+
+
+        <div class="control-group">
+            <label class="control-label">Fecha</label>
+            <div class="controls">
+                <input type="text" disabled="disabled" value="@Model.ESTRATEGIA_COMERCIAL.fecha_registro">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Plan salud</label>
+            <div class="controls">
+                <input value="@Model.ESTRATEGIA_COMERCIAL.T_PLAN_DE_SALUD.nombre_plan" readonly="readonly" />
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <hr />
+            <div class="row">
+                <div class="span3">
+                    @if (esco_modific && plan_vigente)
+                    {
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <input type="button" class="btn" id="estrategia_comercial_create_detalle_button" value="Agregar" />
+                        </div>
+                    }
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label">Total estrategia</label>
+                        <div class="controls">
+                            <input value="@Model.ESTRATEGIA_COMERCIAL.presupuesto" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label">Total detalle</label>
+                        <div class="controls">
+                            <input value="@Model.ESTRATEGIA_COMERCIAL.T_ESTRATEGIA_COMERCIAL_DETALLE.Sum(x => x.monto)" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <h3>Detalle</h3>
+            <div>
+                <table id="table_estrategias_comerciales" class="display nowrap dataTable dtr-inline collapsed ">
+                    <thead>
+                        <tr>
+                            <th>MEDIO</th>
+                            <th>CANAL</th>
+                            <th>FECHA INICIO</th>
+                            <th>FECHA FIN</th>
+                            <th>OBJETIVO</th>
+                            <th>MONTO</th>
+                            <th>ESTADO</th>
+                            <th>ACCI&Oacute;N</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var esdet in Model.ESTRATEGIA_COMERCIAL.T_ESTRATEGIA_COMERCIAL_DETALLE)
+                        {
+                            <tr>
+                                <td>@esdet.medio_campana</td>
+                                <td>@esdet.canal</td>
+                                <td>@esdet.fecha_inicio</td>
+                                <td>@esdet.fecha_fin</td>
+                                <td>@esdet.objetivo</td>
+                                <td>@esdet.monto</td>
+                                <td>
+                                    @if (esco_modific && plan_vigente)
+                                    {
+                                        <select name="estrategia_comercial_detalle_select_estado" id="estrategia_comercial_detalle_select_estado">
+                                            <option value="default">-- Seleccione --</option>
+                                            @foreach (var item in Util.EstrategiaComercialDetalleEstado())
+                                            {
+                                                if (esdet.estado == item.Value)
+                                                {
+                                                    <option selected value="@item.Value">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Value">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <input value="@esdet.estado" readonly="readonly"/>
+                                    }                                  
+                                </td>
+                                <td>
+                                    @if (esco_modific && plan_vigente)
+                                    {
+                                        if (esdet.estado.ToLower() == "abierto")
+                                        {
+                                            @Html.ActionLink("Eliminar", "DeleteDetalle", new { id = esdet.id_estrategia_detalle })
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn" })
+            @if (esco_modific && plan_vigente)
+            {
+                <input class="btn" type="submit" value="Grabar" />
+            }
+            else
+            {
+                <input class="btn" type="submit" value="Grabar" disabled="disabled" />
+            }
+
+        </p>
+
+    </div>
+</form>
+
+
+

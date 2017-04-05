@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace UPC.TP2.WEB.Utils
 {
@@ -24,6 +22,15 @@ namespace UPC.TP2.WEB.Utils
             return tipos;
         }
 
+        public static Dictionary<int, string> EstrategiaComercialDetalleEstado()
+        {
+            Dictionary<int, string> tipos = new Dictionary<int, string>();
+            tipos.Add(1, "ABIERTO");
+            tipos.Add(2, "EJECUCION");
+            tipos.Add(3, "COMPLETO");
+            return tipos;
+        }
+
         public static JsonSerializerSettings jsonNoLoopSettings()
         {
             return new JsonSerializerSettings {
@@ -37,6 +44,11 @@ namespace UPC.TP2.WEB.Utils
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
+        }
+
+        public static object getToday()
+        {
+            return DateTime.Now;
         }
 
     }
