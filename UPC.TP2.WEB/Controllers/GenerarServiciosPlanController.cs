@@ -28,15 +28,14 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
             HttpRequestBase request = Request.Form.AllKeys.Length == 0 ? (HttpRequestBase)TempData["request"] : Request;
             ViewBag.Message = TempData["Message"];
 
-            string fi = request["fecha_inicio"] ?? "";
-            string ff = request["fecha_fin"] ?? "";
+            string fi = request != null ? request["fecha_inicio"] ?? String.Empty : String.Empty;
+            string ff = request != null ? request["fecha_fin"] ?? String.Empty : String.Empty;
 
             ViewBag.FechaInicio = fi;
             ViewBag.FechaFin = ff;
 
-            if (fi == "" || ff == "")
+            if (fi == String.Empty || ff == String.Empty)
             {
-                ViewBag.Message = "Debe ingresar ambas fechas";
                 return View("Index");
             }
             else
@@ -170,40 +169,46 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                     int key_espe = Int32.Parse(splits[3]);
                     int key_serv = Int32.Parse(splits[4]);
 
-                    T_PLAN_SERVICIO ps_m = null; //PLAN SERVICIO MODIFICAR
+                    List<T_PLAN_SERVICIO> list_ps_m = null; //PLAN SERVICIOS MODIFICAR
                     T_PLAN_SERVICIO ps_n = null; //PLAN SERVICIO NUEVO
+
                     try
                     {
-                        ps_m = db.T_PLAN_SERVICIO.Where(x => x.id_plan_salud == key_plan && x.idEspecialidad == key_espe && x.id_servicio == key_serv).First();
+                        list_ps_m = db.T_PLAN_SERVICIO.Where(x => x.id_plan_salud == key_plan && x.idEspecialidad == key_espe && x.id_servicio == key_serv).ToList();
+
+                        foreach (var ps_m in list_ps_m)
+                        {
+                            //MODIFY VALUES FOR RECORD
+                            ps_m.estado = "0";
+                            ps_m.fecha_fin = DateTime.Now;
+                            db.Entry(ps_m).State = EntityState.Modified;
+
+                            db.SaveChanges(); //MODIFY RECORD
+                        }
+
                     }
                     catch (Exception e)
                     {
 
                     }                   
 
-                    if (ps_m != null)
+                    if (list_ps_m != null)
                     {
-                        DateTime? fecha_fin = ps_m.T_PLAN_DE_SALUD.fecha_fin;
-
-                        //MODIFY VALUES FOR RECORD
-                        ps_m.estado = "0";
-                        ps_m.fecha_fin = DateTime.Now;
-                        db.Entry(ps_m).State = EntityState.Modified;
-
+                        DateTime? fecha_fin = db.T_PLAN_DE_SALUD.Find(key_plan).fecha_fin;
+                       
                         //SET VALUES FOR NEW RECORD
                         ps_n = new T_PLAN_SERVICIO()
                         {
                             fecha_inicio = DateTime.Now,
                             fecha_fin = fecha_fin,
-                            id_plan_salud = ps_m.id_plan_salud,
-                            id_servicio = ps_m.id_servicio,
-                            idEspecialidad = ps_m.idEspecialidad,
+                            id_plan_salud = key_plan,
+                            id_servicio = key_serv,
+                            idEspecialidad = key_espe,
                             estado = "1"
                         };
 
                         try
                         {
-                            db.SaveChanges(); //MODIFY RECORD
                             db.T_PLAN_SERVICIO.Add(ps_n);
                             db.SaveChanges(); //ADD RECORD
                             ViewBag.Message = "El retiro de servicio se a realizado corectamente";
@@ -216,8 +221,7 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                     {
                         ViewBag.Message = "No existe esta asignacion actualmente";
                     }
-                    
-                    
+                                       
                 }
                 
             }
