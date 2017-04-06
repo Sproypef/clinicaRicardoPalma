@@ -25,10 +25,10 @@
     esco_modific = true; //For add new detalle
 }
 
-<form action="/Bitacora/EditSave" method="post" id="bitacora_edit_form">
-    <div class="form-horizontal" id="bitacora_edit_form_div">
+<form action="/EstrategiaComercial/EditDetalleSave" method="post" id="estrategia_comercial_detalle_form">
+    <div class="form-horizontal" id="estrategia_comercial_edit_form_div">
 
-        <input type="hidden" name="bitacora_edit_id" value="@Model.ESTRATEGIA_COMERCIAL.id_estrategia_comercial" />
+        <input type="hidden" name="estrategia_comercial_id" value="@Model.ESTRATEGIA_COMERCIAL.id_estrategia_comercial" />
 
 
         <div class="control-group">
@@ -53,7 +53,8 @@
                     {
                         <div class="control-group">
                             <label class="control-label"></label>
-                            <input type="button" class="btn" id="estrategia_comercial_create_detalle_button" value="Agregar" />
+                            <!-- Boton agregar detalle comercial -->
+                            <a href="#estrategia_comercial_detalle_create_modal" role="button" class="btn" data-toggle="modal" id="estrategia_comercial_create_button">Agregar</a>
                         </div>
                     }
                 </div>
@@ -81,6 +82,7 @@
                 <table id="table_estrategias_comerciales" class="display nowrap dataTable dtr-inline collapsed ">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>MEDIO</th>
                             <th>CANAL</th>
                             <th>FECHA INICIO</th>
@@ -95,6 +97,7 @@
                         @foreach (var esdet in Model.ESTRATEGIA_COMERCIAL.T_ESTRATEGIA_COMERCIAL_DETALLE)
                         {
                             <tr>
+                                <td><input type="hidden" name="list_estrategia_comercial_detalle_id" id="list_estrategia_comercial_detalle_id" value="@esdet.id_estrategia_detalle"/></td>
                                 <td>@esdet.medio_campana</td>
                                 <td>@esdet.canal</td>
                                 <td>@esdet.fecha_inicio</td>
@@ -104,7 +107,7 @@
                                 <td>
                                     @if (esco_modific && plan_vigente)
                                     {
-                                        <select name="estrategia_comercial_detalle_select_estado" id="estrategia_comercial_detalle_select_estado">
+                                        <select name="list_estrategia_comercial_detalle_estado" tabindex="" id="list_estrategia_comercial_detalle_estado">
                                             <option value="default">-- Seleccione --</option>
                                             @foreach (var item in Util.EstrategiaComercialDetalleEstado())
                                             {
@@ -129,7 +132,9 @@
                                     {
                                         if (esdet.estado.ToLower() == "abierto")
                                         {
-                                            @Html.ActionLink("Eliminar", "DeleteDetalle", new { id = esdet.id_estrategia_detalle })
+                                            @Html.ActionLink("Eliminar", "DeleteDetalle", 
+                                           new { id = Model.ESTRATEGIA_COMERCIAL.id_estrategia_comercial, id_det = esdet.id_estrategia_detalle }, 
+                                           new { @id="estrategia_comercial_detalle_delete_action", @onclick = "return confirm('¿Desea eliminar este detalle?')"})
                                         }
                                     }
                                 </td>
@@ -150,10 +155,93 @@
             {
                 <input class="btn" type="submit" value="Grabar" disabled="disabled" />
             }
-
         </p>
 
     </div>
+
+    <!-- CREATE DETALLE -->
+    <div id="estrategia_comercial_detalle_create_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Nuevo detalle de Estrategia comercial</h3>
+        </div>
+        <div class="modal-body">
+            <p></p>
+            <!-- content -->
+            <div class="form-horizontal" id="estrategia_comercial_create_form_div">
+
+                <div class="control-group">
+                    <label class="control-label">Medio</label>
+                    <div class="controls">
+                        <input type="text" id="estrategia_comercial_detalle_medio" placeholder="Ingrese texto" name="estrategia_comercial_detalle_medio">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Canal</label>
+                    <div class="controls">
+                        <input type="text" id="estrategia_comercial_detalle_canal" placeholder="Ingrese texto" name="estrategia_comercial_detalle_canal">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Fecha inicio</label>
+                    <div class="controls">
+                        <div class="input-append date" id="dp3" data-date="@Util.getToday()" data-date-format="dd/mm/yyyy">
+                            <input class="span2" size="16" type="text" value="@Util.getToday()" id="estrategia_comercial_detalle_fecha_inicio" name="estrategia_comercial_detalle_fecha_inicio">
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                        <!--<input id="estrategia_comercial_detalle_fecha_inicio" type="date" class="form-control datepicker" value="" name="estrategia_comercial_detalle_fecha_inicio" >-->
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Fecha fin</label>
+                    <div class="controls">
+                        <div class="input-append date" id="dp3" data-date="" data-date-format="dd/mm/yyyy">
+                            <input class="span2" size="16" type="text" value="" id="estrategia_comercial_detalle_fecha_fin" name="estrategia_comercial_detalle_fecha_fin">
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                        <!--<input id="estrategia_comercial_detalle_fecha_fin" type="date" class="form-control datepicker" value="dd/MM/yyyy" name="estrategia_comercial_detalle_fecha_fin">-->
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Monto</label>
+                    <div class="controls">
+                        <input type="number" id="estrategia_comercial_detalle_monto" placeholder="Ingrese monto" name="estrategia_comercial_detalle_monto">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Estado</label>
+                    <div class="controls">
+                        <select name="estrategia_comercial_detalle_estado" id="estrategia_comercial_detalle_estado">
+                            <option value="default">-- Seleccione --</option>
+                            @foreach (var item in Util.EstrategiaComercialDetalleEstado())
+                            {
+                                if (item.Value.ToLower() == "abierto")
+                                {
+                                    <option selected value="@item.Value">@item.Value</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Value</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Objetivo</label>
+                    <div class="controls">
+                        <input type="text" id="estrategia_comercial_detalle_objetivo" placeholder="Ingrese objetivo" name="estrategia_comercial_detalle_objetivo">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+            <button class="btn btn-primary" id="estrategia_comercial_detalle_button_create_save">Guardar</button>
+        </div>
+    </div>
+
 </form>
 
 

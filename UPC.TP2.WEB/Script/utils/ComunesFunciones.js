@@ -1,4 +1,4 @@
-﻿//=== MAIN LOAD ON PAGE
+﻿//=== BEGIN: MAIN LOAD ON PAGE
 (function ($) {
 
     //Bitacora
@@ -13,6 +13,16 @@
     }
 
 })(jQuery);
+
+//=== END: MAIN LOAD ON PAGE
+
+// BEGIN ## DATEPICKER ##
+
+$("#estrategia_comercial_detalle_fecha_inicio").datepicker({ format: "dd/mm/yyyy" });
+
+$("#estrategia_comercial_detalle_fecha_fin").datepicker({ format: "dd/mm/yyyy" });
+
+// END ## DATEPIKER ##
 
 // BEGIN ## SERVICIOS SALUD ##
 
@@ -130,11 +140,11 @@ $("#estrategia_comercial_create_button").on("click", function (e) {
     }
 });
 
-$("#estrategia_comercial_button_create_submit").on("click", function (e) {
+$("#estrategia_comercial_detalle_button_create_save").on("click", function (e) {
 
     var to_submit = true;
 
-    $("#estrategia_comercial_create_form_div").find("input, select").each(function () {
+    $("#estrategia_comercial_detalle_form").find("input, select").each(function () {
         if ($(this).val() == "") {
             alert("Debe llenar todos los campos");
             to_submit = false;
@@ -144,9 +154,10 @@ $("#estrategia_comercial_button_create_submit").on("click", function (e) {
     });
 
     if (to_submit) {
-        $("#form_estrategia_comercial_index").attr("action", "/EstrategiaComercial/Create");
-        $("#form_estrategia_comercial_index").submit();
+        $("#estrategia_comercial_detalle_form").attr("action", "/EstrategiaComercial/CreateDetalleSave");
+        $("#estrategia_comercial_detalle_form").submit();
     }
+
 });
 
 // END ## ESTRATEGIAS COMERCIALES ##

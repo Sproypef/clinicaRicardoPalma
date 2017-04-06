@@ -151,7 +151,7 @@ namespace UPC.TP2.WEB.Controllers
                 db.Entry(bit).State = EntityState.Modified;
                 db.SaveChanges();
 
-                if(bit_estado != String.Empty && bit_estado.ToLower() != "cerrado")
+                if(bit_estado != String.Empty && bit_estado.ToLower() != "cerrado" && bit_estado.ToLower() != "rechazado")
                 {
                     T_SEGUIMIENTO bit_seg = new T_SEGUIMIENTO()
                     {

@@ -19,13 +19,13 @@ namespace UPC.TP2.WEB.Controllers
 
         public ActionResult Index()
         {
-            int id_plan_salud = 0; //Consider that not exist id_plan_salud equal to 0: Optinality change for ej. to -99
+            int id_plan_salud = 0; //Consider that if [id_plan_salud] does not exist, it is 0: Optionality change for -99 
 
             id_plan_salud = Int32.Parse(Request["estrategia_comercial_action_select_plan"] ?? (TempData["est_com.id_plan_salud"] != null ? TempData["est_com.id_plan_salud"].ToString() : "-1")); //-1: All record by default
             ViewData["id_plan_salud"] = id_plan_salud.ToString();
 
             //Get messages from others actions : When redirect to here
-            ViewBag.Message = TempData["est_com.Message"] != null ? TempData["est_com.Message"].ToString() : "";
+            ViewBag.Message = TempData["est_com.Message"] != null ? TempData["est_com.Message"].ToString() : String.Empty;
 
             //==== BEGIN: Main process
             var t_estrategia_comercial = db.T_ESTRATEGIA_COMERCIAL.Include(t => t.T_PLAN_DE_SALUD);
@@ -105,14 +105,13 @@ namespace UPC.TP2.WEB.Controllers
 
                 TempData["est_com.Message"] = "La Estrategia Comercial a sido grabada correctamente";
 
-                return RedirectToAction("Index");
-
             }
             catch (Exception e)
             {
                 TempData["est_com.Message"] = "No se pudo grabar la Estrategia Comercial";
-                return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
         //
@@ -120,6 +119,7 @@ namespace UPC.TP2.WEB.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            ViewBag.Message = TempData["est_com.Message"] != null ? TempData["est_com.Message"].ToString() : String.Empty;
 
             T_ESTRATEGIA_COMERCIAL t_estrategia_comercial = db.T_ESTRATEGIA_COMERCIAL.Find(id);
             if (t_estrategia_comercial == null)
@@ -135,50 +135,108 @@ namespace UPC.TP2.WEB.Controllers
             return View(evm);
         }
 
-        //
-        // POST: /EstrategiaComercial/Edit/5
-
-        public ActionResult EditSave()
+        public ActionResult EditDetalleSave()
         {
-            int bit_id = Int32.Parse(Request["bitacora_edit_id"] ?? "-1");
+            int est_com_id = Int32.Parse(Request["estrategia_comercial_id"]??"-1");
+            try
+            {
+                string[] est_com_det_id = Request["list_estrategia_comercial_detalle_id"].Split(',');
+                string[] est_com_det_estado = Request["list_estrategia_comercial_detalle_estado"].Split(',');
 
-            string bit_estado = Request["bitacora_edit_estado"] ?? String.Empty;
-            string bit_seguimiento = Request["bitacora_edit_seguimiento"] ?? String.Empty;
+                for (int i = 0; i < est_com_det_id.Length; i++ )
+                {
+                    int det_id = Int32.Parse(est_com_det_id[i]);
+                    T_ESTRATEGIA_COMERCIAL_DETALLE ecd = db.T_ESTRATEGIA_COMERCIAL_DETALLE.Find(det_id);
+                    ecd.estado = est_com_det_estado[i];
+                    db.Entry(ecd).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                TempData["est_com.Message"] = "Los cambios se han guardado correctamente";
+            }
+            catch (Exception e)
+            {
+                TempData["est_com.Message"] = "Los cambios no han sido guardados";
+            }
 
-            T_BITACORA_INCIDENCIA bit = db.T_BITACORA_INCIDENCIA.Find(bit_id);
-            bit.estado = bit_estado;
+            return RedirectToAction("Edit", new { id = est_com_id });
+        }
+
+        public ActionResult CreateDetalleSave()
+        {
+            T_ESTRATEGIA_COMERCIAL_DETALLE est_com_det = null;
+            int est_com_id = Int32.Parse(Request["estrategia_comercial_id"]);
 
             try
             {
-                db.Entry(bit).State = EntityState.Modified;
-                db.SaveChanges();
+                string est_com_det_medio = Request["estrategia_comercial_detalle_medio"];
+                string est_com_det_canal = Request["estrategia_comercial_detalle_canal"];
+                string est_com_det_fecha_inicio = Request["estrategia_comercial_detalle_fecha_inicio"];
+                string est_com_det_fecha_fin = Request["estrategia_comercial_detalle_fecha_fin"];
+                decimal est_com_det_monto = Decimal.Parse(Request["estrategia_comercial_detalle_monto"]);
+                string est_com_det_estado = Request["estrategia_comercial_detalle_estado"];
+                string est_com_det_objetivo = Request["estrategia_comercial_detalle_objetivo"];
 
-                if (bit_estado != String.Empty && bit_estado.ToLower() != "cerrado")
+                int cd = Utils.Util.compareDates(est_com_det_fecha_inicio, est_com_det_fecha_fin);
+                if(cd != 1)
                 {
-                    T_SEGUIMIENTO bit_seg = new T_SEGUIMIENTO()
-                    {
-                        id_bitacora = bit.id_bitacora,
-                        id_plan_salud = bit.id_plan_salud,
-                        seguimiento = bit_seguimiento,
-                        fecha_registro = DateTime.Now,
-                        usuario = "Dennis Urbano"
-                    };
-
-                    db.T_SEGUIMIENTO.Add(bit_seg);
-                    db.SaveChanges();
+                    TempData["est_com.Message"] = "Error: " + Utils.Util.compareDatesMessage(cd);
+                    return RedirectToAction("Edit", new { id = est_com_id });
                 }
 
-                ViewBag.Message = "La incidencia a sido grabada correctamente";
-                TempData["Message"] = ViewBag.Message;
-                return RedirectToAction("Edit", new { id = bit_id });
+
+                est_com_det = new T_ESTRATEGIA_COMERCIAL_DETALLE()
+                {
+                    medio_campana = est_com_det_medio,
+                    canal = est_com_det_canal,
+                    fecha_inicio = DateTime.Parse(est_com_det_fecha_inicio),
+                    fecha_fin = DateTime.Parse(est_com_det_fecha_fin),
+                    monto = est_com_det_monto,
+                    estado = est_com_det_estado,
+                    objetivo = est_com_det_objetivo,
+                    usuario = "DENNIS URBANO",
+                    id_estrategia_comercial = est_com_id
+                };
+            }
+            catch (Exception e)
+            {
+                TempData["est_com.Message"] = "No se pudo grabar el detalle de estrategia comercial";
+                return RedirectToAction("Edit", new { id = est_com_id });
+            }
+
+            try
+            {
+                db.T_ESTRATEGIA_COMERCIAL_DETALLE.Add(est_com_det);
+                db.SaveChanges();
+
+                TempData["est_com.Message"] = "El detalle de la estrategia a sigo guardada correctamente";
 
             }
             catch (Exception e)
             {
-                ViewBag.Message = "No se pudo grabar la incidencia";
-                TempData["Message"] = ViewBag.Message;
-                return View("Edit");
+                TempData["est_com.Message"] = "No se pudo grabar el detalle de estrategia comercial";
             }
+
+            return RedirectToAction("Edit", new { id = est_com_id });
+        }
+
+        //
+        // GET: /EstrategiaComercialDetalle/Delete/5/1
+
+        public ActionResult DeleteDetalle(int id = 0, int id_det = 0)
+        {
+            T_ESTRATEGIA_COMERCIAL_DETALLE t_estrategia_comercial_detalle = db.T_ESTRATEGIA_COMERCIAL_DETALLE.Find(id_det);
+
+            if (t_estrategia_comercial_detalle != null)
+            {
+                TempData["est_com.Message"] = "El detalle a sido eliminado correctamente";
+                db.T_ESTRATEGIA_COMERCIAL_DETALLE.Remove(t_estrategia_comercial_detalle);
+                db.SaveChanges();
+            } else
+            {
+                TempData["est_com.Message"] = "No se ha eliminado el detalle";
+            }
+
+            return RedirectToAction("Edit", new { id = id });
         }
 
         //
