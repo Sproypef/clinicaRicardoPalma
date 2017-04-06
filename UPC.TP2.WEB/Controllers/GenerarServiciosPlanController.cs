@@ -84,7 +84,7 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
             T_CONFIGURACION config_retirar = db.T_CONFIGURACION.Where(x => x.indicador == "retirar_servicio").FirstOrDefault();
 
             //## TABLA DE RETIRO
-            object obj_ret_serv = from pla_ser in db.T_PLAN_SERVICIO.ToList()
+            object obj_ret_serv = from pla_ser in db.T_PLAN_SERVICIO.Where(x => x.estado == "1").ToList()
                                   join pla in db.T_PLAN_DE_SALUD on pla_ser.id_plan_salud equals pla.id_plan_salud
                                   join per_pla in db.T_PERSONA_PLANSALUD on pla.id_plan_salud equals per_pla.id_plan_salud into gj_per_pla
                                   from per_pla in gj_per_pla.DefaultIfEmpty(new T_PERSONA_PLANSALUD())
@@ -93,7 +93,7 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
                                     new { pla_ser.idEspecialidad, pla_ser.id_servicio } equals
                                     new { pro.idEspecialidad, pro.id_servicio }  into gj_pro
                                   from pro in gj_pro.DefaultIfEmpty()
-                                  where pro != null && pro.fecha >= per_pla.fecha_inicio && pro.fecha <= per_pla.fecha_fin
+                                  where pro == null || ( pro != null && pro.fecha >= per_pla.fecha_inicio && pro.fecha <= per_pla.fecha_fin)
                                   group 
                                     new { pla_ser, pla, per_pla } 
                                     by new { pla_ser.id_plan_salud, pla_ser.idEspecialidad, pla_ser.id_servicio } into gbx
