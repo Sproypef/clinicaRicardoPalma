@@ -183,16 +183,23 @@ namespace UPC.TP2.WEB.PlanSalud.Controllers
 
                     if (ps_m != null)
                     {
-                        //SET VALUES FOR NEW RECORD
-                        ps_n = ps_m;
-                        ps_n.estado = "1";
-                        ps_n.fecha_inicio = DateTime.Now;
-                        ps_n.fecha_fin = ps_n.T_PLAN_DE_SALUD.fecha_fin;
+                        DateTime? fecha_fin = ps_m.T_PLAN_DE_SALUD.fecha_fin;
 
                         //MODIFY VALUES FOR RECORD
                         ps_m.estado = "0";
                         ps_m.fecha_fin = DateTime.Now;
                         db.Entry(ps_m).State = EntityState.Modified;
+
+                        //SET VALUES FOR NEW RECORD
+                        ps_n = new T_PLAN_SERVICIO()
+                        {
+                            fecha_inicio = DateTime.Now,
+                            fecha_fin = fecha_fin,
+                            id_plan_salud = ps_m.id_plan_salud,
+                            id_servicio = ps_m.id_servicio,
+                            idEspecialidad = ps_m.idEspecialidad,
+                            estado = "1"
+                        };
 
                         try
                         {
