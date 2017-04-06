@@ -17,8 +17,8 @@ namespace UPC.TP2.WEB.Utils
         public static Dictionary<int, string> BitacoraTipos()
         {
             Dictionary<int, string> tipos = new Dictionary<int, string>();
-            tipos.Add(1, "APORTES");
-            tipos.Add(2, "RECLAMOS");
+            tipos.Add(1, "APORTE");
+            tipos.Add(2, "RECLAMO");
             return tipos;
         }
 
@@ -34,8 +34,8 @@ namespace UPC.TP2.WEB.Utils
         public static Dictionary<int, string> PlanSaludEstado()
         {
             Dictionary<int, string> estado = new Dictionary<int, string>();
+            estado.Add(0, "INACTIVO");
             estado.Add(1, "ACTIVO");
-            estado.Add(2, "INACTIVO");
             return estado;
         }
 

@@ -98,7 +98,7 @@ namespace UPC.TP2.WEB.Controllers
                     id_plan_salud = bit_plan,
                     seguimiento = bit_seguimiento,
                     fecha_registro = DateTime.Now,
-                    usuario = "Dennis Urbano"
+                    usuario = "DURBANO"
                     
                 };
 
