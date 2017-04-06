@@ -24,11 +24,19 @@ namespace UPC.TP2.WEB.Utils
 
         public static Dictionary<int, string> EstrategiaComercialDetalleEstado()
         {
-            Dictionary<int, string> tipos = new Dictionary<int, string>();
-            tipos.Add(1, "ABIERTO");
-            tipos.Add(2, "EJECUCION");
-            tipos.Add(3, "COMPLETO");
-            return tipos;
+            Dictionary<int, string> estado = new Dictionary<int, string>();
+            estado.Add(1, "ABIERTO");
+            estado.Add(2, "EJECUCION");
+            estado.Add(3, "COMPLETO");
+            return estado;
+        }
+
+        public static Dictionary<int, string> PlanSaludEstado()
+        {
+            Dictionary<int, string> estado = new Dictionary<int, string>();
+            estado.Add(1, "ACTIVO");
+            estado.Add(2, "INACTIVO");
+            return estado;
         }
 
         public static JsonSerializerSettings jsonNoLoopSettings()
@@ -49,6 +57,13 @@ namespace UPC.TP2.WEB.Utils
         public static object getToday()
         {
             return DateTime.Now.ToString("dd/MM/yyyy") ;
+        }
+
+        public static string DateTimeToShort(DateTime? dt)
+        {
+            if (dt == null) return String.Empty;
+            DateTime _dt = dt ?? DateTime.Now; //Only for parse
+            return dt != null ? _dt.ToString("dd/MM/yyyy") : String.Empty;
         }
 
         /**

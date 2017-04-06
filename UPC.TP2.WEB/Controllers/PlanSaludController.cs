@@ -19,8 +19,22 @@ namespace UPC.TP2.WEB.Controllers
         // GET: /PlanSalud/
 
         public ActionResult Index()
-        {            
-            return View(db.T_PLAN_DE_SALUD.ToList());
+        {
+            //B:Get plan salud
+            int id_plan_salud = 0; //Consider that if [id_plan_salud] does not exist, it is 0: Optionality change for -99 
+            id_plan_salud = Int32.Parse(Request["plan_salud_action_select_plan"] ?? (TempData["pla_sal.id_plan_salud"] != null ? TempData["pla_sal.id_plan_salud"].ToString() : "-1")); //-1: All record by default
+            ViewData["id_plan_salud"] = id_plan_salud.ToString();
+            //E:Get plan salud
+
+            //Get messages from others actions : When redirect to here
+            ViewBag.Message = TempData["pla_sal.Message"] != null ? TempData["pla_sal.Message"].ToString() : String.Empty;
+
+            PlanSaludViewModel pvm = new PlanSaludViewModel()
+            {
+                PLANES_DE_SALUD = db.T_PLAN_DE_SALUD.ToList(),
+                PLAN_DE_SALUD = db.T_PLAN_DE_SALUD.Find(id_plan_salud) ?? new T_PLAN_DE_SALUD()
+            };
+            return View(pvm);
         }
 
         //

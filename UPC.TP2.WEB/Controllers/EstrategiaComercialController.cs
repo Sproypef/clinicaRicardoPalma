@@ -19,10 +19,11 @@ namespace UPC.TP2.WEB.Controllers
 
         public ActionResult Index()
         {
+            //B:Get plan salud
             int id_plan_salud = 0; //Consider that if [id_plan_salud] does not exist, it is 0: Optionality change for -99 
-
             id_plan_salud = Int32.Parse(Request["estrategia_comercial_action_select_plan"] ?? (TempData["est_com.id_plan_salud"] != null ? TempData["est_com.id_plan_salud"].ToString() : "-1")); //-1: All record by default
             ViewData["id_plan_salud"] = id_plan_salud.ToString();
+            //E:Get plan salud
 
             //Get messages from others actions : When redirect to here
             ViewBag.Message = TempData["est_com.Message"] != null ? TempData["est_com.Message"].ToString() : String.Empty;

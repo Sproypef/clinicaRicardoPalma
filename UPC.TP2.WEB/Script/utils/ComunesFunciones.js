@@ -22,6 +22,10 @@ $("#estrategia_comercial_detalle_fecha_inicio").datepicker({ format: "dd/mm/yyyy
 
 $("#estrategia_comercial_detalle_fecha_fin").datepicker({ format: "dd/mm/yyyy" });
 
+$("#plan_salud_fecha_inicio").datepicker({ format: "dd/mm/yyyy" });
+
+$("#plan_salud_fecha_fin").datepicker({ format: "dd/mm/yyyy" });
+
 // END ## DATEPIKER ##
 
 // BEGIN ## SERVICIOS SALUD ##
@@ -161,3 +165,14 @@ $("#estrategia_comercial_detalle_button_create_save").on("click", function (e) {
 });
 
 // END ## ESTRATEGIAS COMERCIALES ##
+
+// BEGIN ## PLAN DE SALUD ##
+
+$("#plan_salud_action_select_plan").on("change", function (e) {
+    if ($(this).val() != "default") {
+        $("#form_plan_salud_index").attr("action", "/PlanSalud/Index");
+        $("#form_plan_salud_index").submit();
+    }
+});
+
+// END ## PLAN DE SALUD ##

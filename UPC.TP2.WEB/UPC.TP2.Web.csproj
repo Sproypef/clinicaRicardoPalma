@@ -227,6 +227,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicaContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\PlanSaludViewModel.cs" />
     <Content Include="App_Data\03_04_2017_%282%29_data.sql" />
     <Content Include="App_Data\03_04_2017_%282%29_schema.sql" />
     <Content Include="App_Data\03_04_2017_database.sql" />
